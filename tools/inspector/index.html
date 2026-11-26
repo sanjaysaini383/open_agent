@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Interoperability Inspector</title>
+    <meta name="description" content="Check whether an agentic website can be loaded and run by other sites, following the Worldwide Agentic Web MVP specification.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="inspector.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">AI</span>
+        <div>
+          <strong>Agent Interoperability Inspector</strong>
+          <span class="brand-sub">Can another site's browser load and run this agent network?</span>
+        </div>
+      </div>
+      <a href="./README.md">Documentation</a>
+    </header>
+
+    <main>
+      <section class="panel">
+        <form id="inspect-form" novalidate>
+          <label for="url">Agentic website or network URL</label>
+          <div class="row">
+            <input id="url" name="url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://site.example/network_name" required>
+            <button type="submit" id="run">Inspect</button>
+          </div>
+          <p class="hint">Enter a site's address, the folder that holds its <code>agent-manifest.json</code>, or a network URL (that folder, then the network name). The checks run in this browser, from <code id="origin"></code>, so CORS is enforced for real. Only the site's public files are read; nothing is sent to it but the requests themselves.</p>
+          <p id="form-error" class="error" role="alert" hidden></p>
+        </form>
+        <div id="examples" class="examples" hidden></div>
+      </section>
+
+      <p id="status" class="status" role="status" hidden></p>
+      <section id="report" hidden></section>
+    </main>
+
+    <footer class="site-footer">
+      Checks follow the <a href="https://github.com/cognizant-ai-labs/agentic-web/blob/main/docs/worldwide_agentic_web_mvp_spec.md">Worldwide Agentic Web MVP specification</a>. Parsing and validation are done by the official agentic-web browser runtime, unchanged. A reusable, dependency-free tool from the ReliefMesh project; Apache-2.0.
+    </footer>
+  </body>
+</html>
