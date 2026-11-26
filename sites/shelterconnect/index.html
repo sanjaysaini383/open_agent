@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShelterConnect — emergency shelter management</title>
+    <meta name="description" content="ShelterConnect registers emergency shelters, publishes capacity and resource requests, and shares them with other agentic websites.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="site.js"></script>
+  </head>
+  <body>
+    <div class="sim-banner" role="note">Simulated demonstration data — no real shelters, people or stock levels are shown.</div>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">SC</span>
+        <div>
+          <strong>ShelterConnect</strong>
+          <span class="brand-sub">Emergency shelter management · independent agentic website</span>
+        </div>
+      </div>
+      <nav aria-label="Sections">
+        <a href="#shelters">Shelters</a>
+        <a href="#requests">Requests</a>
+        <a href="#manage">Manage</a>
+        <a href="#deliveries">Deliveries</a>
+        <a href="#assistant">Assistant</a>
+        <a href="#network">Agent network</a>
+      </nav>
+    </header>
+
+    <main>
+      <p id="page-notice" class="notice" role="status" hidden></p>
+      <section class="tiles" id="summary" aria-label="Summary"></section>
+
+      <section id="shelters" class="panel">
+        <div class="panel-head">
+          <h2>Registered shelters</h2>
+          <p>Capacity, head count and urgency. Change a shelter's urgency here and partner sites read the new level.</p>
+        </div>
+        <p id="msg-shelters" class="field-error" role="alert" hidden></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Shelter</th><th class="num">Occupancy</th><th class="num">Free places</th><th>Urgency</th><th>Coordinates</th></tr></thead>
+            <tbody id="shelter-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="requests" class="panel">
+        <div class="panel-head">
+          <h2>Published resource requests</h2>
+          <p>Shortage is the requirement minus stock on hand. Coordinating agent sites read exactly this table.</p>
+        </div>
+        <ul id="request-totals" class="totals"></ul>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Shelter</th><th>Resource</th><th class="num">Required</th><th class="num">In stock</th><th class="num">Shortage</th><th>Urgency</th><th>Needed by</th><th>Status</th></tr></thead>
+            <tbody id="request-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="manage" class="grid-3">
+        <form id="inventory-form" class="panel" novalidate>
+          <h2>Update inventory</h2>
+          <p class="hint">Set the stock a shelter holds right now.</p>
+          <label>Shelter <select name="shelterId" data-fill="shelters" required></select></label>
+          <label>Resource <select name="resource" data-fill="resources" required></select></label>
+          <label>Stock on hand <input name="quantity" type="number" min="0" max="100000" step="1" required inputmode="numeric"></label>
+          <p id="msg-inventory" class="field-error" role="alert" hidden></p>
+          <button type="submit">Update stock</button>
+        </form>
+
+        <form id="request-form" class="panel" novalidate>
+          <h2>Publish resource request</h2>
+          <p class="hint">State what a shelter needs in total. Zero withdraws the request.</p>
+          <label>Shelter <select name="shelterId" data-fill="shelters" required></select></label>
+          <label>Resource <select name="resource" data-fill="resources" required></select></label>
+          <label>Total required <input name="quantityRequired" type="number" min="0" max="100000" step="1" required inputmode="numeric"></label>
+          <label>Needed by (optional) <input name="neededBy" type="datetime-local"></label>
+          <p id="msg-request" class="field-error" role="alert" hidden></p>
+          <button type="submit">Publish request</button>
+        </form>
+
+        <form id="register-form" class="panel" novalidate>
+          <h2>Register a shelter</h2>
+          <p class="hint">Adds a shelter to the published register.</p>
+          <label>Name <input name="name" maxlength="80" required></label>
+          <label>Block / locality <input name="block" maxlength="60" required></label>
+          <div class="row">
+            <label>Latitude <input name="lat" type="number" step="0.0001" min="-90" max="90" required></label>
+            <label>Longitude <input name="lng" type="number" step="0.0001" min="-180" max="180" required></label>
+          </div>
+          <div class="row">
+            <label>Capacity <input name="capacity" type="number" min="1" max="100000" step="1" required></label>
+            <label>Occupancy <input name="occupancy" type="number" min="0" max="100000" step="1" required></label>
+          </div>
+          <label>Urgency <select name="urgency" data-fill="urgency"></select></label>
+          <p id="msg-register" class="field-error" role="alert" hidden></p>
+          <button type="submit">Register shelter</button>
+        </form>
+      </section>
+
+      <section id="deliveries" class="panel">
+        <div class="panel-head">
+          <h2>Deliveries received</h2>
+          <p>A coordinating site can ask to record a delivery. That opens a ShelterConnect window where a person here confirms receipt; only then does stock change.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Receipt</th><th>Shelter</th><th>Resource</th><th class="num">Quantity</th><th>Shipment · recorded</th></tr></thead>
+            <tbody id="delivery-rows"></tbody>
+          </table>
+        </div>
+        <button type="button" id="reset-demo" class="secondary">Reset demo data</button>
+      </section>
+
+      <section id="assistant" class="assistant panel" aria-labelledby="assistant-heading">
+        <h2 id="assistant-heading">Ask ShelterConnect</h2>
+        <p>The assistant reads this page's shelters, requests and stock, and can update stock, publish a request or change urgency when you ask.</p>
+        <p class="assistant-note">Your messages and this page's data go to the LLM provider you choose in the settings below. You confirm anything that cannot be undone before it happens.</p>
+        <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. You can still use the page directly.</p>
+        <div id="agent-app">
+          <div data-ns-slot="header"></div>
+          <div class="assistant-panels">
+            <div data-ns-slot="chat"></div>
+            <div data-ns-slot="agents"></div>
+          </div>
+          <div data-ns-slot="settings"></div>
+        </div>
+      </section>
+
+      <section id="network" class="panel">
+        <div class="panel-head">
+          <h2>Open Agentic Web</h2>
+          <p>This site publishes its agent network as data. Any compatible agentic website can load it, after its own visitor agrees, and run it in that visitor's browser.</p>
+        </div>
+        <dl class="facts">
+          <dt>Network URL</dt><dd><code id="network-url"></code></dd>
+          <dt>Public files</dt><dd><a id="manifest-link" href="#">agent-manifest.json</a> · <a id="network-link" href="#">shelterconnect.network.json</a> · <a href="./links.json">links.json</a></dd>
+          <dt>Agents</dt><dd>ShelterStatusAgent (front), ShelterRequestAgent, ShelterInventoryAgent</dd>
+          <dt>Shared with partner sites</dt><dd>Reads: shelter overview, resource requests, inventory. Write: record deliveries, confirmed in a ShelterConnect window.</dd>
+        </dl>
+        <h3>Partner sites</h3>
+        <ul id="partner-links" class="links"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">ShelterConnect is part of the ReliefMesh demonstration for the Open Agentic Web. All data is simulated.</footer>
+  </body>
+</html>

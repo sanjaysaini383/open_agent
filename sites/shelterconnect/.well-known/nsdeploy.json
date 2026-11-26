@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "shelterconnect",
+      "front_man": "ShelterStatusAgent",
+      "aliases": [
+        "shelterconnect",
+        "ShelterStatusAgent"
+      ],
+      "url": "shelterconnect"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "brand": "ShelterConnect Assistant",
+  "networks": [
+    {
+      "name": "shelterconnect",
+      "front_man": "ShelterStatusAgent",
+      "hocon": "./shelterconnect.network.json",
+      "description": "Ask about emergency shelters, their capacity, urgency, stock and resource requests, and update stock or publish a request.",
+      "tags": [
+        "agentified-website",
+        "emergency-response",
+        "shelter",
+        "reliefmesh"
+      ],
+      "sample_queries": [
+        "Which shelters are most urgent, and how many free places does each have?",
+        "What is still short across all shelters, by resource?",
+        "Set the stock of water kits at SH-02 to 120.",
+        "Publish a request for 600 food packets at SH-03.",
+        "Can ReliefMesh coordinate suppliers for our open requests?",
+        "Can you order blankets from a supplier and pay for them here?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "http://localhost:8080"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls only the partner sites in allowed_peers, after the visitor agrees, plus page-local actions."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "shelterconnect",
+    "front_man": "ShelterStatusAgent",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#0f766e"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "shelterconnect",
+        "front_man": "ShelterStatusAgent",
+        "aliases": [
+          "shelterconnect",
+          "ShelterStatusAgent"
+        ],
+        "url": "shelterconnect"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_shelter_overview",
+      "get_resource_requests",
+      "get_shelter_inventory",
+      "update_inventory",
+      "publish_resource_request",
+      "set_shelter_urgency",
+      "register_shelter",
+      "record_deliveries"
+    ]
+  },
+  "reliefmesh": {
+    "role": "shelter",
+    "capabilities": [
+      "shelter_register",
+      "shelter_capacity",
+      "resource_requests",
+      "shelter_inventory",
+      "delivery_receipts"
+    ],
+    "data_classification": "simulated",
+    "organization": "ShelterConnect (demonstration)"
+  }
+}
