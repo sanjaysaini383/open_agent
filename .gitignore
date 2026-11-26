@@ -1,0 +1,26 @@
+# Dependencies and build output
+node_modules/
+sites/command/dist/
+*.tsbuildinfo
+
+# Test output
+test-results/
+playwright-report/
+tests/e2e/.artifacts/
+.serve-logs/
+
+# Secrets. Nothing in this project needs a server-side secret; these are here so that
+# one can never be committed by accident.
+.env
+.env.*
+!.env.example
+
+# TrustRegistry signing key (private half). The public half and the signed attestations
+# are published; the private key never leaves the machine that signs.
+sites/trustregistry/.keys/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

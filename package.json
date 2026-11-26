@@ -1,0 +1,33 @@
+{
+  "name": "reliefmesh",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ReliefMesh — an open, decentralized multi-agent emergency response coordination network built on the Open Agentic Web MVP specification.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "setup": "node scripts/sync-runtime.mjs && npm --prefix sites/command install",
+    "runtime:sync": "node scripts/sync-runtime.mjs",
+    "runtime:check": "node scripts/sync-runtime.mjs --check",
+    "networks:build": "node scripts/build-networks.mjs",
+    "networks:check": "node scripts/build-networks.mjs --check",
+    "trust:sign": "node scripts/sign-trust.mjs",
+    "origins:set": "node scripts/set-origins.mjs",
+    "build": "node scripts/build-networks.mjs && npm --prefix sites/command run build",
+    "serve": "node scripts/serve-all.mjs",
+    "check:partners": "node scripts/check-partners.mjs",
+    "inspect": "node tools/inspector/cli.mjs",
+    "test:unit": "npm --prefix sites/command run test",
+    "test:sites": "node --test \"sites/shelterconnect/tests/*.test.mjs\" \"sites/aidsupply/tests/*.test.mjs\" \"sites/trustregistry/tests/*.test.mjs\" \"sites/routebridge/tests/*.test.mjs\" \"tools/inspector/tests/*.test.mjs\"",
+    "test:integration": "node --test \"tests/integration/*.test.mjs\"",
+    "test:e2e": "playwright test",
+    "test": "npm run test:unit && npm run test:sites && npm run test:integration",
+    "compliance": "node scripts/compliance-report.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

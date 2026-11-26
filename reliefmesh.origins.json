@@ -1,0 +1,29 @@
+{
+  "//": "Origins of the five independent ReliefMesh sites. 'active' names the profile currently written into the published files (.hocon, agent-manifest.json, bridge callers, partner registry). Switch with: npm run origins:set -- <profile>",
+  "active": "local",
+  "profiles": {
+    "local": {
+      "command": "http://localhost:8080",
+      "shelterconnect": "http://localhost:8081",
+      "aidsupply": "http://localhost:8082",
+      "trustregistry": "http://localhost:8083",
+      "routebridge": "http://localhost:8084"
+    },
+    "local-strict": {
+      "//": "Command on a different loopback host name than its partners, so the runtime's loopback key cookie never reaches a partner server. Bridge frames then get partitioned storage, exactly as on public-suffix hosts.",
+      "command": "http://127.0.0.1:8080",
+      "shelterconnect": "http://localhost:8081",
+      "aidsupply": "http://localhost:8082",
+      "trustregistry": "http://localhost:8083",
+      "routebridge": "http://localhost:8084"
+    },
+    "production": {
+      "//": "Replace with the HTTPS origins of your five deployments, then run: npm run origins:set -- production",
+      "command": "https://reliefmesh-command.example",
+      "shelterconnect": "https://reliefmesh-shelterconnect.example",
+      "aidsupply": "https://reliefmesh-aidsupply.example",
+      "trustregistry": "https://reliefmesh-trustregistry.example",
+      "routebridge": "https://reliefmesh-routebridge.example"
+    }
+  }
+}
