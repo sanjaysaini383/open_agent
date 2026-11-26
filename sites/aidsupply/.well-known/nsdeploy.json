@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "aidsupply",
+      "front_man": "SupplierOfferAgent",
+      "aliases": [
+        "aidsupply",
+        "SupplierOfferAgent"
+      ],
+      "url": "aidsupply"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

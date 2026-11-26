@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AidSupply Network — relief supplier marketplace</title>
+    <meta name="description" content="AidSupply Network lists NGOs and suppliers, their relief stock, prices and delivery terms, and shares them with other agentic websites.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="site.js"></script>
+  </head>
+  <body>
+    <div class="sim-banner" role="note">Simulated demonstration data — no real suppliers, stock, prices or registrations are shown.</div>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">AS</span>
+        <div>
+          <strong>AidSupply Network</strong>
+          <span class="brand-sub">NGO and supplier marketplace · independent agentic website</span>
+        </div>
+      </div>
+      <nav aria-label="Sections">
+        <a href="#suppliers">Suppliers</a>
+        <a href="#offers">Offers</a>
+        <a href="#quote">Quote</a>
+        <a href="#manage">Manage</a>
+        <a href="#reservations">Reservations</a>
+        <a href="#assistant">Assistant</a>
+        <a href="#network">Agent network</a>
+      </nav>
+    </header>
+
+    <main>
+      <p id="page-notice" class="notice" role="status" hidden></p>
+      <section class="tiles" id="summary" aria-label="Summary"></section>
+
+      <section id="suppliers" class="panel">
+        <div class="panel-head">
+          <h2>Supplier directory</h2>
+          <p>What each organisation declared when it listed here. AidSupply does not verify suppliers: TrustRegistry does.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Supplier</th><th>Type</th><th>Location</th><th>Coordinates</th><th>Registration reference</th><th>Listed since</th></tr></thead>
+            <tbody id="supplier-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="offers" class="panel">
+        <div class="panel-head">
+          <h2>Published offers</h2>
+          <p>Available is the listed quantity minus what reservations hold. Coordinating agent sites read exactly this table. Notes are the supplier's own words.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Offer</th><th>Resource</th><th class="num">Available</th><th class="num">Unit price</th><th class="num">Min order</th><th class="num">Lead time</th><th>Valid until</th><th>Supplier's notes</th></tr></thead>
+            <tbody id="offer-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="quote" class="grid-2">
+        <form id="quote-form" class="panel" novalidate>
+          <h2>Quote calculator</h2>
+          <p class="hint">Ask what a quantity would cost, with an optional target price. A quote is non-binding and reserves nothing.</p>
+          <label>Offer <select name="offerId" data-fill="offers" required></select></label>
+          <div class="row">
+            <label>Quantity <input name="quantity" type="number" min="1" max="1000000" step="1" required inputmode="numeric"></label>
+            <label>Target unit price ₹ (optional) <input name="targetUnitPrice" type="number" min="0" step="0.01" inputmode="decimal"></label>
+          </div>
+          <p id="msg-quote" class="field-error" role="alert" hidden></p>
+          <button type="submit">Get quote</button>
+        </form>
+        <div class="panel">
+          <h2>Quote</h2>
+          <p class="hint">Volume tiers: 2% from 200 units, 5% from 500, 8% from 1,000. NGO suppliers add a 2% relief rate. Each supplier keeps its own limit.</p>
+          <div id="quote-result" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="manage" class="grid-3">
+        <form id="supplier-form" class="panel" novalidate>
+          <h2>Register a supplier</h2>
+          <p class="hint">Lists an organisation in the directory, as self-declared.</p>
+          <label>Name <input name="name" maxlength="80" required></label>
+          <label>Type <select name="type" data-fill="types"></select></label>
+          <div class="row">
+            <label>City <input name="city" maxlength="60" required></label>
+            <label>State <input name="state" maxlength="60" value="West Bengal" required></label>
+          </div>
+          <div class="row">
+            <label>Latitude <input name="lat" type="number" step="0.0001" min="-90" max="90" required></label>
+            <label>Longitude <input name="lng" type="number" step="0.0001" min="-180" max="180" required></label>
+          </div>
+          <label>Registration reference <input name="registrationRef" maxlength="60" required></label>
+          <p id="msg-supplier" class="field-error" role="alert" hidden></p>
+          <button type="submit">Register supplier</button>
+        </form>
+
+        <form id="offer-form" class="panel" novalidate>
+          <h2>Publish an offer</h2>
+          <p class="hint">One offer per supplier and resource: publishing again replaces it.</p>
+          <label>Supplier <select name="supplierId" data-fill="suppliers" required></select></label>
+          <label>Resource <select name="resource" data-fill="resources" required></select></label>
+          <div class="row">
+            <label>Quantity <input name="quantity" type="number" min="1" max="1000000" step="1" required inputmode="numeric"></label>
+            <label>Unit price ₹ <input name="unitPrice" type="number" min="0.01" step="0.01" required inputmode="decimal"></label>
+          </div>
+          <div class="row">
+            <label>Minimum order <input name="minOrder" type="number" min="1" step="1" required inputmode="numeric"></label>
+            <label>Lead time (hours) <input name="leadTimeHours" type="number" min="1" max="720" step="1" required inputmode="numeric"></label>
+          </div>
+          <label>Negotiating limit % (kept private) <input name="maxDiscountPct" type="number" min="0" max="30" step="1" placeholder="0" inputmode="numeric"></label>
+          <label>Notes (optional) <input name="notes" maxlength="240"></label>
+          <p id="msg-offer" class="field-error" role="alert" hidden></p>
+          <button type="submit">Publish offer</button>
+        </form>
+
+        <form id="stock-form" class="panel" novalidate>
+          <h2>Update offer stock</h2>
+          <p class="hint">Set how many units buyers can still reserve. Reserved units stay reserved.</p>
+          <label>Offer <select name="offerId" data-fill="offers" required></select></label>
+          <label>Available now <input name="quantity" type="number" min="0" max="1000000" step="1" required inputmode="numeric"></label>
+          <p id="msg-stock" class="field-error" role="alert" hidden></p>
+          <button type="submit">Update stock</button>
+        </form>
+      </section>
+
+      <section id="reservations" class="panel">
+        <div class="panel-head">
+          <h2>Reservations</h2>
+          <p>A coordinating site can ask to reserve stock. That opens an AidSupply window where a person confirms the lines and prices; only then is stock held. No payment is taken.</p>
+        </div>
+        <p id="msg-reservations" class="field-error" role="alert" hidden></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Reference</th><th>Incident</th><th>Lines</th><th class="num">Total</th><th>Status</th><th></th></tr></thead>
+            <tbody id="reservation-rows"></tbody>
+          </table>
+        </div>
+        <button type="button" id="reset-demo" class="secondary">Reset demo data</button>
+      </section>
+
+      <section id="assistant" class="assistant panel" aria-labelledby="assistant-heading">
+        <h2 id="assistant-heading">Ask AidSupply</h2>
+        <p>The assistant reads this page's suppliers, offers and reservations, prices a quote, and can publish an offer or update stock when you ask.</p>
+        <p class="assistant-note">Your messages and this page's data go to the LLM provider you choose in the settings below. You confirm anything that cannot be undone before it happens.</p>
+        <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. You can still use the page directly.</p>
+        <div id="agent-app">
+          <div data-ns-slot="header"></div>
+          <div class="assistant-panels">
+            <div data-ns-slot="chat"></div>
+            <div data-ns-slot="agents"></div>
+          </div>
+          <div data-ns-slot="settings"></div>
+        </div>
+      </section>
+
+      <section id="network" class="panel">
+        <div class="panel-head">
+          <h2>Open Agentic Web</h2>
+          <p>This site publishes its agent network as data. Any compatible agentic website can load it, after its own visitor agrees, and run it in that visitor's browser.</p>
+        </div>
+        <dl class="facts">
+          <dt>Network URL</dt><dd><code id="network-url"></code></dd>
+          <dt>Public files</dt><dd><a id="manifest-link" href="#">agent-manifest.json</a> · <a id="network-link" href="#">aidsupply.network.json</a> · <a href="./links.json">links.json</a></dd>
+          <dt>Agents</dt><dd>SupplierOfferAgent (front), SupplierInventoryAgent, SupplierNegotiationAgent</dd>
+          <dt>Shared with partner sites</dt><dd>Reads: supplier directory, offers, non-binding quotes, reservations. Write: reserve an allocation, confirmed in an AidSupply window.</dd>
+        </dl>
+        <h3>Partner sites</h3>
+        <ul id="partner-links" class="links"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">AidSupply Network is part of the ReliefMesh demonstration for the Open Agentic Web. All data is simulated.</footer>
+  </body>
+</html>

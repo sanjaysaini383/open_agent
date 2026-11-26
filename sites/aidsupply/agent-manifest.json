@@ -1,0 +1,101 @@
+{
+  "brand": "AidSupply Assistant",
+  "networks": [
+    {
+      "name": "aidsupply",
+      "front_man": "SupplierOfferAgent",
+      "hocon": "./aidsupply.network.json",
+      "description": "Ask about relief suppliers and their offers of food, water, medical kits and blankets, price a non-binding quote, and publish an offer or update stock.",
+      "tags": [
+        "agentified-website",
+        "emergency-response",
+        "supplier",
+        "marketplace",
+        "reliefmesh"
+      ],
+      "sample_queries": [
+        "Which suppliers offer food packets, and at what price and lead time?",
+        "What would 600 water kits on offer OFF-C-WATER cost, and could they do 54 rupees each?",
+        "Set the available stock of offer OFF-B-MED to 150.",
+        "Publish an offer of 400 blankets from SUP-B at 170 rupees each, minimum order 50, lead time 9 hours.",
+        "Is Ganga Basin Supplies a verified organisation?",
+        "Can you take payment for a reservation or arrange delivery to a shelter here?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "http://localhost:8083"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls only the partner sites in allowed_peers, after the visitor agrees, plus page-local actions."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "aidsupply",
+    "front_man": "SupplierOfferAgent",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#1d4ed8"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "aidsupply",
+        "front_man": "SupplierOfferAgent",
+        "aliases": [
+          "aidsupply",
+          "SupplierOfferAgent"
+        ],
+        "url": "aidsupply"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_supplier_directory",
+      "get_supplier_offers",
+      "request_improved_offer",
+      "get_reservations",
+      "register_supplier",
+      "publish_offer",
+      "update_offer_stock",
+      "reserve_allocation"
+    ]
+  },
+  "reliefmesh": {
+    "role": "supplier",
+    "capabilities": [
+      "supplier_directory",
+      "supplier_offers",
+      "offer_negotiation",
+      "allocation_reservation"
+    ],
+    "data_classification": "simulated",
+    "organization": "AidSupply Network (demonstration)"
+  }
+}
