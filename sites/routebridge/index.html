@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RouteBridge — emergency logistics coordination</title>
+    <meta name="description" content="RouteBridge registers transport providers, publishes vehicle availability, estimates routes and delivery times, and tracks shipments, and shares them with other agentic websites.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="site.js"></script>
+  </head>
+  <body>
+    <div class="sim-banner" role="note">Simulated demonstration data — no real transport providers, vehicles, routes or shipments are shown, and no vehicle is ever dispatched.</div>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">RB</span>
+        <div>
+          <strong>RouteBridge</strong>
+          <span class="brand-sub">Emergency logistics coordination · independent agentic website</span>
+        </div>
+      </div>
+      <nav aria-label="Sections">
+        <a href="#providers">Providers</a>
+        <a href="#planner">Route planner</a>
+        <a href="#shipments">Shipments</a>
+        <a href="#manage">Manage</a>
+        <a href="#assistant">Assistant</a>
+        <a href="#network">Agent network</a>
+      </nav>
+    </header>
+
+    <main>
+      <p id="page-notice" class="notice" role="status" hidden></p>
+      <section class="tiles" id="summary" aria-label="Summary"></section>
+
+      <section id="providers" class="panel">
+        <div class="panel-head">
+          <h2>Transport providers and vehicle availability</h2>
+          <p>A vehicle is free unless a shipment that is planned, dispatched, in transit or delayed holds it. Partner sites read exactly this table.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Provider</th><th>Vehicle type</th><th class="num">Fleet</th><th class="num">Free now</th><th class="num">Capacity</th><th class="num">Avg speed</th><th class="num">Rate</th><th>Flood-capable</th></tr></thead>
+            <tbody id="provider-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="grid-2">
+        <div id="zones" class="panel">
+          <div class="panel-head">
+            <h2>Flood zones</h2>
+            <p>A destination inside a zone changes what can reach it. Simulated closures, not live road conditions.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Zone</th><th>Centre · radius</th><th>Effect</th></tr></thead>
+              <tbody id="zone-rows"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <form id="routing-form" class="panel" novalidate>
+          <h2>Routing source</h2>
+          <p class="hint">Where distances come from. In use now: <strong id="routing-current"></strong></p>
+          <p id="routing-method" class="sub"></p>
+          <label>Live routing service base URL (optional)
+            <input name="baseUrl" type="url" maxlength="200" placeholder="https://router.project-osrm.org" autocomplete="off">
+          </label>
+          <p class="warn-note">Turning this on sends the coordinates of every route asked for here, by you or by a partner agent site, to that third-party routing service. Leave it empty to keep everything on this site. If the service does not answer, the demonstration distance is used and labelled as such.</p>
+          <p id="msg-routing" class="field-error" role="alert" hidden></p>
+          <div class="btn-row">
+            <button type="submit">Save routing source</button>
+            <button type="button" id="routing-off" class="secondary">Use the demonstration dataset</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="planner" class="panel">
+        <div class="panel-head">
+          <h2>Route planner</h2>
+          <p>Compare every provider's option for one load: feasibility, estimated time, cost and advisories. Planning books nothing.</p>
+        </div>
+        <form id="planner-form" class="planner" novalidate>
+          <fieldset>
+            <legend>From</legend>
+            <label>Known place <select name="fromPlace" data-fill="places"></select></label>
+            <div class="row">
+              <label>Latitude <input name="fromLat" type="number" step="0.0001" min="-90" max="90" required></label>
+              <label>Longitude <input name="fromLng" type="number" step="0.0001" min="-180" max="180" required></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>To</legend>
+            <label>Known place <select name="toPlace" data-fill="places"></select></label>
+            <div class="row">
+              <label>Latitude <input name="toLat" type="number" step="0.0001" min="-90" max="90" required></label>
+              <label>Longitude <input name="toLng" type="number" step="0.0001" min="-180" max="180" required></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Load</legend>
+            <label>Weight (kg) <input name="weightKg" type="number" min="1" max="500000" step="1" required inputmode="numeric" value="2400"></label>
+            <label>Needed within (hours, optional) <input name="neededWithinHours" type="number" min="0.5" max="720" step="0.5" value="24"></label>
+            <button type="submit">Compare transport options</button>
+          </fieldset>
+        </form>
+        <p id="msg-planner" class="field-error" role="alert" hidden></p>
+        <p id="planner-meta" class="sub" role="status"></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Provider · vehicle</th><th class="num">Vehicles</th><th class="num">Deadhead</th><th class="num">Haul</th><th class="num">ETA</th><th class="num">Cost</th><th>Feasible</th><th>Deadline</th><th>Advisories</th><th>Source</th></tr></thead>
+            <tbody id="option-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="shipments" class="panel">
+        <div class="panel-head">
+          <h2>Shipments</h2>
+          <p>A coordinating site can ask to book shipments. That opens a RouteBridge window where a person here confirms the booking. Move a shipment through its statuses below; only the allowed next steps are offered.</p>
+        </div>
+        <p id="msg-shipments" class="field-error" role="alert" hidden></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tracking</th><th>Provider · vehicle</th><th>Lane and cargo</th><th class="num">ETA · cost</th><th>Status</th><th>Next step</th></tr></thead>
+            <tbody id="shipment-rows"></tbody>
+          </table>
+        </div>
+        <button type="button" id="reset-demo" class="secondary">Reset demo data</button>
+      </section>
+
+      <section id="manage" class="grid-2">
+        <form id="register-form" class="panel" novalidate>
+          <h2>Register a transport provider</h2>
+          <p class="hint">Adds a provider, with its first vehicle type, to the published register.</p>
+          <label>Name <input name="name" maxlength="80" required></label>
+          <div class="row">
+            <label>Base town <input name="city" maxlength="60" required></label>
+            <label>Organisation id (optional) <input name="organizationId" maxlength="20" placeholder="ORG-…"></label>
+          </div>
+          <div class="row">
+            <label>Latitude <input name="lat" type="number" step="0.0001" min="-90" max="90" required></label>
+            <label>Longitude <input name="lng" type="number" step="0.0001" min="-180" max="180" required></label>
+          </div>
+          <div class="row">
+            <label>Vehicle type <select name="vehicleType" data-fill="vehicles"></select></label>
+            <label>Vehicles <input name="count" type="number" min="1" max="500" step="1" required></label>
+          </div>
+          <div class="row">
+            <label>Capacity (kg) <input name="capacityKg" type="number" min="100" max="100000" step="1" required></label>
+            <label>Avg speed (km/h) <input name="avgSpeedKmh" type="number" min="1" max="120" step="1" required></label>
+          </div>
+          <label>Rate (INR per km) <input name="ratePerKm" type="number" min="1" max="10000" step="1" required></label>
+          <p id="msg-register" class="field-error" role="alert" hidden></p>
+          <button type="submit">Register provider</button>
+        </form>
+
+        <form id="fleet-form" class="panel" novalidate>
+          <h2>Update fleet availability</h2>
+          <p class="hint">Set how many vehicles of one type a provider has. It cannot go below the number on unfinished shipments.</p>
+          <label>Provider <select name="providerId" data-fill="providers" required></select></label>
+          <label>Vehicle type <select name="vehicleType" data-fill="fleet-types" required></select></label>
+          <label>Vehicles in the fleet <input name="count" type="number" min="0" max="500" step="1" required inputmode="numeric"></label>
+          <p id="msg-fleet" class="field-error" role="alert" hidden></p>
+          <button type="submit">Update fleet</button>
+        </form>
+      </section>
+
+      <section id="assistant" class="assistant panel" aria-labelledby="assistant-heading">
+        <h2 id="assistant-heading">Ask RouteBridge</h2>
+        <p>The assistant reads this page's providers, vehicles, flood zones and shipments, compares transport options for a load, and can change a fleet count or a shipment's status when you ask.</p>
+        <p class="assistant-note">Your messages and this page's data go to the LLM provider you choose in the settings below. You confirm anything that cannot be undone before it happens.</p>
+        <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. You can still use the page directly.</p>
+        <div id="agent-app">
+          <div data-ns-slot="header"></div>
+          <div class="assistant-panels">
+            <div data-ns-slot="chat"></div>
+            <div data-ns-slot="agents"></div>
+          </div>
+          <div data-ns-slot="settings"></div>
+        </div>
+      </section>
+
+      <section id="network" class="panel">
+        <div class="panel-head">
+          <h2>Open Agentic Web</h2>
+          <p>This site publishes its agent network as data. Any compatible agentic website can load it, after its own visitor agrees, and run it in that visitor's browser.</p>
+        </div>
+        <dl class="facts">
+          <dt>Network URL</dt><dd><code id="network-url"></code></dd>
+          <dt>Public files</dt><dd><a id="manifest-link" href="#">agent-manifest.json</a> · <a id="network-link" href="#">routebridge.network.json</a> · <a href="./links.json">links.json</a></dd>
+          <dt>Agents</dt><dd>RoutePlanningAgent (front), TransportDiscoveryAgent, ShipmentTrackingAgent</dd>
+          <dt>Shared with partner sites</dt><dd>Reads: transport providers, transport options, route estimates, shipment status. Write: book shipments, confirmed in a RouteBridge window.</dd>
+        </dl>
+        <h3>Partner sites</h3>
+        <ul id="partner-links" class="links"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">RouteBridge is part of the ReliefMesh demonstration for the Open Agentic Web. All data is simulated.</footer>
+  </body>
+</html>

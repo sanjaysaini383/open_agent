@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "routebridge",
+      "front_man": "RoutePlanningAgent",
+      "aliases": [
+        "routebridge",
+        "RoutePlanningAgent"
+      ],
+      "url": "routebridge"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

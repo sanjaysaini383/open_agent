@@ -1,0 +1,102 @@
+{
+  "brand": "RouteBridge Assistant",
+  "networks": [
+    {
+      "name": "routebridge",
+      "front_man": "RoutePlanningAgent",
+      "hocon": "./routebridge.network.json",
+      "description": "Ask about transport providers and free vehicles, compare options to move a load, estimate routes and delivery times, and follow or update shipments.",
+      "tags": [
+        "agentified-website",
+        "emergency-response",
+        "logistics",
+        "reliefmesh"
+      ],
+      "sample_queries": [
+        "Which transport providers have vehicles free right now, and what can each carry?",
+        "What are the options to move 2,400 kg from Berhampore (24.1040, 88.2510) to Manikchak (25.0773, 87.9003) within 24 hours?",
+        "How far is it by road from Siliguri (26.7271, 88.3953) to Ratua (25.2046, 87.9281), and is the approach flooded?",
+        "Set Malda Fleet Cooperative's light trucks to 8.",
+        "Where are the emergency shelters, and how urgent is each?",
+        "Can you track a truck by GPS and tell me today's traffic on the highway?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "http://localhost:8081"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls only the partner sites in allowed_peers, after the visitor agrees, plus page-local actions."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "routebridge",
+    "front_man": "RoutePlanningAgent",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#b45309"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "routebridge",
+        "front_man": "RoutePlanningAgent",
+        "aliases": [
+          "routebridge",
+          "RoutePlanningAgent"
+        ],
+        "url": "routebridge"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_transport_providers",
+      "get_transport_options",
+      "estimate_routes",
+      "get_shipment_status",
+      "register_provider",
+      "update_fleet_availability",
+      "update_shipment_status",
+      "create_shipments"
+    ]
+  },
+  "reliefmesh": {
+    "role": "logistics",
+    "capabilities": [
+      "transport_providers",
+      "vehicle_availability",
+      "route_estimation",
+      "transport_options",
+      "shipment_booking",
+      "shipment_tracking"
+    ],
+    "data_classification": "simulated",
+    "organization": "RouteBridge (demonstration)"
+  }
+}

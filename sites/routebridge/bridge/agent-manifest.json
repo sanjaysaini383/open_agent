@@ -1,0 +1,11 @@
+{
+  "networks": [
+    {
+      "name": "routebridge"
+    }
+  ],
+  "actions": {
+    "version": 1,
+    "module": "./bridge-actions.js"
+  }
+}
