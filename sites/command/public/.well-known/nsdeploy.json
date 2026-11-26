@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "reliefmesh_command",
+      "front_man": "EmergencyCommanderAgent",
+      "aliases": [
+        "reliefmesh_command",
+        "EmergencyCommanderAgent"
+      ],
+      "url": "reliefmesh_command"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

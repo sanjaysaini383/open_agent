@@ -1,0 +1,11 @@
+{
+  "networks": [
+    {
+      "name": "reliefmesh_command"
+    }
+  ],
+  "actions": {
+    "version": 1,
+    "module": "./bridge-actions.js"
+  }
+}

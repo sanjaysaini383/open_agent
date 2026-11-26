@@ -1,0 +1,46 @@
+{
+  "notice": "Publisher-configured partner registry: a list shipped with this site. It is NOT a lookup in the NANDA Index or any other external directory.",
+  "self": {
+    "origin": "http://localhost:8080",
+    "networkUrl": "http://localhost:8080/reliefmesh_command"
+  },
+  "partners": [
+    {
+      "id": "trustregistry",
+      "label": "TrustRegistry",
+      "role": "trust",
+      "networkUrl": "http://localhost:8083/trustregistry",
+      "siteUrl": "http://localhost:8083/",
+      "purpose": "Identity records, signed attestations, credentials and reputation."
+    },
+    {
+      "id": "shelterconnect",
+      "label": "ShelterConnect",
+      "role": "shelter",
+      "networkUrl": "http://localhost:8081/shelterconnect",
+      "siteUrl": "http://localhost:8081/",
+      "purpose": "Shelter register, capacity, inventory and resource requests."
+    },
+    {
+      "id": "aidsupply",
+      "label": "AidSupply Network",
+      "role": "supplier",
+      "networkUrl": "http://localhost:8082/aidsupply",
+      "siteUrl": "http://localhost:8082/",
+      "purpose": "Supplier directory, offers, quotes and reservations."
+    },
+    {
+      "id": "routebridge",
+      "label": "RouteBridge",
+      "role": "logistics",
+      "networkUrl": "http://localhost:8084/routebridge",
+      "siteUrl": "http://localhost:8084/",
+      "purpose": "Transport providers, route estimates and shipment booking."
+    }
+  ],
+  "inspector": "http://localhost:8090/",
+  "nandaIndex": {
+    "apiBase": "https://api.nandaindex.org",
+    "site": "https://nandaindex.org/"
+  }
+}

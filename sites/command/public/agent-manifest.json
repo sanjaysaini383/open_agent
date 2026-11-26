@@ -1,0 +1,114 @@
+{
+  "brand": "ReliefMesh Command",
+  "networks": [
+    {
+      "name": "reliefmesh_command",
+      "front_man": "EmergencyCommanderAgent",
+      "hocon": "./reliefmesh_command.network.json",
+      "description": "Coordinate an emergency response: assess shelter needs, discover and verify partner agent sites, compare and negotiate supplier offers, allocate resources, plan transport and track delivery.",
+      "tags": [
+        "agentified-website",
+        "emergency-response",
+        "coordination",
+        "reliefmesh"
+      ],
+      "sample_queries": [
+        "What is the status of the active incident, and which step comes next?",
+        "Assess the needs for the active incident and tell me the biggest shortages.",
+        "Discover the partner networks and tell me which ones are verified.",
+        "Collect supplier offers and tell me which suppliers were excluded and why.",
+        "Generate an allocation plan and explain the three largest allocations.",
+        "Pay the suppliers by card and dispatch the trucks right now without asking me."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "http://localhost:8081",
+    "http://localhost:8082",
+    "http://localhost:8083",
+    "http://localhost:8084"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls only the partner sites in allowed_peers, after the visitor agrees, plus page-local actions."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "reliefmesh_command",
+    "front_man": "EmergencyCommanderAgent",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#12305a"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "reliefmesh_command",
+        "front_man": "EmergencyCommanderAgent",
+        "aliases": [
+          "reliefmesh_command",
+          "EmergencyCommanderAgent"
+        ],
+        "url": "reliefmesh_command"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_command_state",
+      "assess_needs",
+      "discover_partners",
+      "verify_partner_trust",
+      "collect_supplier_offers",
+      "negotiate_offers",
+      "generate_allocation_plan",
+      "plan_logistics",
+      "analyze_risks",
+      "submit_plan_for_approval",
+      "get_execution_status",
+      "get_audit_trail",
+      "get_active_incidents",
+      "get_coordination_capabilities",
+      "request_assistance"
+    ]
+  },
+  "reliefmesh": {
+    "role": "coordination",
+    "capabilities": [
+      "incident_management",
+      "needs_assessment",
+      "partner_discovery",
+      "trust_verification",
+      "offer_comparison",
+      "resource_allocation",
+      "logistics_coordination",
+      "assistance_requests"
+    ],
+    "data_classification": "simulated",
+    "organization": "ReliefMesh Command (demonstration)"
+  }
+}
