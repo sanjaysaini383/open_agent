@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ExternalLink, Globe2, ShieldAlert } from "lucide-react";
 import { overallFulfilmentPct } from "@/domain/allocation";
 import { logisticsTotals } from "@/domain/logistics";
-import { inr, num, RESOURCES } from "@/domain/resources";
+import { inr, num, price, RESOURCES } from "@/domain/resources";
 import { useStore } from "@/state/store";
 import type { WorkflowRun } from "@/state/types";
 import { useUi } from "@/state/ui";
@@ -139,7 +139,7 @@ export function PlanPreview({ run, compact = false }: { run: WorkflowRun; compac
                   <Td>{offer?.supplierName ?? "—"}</Td>
                   <Td>{offer ? RESOURCES[offer.resource].label : "—"}</Td>
                   <Td right>{num(line.quantity)}</Td>
-                  <Td right>{inr(line.unitPrice)}{offer && line.unitPrice < offer.listUnitPrice && <span className="ml-1 text-[11.5px] text-ok">quoted</span>}</Td>
+                  <Td right>{price(line.unitPrice)}{offer && line.unitPrice < offer.listUnitPrice && <span className="ml-1 text-[11.5px] text-ok">quoted</span>}</Td>
                   <Td right>{inr(line.quantity * line.unitPrice)}</Td>
                 </tr>
               );

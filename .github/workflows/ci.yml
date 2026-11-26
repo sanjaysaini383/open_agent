@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      browser_tests:
+        description: Also run the Playwright browser tests
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  compliance:
+    name: Official checks and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        run: |
+          npm install --no-audit --no-fund
+          npm --prefix sites/command install --no-audit --no-fund
+      - name: The official runtime is unchanged in every site
+        run: npm run runtime:check
+      - name: Official build_network.mjs --check, all five sites
+        run: npm run networks:check
+      - name: Published attestations verify
+        run: node scripts/sign-trust.mjs --verify
+      - name: Type-check and build Command
+        run: npm --prefix sites/command run build
+      - name: Unit tests
+        run: npm run test:unit
+      - name: Site and Inspector tests
+        run: npm run test:sites
+      - name: Integration tests over HTTP between the five origins
+        run: npm run test:integration
+      - name: Official check_partner.mjs on every call path
+        run: |
+          node scripts/serve-all.mjs &
+          for i in $(seq 1 40); do curl -sf http://localhost:8084/agent-manifest.json > /dev/null && break; sleep 0.5; done
+          npm run check:partners
+
+  browser:
+    name: Browser tests
+    if: github.event_name == 'workflow_dispatch' && inputs.browser_tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        run: |
+          npm install --no-audit --no-fund
+          npm --prefix sites/command install --no-audit --no-fund
+      - name: Build
+        run: npm run build
+      - name: Playwright, installed Chrome, five real origins
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-results
+          path: test-results/

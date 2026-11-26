@@ -6,7 +6,7 @@ import { overallFulfilmentPct } from "@/domain/allocation";
 import { logisticsTotals } from "@/domain/logistics";
 import { totalSaving } from "@/domain/negotiation";
 import { COMPARISON_WEIGHTS } from "@/domain/offers";
-import { inr, num, RESOURCE_IDS, RESOURCES } from "@/domain/resources";
+import { inr, num, price, RESOURCE_IDS, RESOURCES } from "@/domain/resources";
 import { reportReceipt } from "@/domain/schemas";
 import { nextStatuses, STATUS_LABEL, summariseShipments } from "@/domain/shipments";
 import type { ResourceId, ShipmentStatus, TrustEvaluation } from "@/domain/types";
@@ -184,7 +184,7 @@ export function OffersView({ incidentId }: { incidentId: string }) {
                       ))}
                     </Td>
                     <Td right>{num(offer.quantityAvailable)}<div className="text-[11.5px] text-muted">min {num(offer.minOrder)}</div></Td>
-                    <Td right>{inr(offer.unitPrice)}{offer.unitPrice < offer.listUnitPrice && <div className="text-[11.5px] text-ok">list {inr(offer.listUnitPrice)}</div>}</Td>
+                    <Td right>{price(offer.unitPrice)}{offer.unitPrice < offer.listUnitPrice && <div className="text-[11.5px] text-ok">list {price(offer.listUnitPrice)}</div>}</Td>
                     <Td right>{inr(need * offer.unitPrice)}<div className="text-[11.5px] text-muted">for {num(need)}</div></Td>
                     <Td>{offer.location.city}<div className="text-[11.5px] text-muted">{num(offer.distanceKm)} km est.</div></Td>
                     <Td right>{offer.leadTimeHours} h</Td>
@@ -234,9 +234,9 @@ export function NegotiationView({ incidentId }: { incidentId: string }) {
               <span className="font-semibold">{event.supplierName}</span>
               <span className="text-muted">{num(event.quantity)} × {RESOURCES[event.resource].label.toLowerCase()}</span>
               <span className="tabular ml-auto flex items-center gap-1.5">
-                <span className="text-muted">list {inr(event.listUnitPrice)}</span><ArrowRight size={12} className="text-slate-400" aria-hidden />
-                <span className="text-muted">asked {inr(event.targetUnitPrice)}</span><ArrowRight size={12} className="text-slate-400" aria-hidden />
-                <strong>{event.quotedUnitPrice !== null ? inr(event.quotedUnitPrice) : "no quote"}</strong>
+                <span className="text-muted">list {price(event.listUnitPrice)}</span><ArrowRight size={12} className="text-slate-400" aria-hidden />
+                <span className="text-muted">asked {price(event.targetUnitPrice)}</span><ArrowRight size={12} className="text-slate-400" aria-hidden />
+                <strong>{event.quotedUnitPrice !== null ? price(event.quotedUnitPrice) : "no quote"}</strong>
               </span>
               <Badge tone={outcome[event.outcome]}>{event.outcome}{event.saving > 0 ? ` · saves ${inr(event.saving)}` : ""}</Badge>
             </div>
@@ -294,7 +294,7 @@ export function AllocationView({ incidentId }: { incidentId: string }) {
               <Td>{RESOURCES[line.resource].label}</Td>
               <Td>{line.supplierName}</Td>
               <Td right>{num(line.quantity)}</Td>
-              <Td right>{inr(line.unitPrice)}</Td>
+              <Td right>{price(line.unitPrice)}</Td>
               <Td right>{inr(line.lineCost)}</Td>
               <Td right>{line.deliveryHours} h {!line.onTime && <Badge tone="warn">late</Badge>}</Td>
             </FragmentRow>

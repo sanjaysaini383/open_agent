@@ -40,8 +40,17 @@ async function waitForStep(step, statuses, timeout = 150_000) {
 
 /** Answer the partner's own confirmation window, opened from the dashboard's prompt. */
 async function confirmInPartnerWindow(openButtonName, confirmButtonName) {
+  // Consent is remembered for a session only. After a reload the dashboard asks again
+  // before it contacts the partner, and only then offers to open the partner's window.
+  const open = page.getByRole("button", { name: openButtonName });
+  const allow = page.getByRole("button", { name: "Allow once" });
+  for (let asked = 0; asked < 4; asked++) {
+    await expect(open.or(allow)).toBeVisible({ timeout: 30_000 });
+    if (await open.isVisible()) break;
+    await allow.click();
+  }
   const popupPromise = page.waitForEvent("popup");
-  await page.getByRole("button", { name: openButtonName }).click();
+  await open.click();
   const popup = await popupPromise;
   await popup.waitForLoadState("domcontentloaded");
   const origin = new URL(popup.url()).origin;
@@ -230,6 +239,13 @@ test("allocation approval: the plan is valid, a person approves it, and only the
 
 test("shipment tracking: statuses follow the allowed transitions and a delivery is recorded at the shelter", async () => {
   await page.goto("/#/logistics");
+  // A reload must not disturb a step that is waiting for a person, nor the receipts.
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Logistics", exact: true })).toBeVisible();
+  const reloaded = await run();
+  expect(reloaded.steps.execute.status).toBe("waiting");
+  expect(reloaded.reservation.status).toBe("confirmed");
+  expect(reloaded.booking.status).toBe("confirmed");
   const first = (await run()).shipments[0];
   const row = page.getByRole("row", { name: new RegExp(first.trackingCode) });
   // A planned shipment cannot jump to delivered: that button does not exist.

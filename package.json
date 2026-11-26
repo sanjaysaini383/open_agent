@@ -16,7 +16,7 @@
     "networks:check": "node scripts/build-networks.mjs --check",
     "trust:sign": "node scripts/sign-trust.mjs",
     "origins:set": "node scripts/set-origins.mjs",
-    "build": "node scripts/build-networks.mjs && npm --prefix sites/command run build",
+    "build": "node scripts/build-networks.mjs && node scripts/sign-trust.mjs --verify && npm --prefix sites/command run build",
     "serve": "node scripts/serve-all.mjs",
     "check:partners": "node scripts/check-partners.mjs",
     "inspect": "node tools/inspector/cli.mjs",
@@ -24,6 +24,8 @@
     "test:sites": "node --test \"sites/shelterconnect/tests/*.test.mjs\" \"sites/aidsupply/tests/*.test.mjs\" \"sites/trustregistry/tests/*.test.mjs\" \"sites/routebridge/tests/*.test.mjs\" \"tools/inspector/tests/*.test.mjs\"",
     "test:integration": "node --test \"tests/integration/*.test.mjs\"",
     "test:e2e": "playwright test",
+    "screenshots": "node tests/e2e/support/capture-screenshots.mjs",
+    "hosting:config": "node scripts/write-hosting-config.mjs",
     "test": "npm run test:unit && npm run test:sites && npm run test:integration",
     "compliance": "node scripts/compliance-report.mjs"
   },

@@ -190,11 +190,12 @@ export const useStore = create<AppState>()(
         settings: state.settings,
       }),
       // A step that was mid-flight when the tab closed did not finish: say so on reload.
+      // "waiting" is different: it means waiting for a person, which survives a reload.
       onRehydrateStorage: () => (state) => {
         if (!state) return;
         for (const run of Object.values(state.runs)) {
           for (const step of Object.values(run.steps)) {
-            if (step.status === "running" || step.status === "waiting") {
+            if (step.status === "running") {
               step.status = "failed";
               step.error = "Interrupted: the page was closed or reloaded while this step was running. Run it again.";
             }

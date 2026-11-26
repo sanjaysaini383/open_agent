@@ -33,6 +33,10 @@ export function emptyResourceRecord<T>(make: (id: ResourceId) => T): Record<Reso
 export const inr = (value: number): string =>
   new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(Math.round(value));
 
+/** A unit price, to the paisa: a quote of ₹170.70 must not read as ₹171. */
+export const price = (value: number): string =>
+  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+
 export const num = (value: number): string => new Intl.NumberFormat("en-IN").format(value);
 
 export const round2 = (value: number): number => Math.round((value + Number.EPSILON) * 100) / 100;
