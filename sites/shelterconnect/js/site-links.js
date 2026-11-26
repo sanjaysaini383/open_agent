@@ -16,6 +16,7 @@ export class SiteLinks {
   /** The origins allowed to read this site's shared actions and to make its shared write. */
   static CALLERS = [
     "http://localhost:8080",
+    "http://localhost:8084",
   ];
 
   static asFacts() {
