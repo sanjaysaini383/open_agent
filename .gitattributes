@@ -1,0 +1,8 @@
+# Byte-stable files on every platform. The TrustRegistry signs digests of the published
+# network files and `npm run runtime:check` compares runtime copies byte for byte, so a
+# checkout must never rewrite line endings.
+* text=auto eol=lf
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.ico binary
