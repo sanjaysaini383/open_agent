@@ -1,0 +1,19 @@
+{
+  "registry": "TrustRegistry (demonstration)",
+  "simulatedAuthority": true,
+  "algorithm": "ECDSA-P256-SHA256",
+  "keys": [
+    {
+      "kid": "tr-1a3014b5b792",
+      "use": "sig",
+      "publicKeyJwk": {
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "HzkEsQS7KyooByYjJsiLWuSjJjyf_Kn8lR9IsP8E5WE",
+        "y": "7KldHHYa31Txu2jAMQh3S4TOE1t--RyCVO19IGc0G3M"
+      },
+      "fingerprint": "sha256:1a3014b5b792bba61ddcc4c8da64797f4b74baea299d8c24784ca696796f1cf9",
+      "createdAt": "2026-11-26T15:50:32.375Z"
+    }
+  ]
+}

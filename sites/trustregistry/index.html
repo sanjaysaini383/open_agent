@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrustRegistry — agent identity and verification</title>
+    <meta name="description" content="TrustRegistry keeps identity records, signed attestations, credentials, reputation history and suspicious-agent reports for agent networks and organisations, and shares them with other agentic websites.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="site.js"></script>
+  </head>
+  <body>
+    <div class="sim-banner" role="note">Simulated authority and credentials — this registry and every record in it are invented for the demonstration. The signatures are real: ECDSA P-256, checked in your browser.</div>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">TR</span>
+        <div>
+          <strong>TrustRegistry</strong>
+          <span class="brand-sub">Agent identity and verification · independent agentic website</span>
+        </div>
+      </div>
+      <nav aria-label="Sections">
+        <a href="#subjects">Subjects</a>
+        <a href="#lookup">Look up</a>
+        <a href="#reports">Reports</a>
+        <a href="#admin">Admin</a>
+        <a href="#assistant">Assistant</a>
+        <a href="#network">Agent network</a>
+      </nav>
+    </header>
+
+    <main>
+      <p id="page-notice" class="notice" role="status" hidden></p>
+      <p id="load-warning" class="notice" data-kind="warn" role="alert" hidden></p>
+      <section class="tiles" id="summary" aria-label="Summary"></section>
+
+      <section id="key" class="panel">
+        <div class="panel-head">
+          <h2>Registry signing key</h2>
+          <p>Every attestation below is signed with this key. A caller pins the fingerprint the first time it sees it, and is warned if it ever changes. The private half never leaves the machine that signs.</p>
+        </div>
+        <dl class="facts" id="key-facts"></dl>
+        <p class="hint key-files">Public files: <a href="./trust-keys.json">trust-keys.json</a> · <a href="./attestations.json">attestations.json</a></p>
+      </section>
+
+      <section id="subjects" class="panel">
+        <div class="panel-head">
+          <h2>Registered subjects</h2>
+          <p>Agent networks and organisations with a registry record. The signature column is computed in this browser, now, from the published files. A subject with no row here is unverified.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Type</th><th>Subject</th><th>Live status</th><th>Credentials</th><th>Signed attestation</th></tr></thead>
+            <tbody id="subject-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="lookup" class="panel">
+        <div class="panel-head">
+          <h2>Look up a subject</h2>
+          <p>Enter a network URL, an organisation id such as ORG-SUP-C, or a subject id. A network with the right name at the wrong address is not a match.</p>
+        </div>
+        <form id="lookup-form" class="inline-form" novalidate>
+          <label class="grow">Network URL, organisation id or subject id
+            <input name="query" maxlength="300" list="subject-id-list" autocomplete="off" required>
+          </label>
+          <datalist id="subject-id-list" data-fill="subject-ids"></datalist>
+          <button type="submit">Look up</button>
+        </form>
+        <div id="lookup-result" aria-live="polite"></div>
+      </section>
+
+      <section id="reports" class="panel">
+        <div class="panel-head">
+          <h2>Suspicious-agent reports</h2>
+          <p>A report is an allegation shown with the subject's record. It does not change a status; only a registry operator does that.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Reference</th><th>Subject</th><th>Reason</th><th>Details</th><th>Filed</th></tr></thead>
+            <tbody id="report-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="admin" class="grid-3">
+        <form id="report-form" class="panel" novalidate>
+          <h2>File a report</h2>
+          <p class="hint">The subject does not have to be registered. Partner sites file the same report through a TrustRegistry window that a person here confirms.</p>
+          <label>Subject id <input name="subjectId" maxlength="80" placeholder="org:ORG-SUP-D or net:aidsupply" required></label>
+          <label>Reason <select name="reason" data-fill="reasons" required></select></label>
+          <label>What was observed <textarea name="details" rows="3" maxlength="280" required></textarea></label>
+          <p id="msg-report" class="field-error" role="alert" hidden></p>
+          <button type="submit">File report</button>
+        </form>
+
+        <form id="status-form" class="panel" novalidate>
+          <h2>Suspend, revoke or reinstate</h2>
+          <p class="hint">Sets the registry's live status. It cannot be better than the signed attestation says: that needs a newly signed attestation, issued offline.</p>
+          <label>Subject <select name="subjectId" data-fill="subjects" required></select></label>
+          <label>New status <select name="status" data-fill="statuses" required></select></label>
+          <label>Reason <input name="reason" maxlength="200" required></label>
+          <p id="msg-status" class="field-error" role="alert" hidden></p>
+          <button type="submit">Set status</button>
+        </form>
+
+        <form id="register-form" class="panel" novalidate>
+          <h2>Register a subject</h2>
+          <p class="hint">Recorded as pending: it has no signed attestation, so callers treat it as unverified until the registry signs one.</p>
+          <label>Kind
+            <select name="kind">
+              <option value="organization">Organisation</option>
+              <option value="agent_network">Agent network</option>
+            </select>
+          </label>
+          <label>Name <input name="name" maxlength="80" required></label>
+          <label data-kind="organization">Organisation id <input name="organizationId" maxlength="40" placeholder="ORG-SUP-E"></label>
+          <label data-kind="organization">Organisation type <select name="organizationType" data-fill="org-types"></select></label>
+          <label data-kind="agent_network">Network URL <input name="networkUrl" maxlength="300" placeholder="https://site.example/network_name"></label>
+          <label data-kind="agent_network">Operator (optional) <input name="operator" maxlength="80"></label>
+          <p id="msg-register" class="field-error" role="alert" hidden></p>
+          <button type="submit">Register as pending</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Demo data</h2>
+          <p>Restores the live state (status changes, pending subjects, reports) to the simulated seed. The signed files are not touched.</p>
+        </div>
+        <button type="button" id="reset-demo" class="secondary">Reset demo data</button>
+      </section>
+
+      <section id="assistant" class="assistant panel" aria-labelledby="assistant-heading">
+        <h2 id="assistant-heading">Ask TrustRegistry</h2>
+        <p>The assistant looks up agent networks and organisations in this registry: status, credentials, reputation and open reports. It can suspend, revoke or register a subject when you ask.</p>
+        <p class="assistant-note">Your messages and this page's data go to the LLM provider you choose in the settings below. You confirm anything that cannot be undone before it happens.</p>
+        <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. You can still use the page directly.</p>
+        <div id="agent-app">
+          <div data-ns-slot="header"></div>
+          <div class="assistant-panels">
+            <div data-ns-slot="chat"></div>
+            <div data-ns-slot="agents"></div>
+          </div>
+          <div data-ns-slot="settings"></div>
+        </div>
+      </section>
+
+      <section id="network" class="panel">
+        <div class="panel-head">
+          <h2>Open Agentic Web</h2>
+          <p>This site publishes its agent network as data. Any compatible agentic website can load it, after its own visitor agrees, and run it in that visitor's browser.</p>
+        </div>
+        <dl class="facts">
+          <dt>Network URL</dt><dd><code id="network-url"></code></dd>
+          <dt>Public files</dt><dd><a href="./agent-manifest.json">agent-manifest.json</a> · <a href="./trustregistry.network.json">trustregistry.network.json</a> · <a href="./links.json">links.json</a> · <a href="./trust-keys.json">trust-keys.json</a> · <a href="./attestations.json">attestations.json</a></dd>
+          <dt>Agents</dt><dd>IdentityVerificationAgent (front), CredentialAgent, ReputationAgent</dd>
+          <dt>Shared with partner sites</dt><dd>Reads: registry info, verify an agent network, verify an organisation, reputation. Write: file a suspicious-agent report, confirmed in a TrustRegistry window.</dd>
+          <dt>Calls other networks</dt><dd>None. A registry is called; it does not call.</dd>
+        </dl>
+        <h3>Other ReliefMesh sites</h3>
+        <ul id="partner-links" class="links"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">TrustRegistry is part of the ReliefMesh demonstration for the Open Agentic Web. Its authority and all its records are simulated; its signatures are real.</footer>
+  </body>
+</html>

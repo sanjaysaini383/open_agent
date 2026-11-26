@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "trustregistry",
+      "front_man": "IdentityVerificationAgent",
+      "aliases": [
+        "trustregistry",
+        "IdentityVerificationAgent"
+      ],
+      "url": "trustregistry"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

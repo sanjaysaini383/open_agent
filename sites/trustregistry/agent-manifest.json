@@ -1,0 +1,100 @@
+{
+  "brand": "TrustRegistry Assistant",
+  "networks": [
+    {
+      "name": "trustregistry",
+      "front_man": "IdentityVerificationAgent",
+      "hocon": "./trustregistry.network.json",
+      "description": "Look up agent networks and organisations in the registry: status, signed attestations, credentials, reputation and suspicious-agent reports.",
+      "tags": [
+        "agentified-website",
+        "emergency-response",
+        "trust",
+        "verification",
+        "reliefmesh"
+      ],
+      "sample_queries": [
+        "Which agent networks and organisations are registered, and is any revoked?",
+        "Is ORG-SUP-C in good standing? Check its credentials.",
+        "What is the reputation history of ORG-TR-1?",
+        "Is ORG-SUP-D registered, and are there open reports against it?",
+        "Suspend ORG-TR-4 while its permit is reviewed.",
+        "Can you issue a signed attestation for my organisation here?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Local agents and page-local actions only."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "trustregistry",
+    "front_man": "IdentityVerificationAgent",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#166534"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "trustregistry",
+        "front_man": "IdentityVerificationAgent",
+        "aliases": [
+          "trustregistry",
+          "IdentityVerificationAgent"
+        ],
+        "url": "trustregistry"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_registry_info",
+      "verify_agent",
+      "verify_organization",
+      "get_reputation",
+      "set_subject_status",
+      "register_subject",
+      "report_suspicious_agent"
+    ]
+  },
+  "reliefmesh": {
+    "role": "trust",
+    "capabilities": [
+      "identity_records",
+      "signed_attestations",
+      "credential_verification",
+      "reputation_history",
+      "revocation",
+      "suspicious_agent_reports"
+    ],
+    "data_classification": "simulated",
+    "organization": "TrustRegistry (demonstration)"
+  }
+}

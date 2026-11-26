@@ -1,0 +1,345 @@
+{
+  "issuer": "http://localhost:8083/trustregistry",
+  "issuedAt": "2026-11-26T16:00:07.414Z",
+  "attestations": {
+    "net:reliefmesh_command": {
+      "payload": {
+        "v": 1,
+        "type": "agent_network",
+        "subjectId": "net:reliefmesh_command",
+        "name": "ReliefMesh Command",
+        "status": "active",
+        "networkUrl": "http://localhost:8080/reliefmesh_command",
+        "networkDigest": null,
+        "capabilities": [],
+        "credentials": [
+          {
+            "type": "Agent operator registration (simulated)",
+            "issuer": "TrustRegistry (demonstration)",
+            "id": "SIM-AOR-0001",
+            "validFrom": "2026-03-02",
+            "validUntil": "2027-03-01"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "WLZz56xdZqo2oCuFsT_ONCXsH_PHHput_uKRYRHk9Db610DUwpSSR6YzxSUMPkD3mTAC2BJCNW9WM8iUHM9UQQ",
+      "kid": "tr-1a3014b5b792"
+    },
+    "net:shelterconnect": {
+      "payload": {
+        "v": 1,
+        "type": "agent_network",
+        "subjectId": "net:shelterconnect",
+        "name": "ShelterConnect",
+        "status": "active",
+        "networkUrl": "http://localhost:8081/shelterconnect",
+        "networkDigest": "sha256:b3e9d961e614c9e15f77b9ffc820f3e0e5b24621f6ed1a63656b28e80ec49761",
+        "capabilities": [
+          "shelter_register",
+          "shelter_capacity",
+          "resource_requests",
+          "shelter_inventory",
+          "delivery_receipts"
+        ],
+        "credentials": [
+          {
+            "type": "Agent operator registration (simulated)",
+            "issuer": "TrustRegistry (demonstration)",
+            "id": "SIM-AOR-0002",
+            "validFrom": "2026-03-05",
+            "validUntil": "2027-03-04"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "pZxKnChta9rD1j8ZBAmiIEg1c7Xz48Skb0Fr6xqhLstMxV1puuOAYu7vMUJz8kvCtB7eDiSqN743jT23K0Wg6Q",
+      "kid": "tr-1a3014b5b792"
+    },
+    "net:aidsupply": {
+      "payload": {
+        "v": 1,
+        "type": "agent_network",
+        "subjectId": "net:aidsupply",
+        "name": "AidSupply Network",
+        "status": "active",
+        "networkUrl": "http://localhost:8082/aidsupply",
+        "networkDigest": "sha256:8ffe56640014b99429063fb318ba547c1dcbb7213ec9688a9fbf40b0958c92e3",
+        "capabilities": [
+          "supplier_directory",
+          "supplier_offers",
+          "offer_negotiation",
+          "allocation_reservation"
+        ],
+        "credentials": [
+          {
+            "type": "Agent operator registration (simulated)",
+            "issuer": "TrustRegistry (demonstration)",
+            "id": "SIM-AOR-0003",
+            "validFrom": "2026-03-09",
+            "validUntil": "2027-03-08"
+          }
+        ],
+        "issuedAt": "2026-11-26T16:00:07.414Z",
+        "expiresAt": "2027-05-25T16:00:07.414Z",
+        "simulated": true
+      },
+      "signature": "Pw8OqxTtpg38iRI8KJUS9t-fR2STdaFDF2WqnM1ryl_U09Q15ipRX8Xynup8tn-DZClnPnnYckCPb87_iEe3Ug",
+      "kid": "tr-1a3014b5b792"
+    },
+    "net:routebridge": {
+      "payload": {
+        "v": 1,
+        "type": "agent_network",
+        "subjectId": "net:routebridge",
+        "name": "RouteBridge",
+        "status": "active",
+        "networkUrl": "http://localhost:8084/routebridge",
+        "networkDigest": "sha256:e46abc21fc337f3c75a0af8ff827a6a6bbcaade80a754f0c7c13827d87e5215a",
+        "capabilities": [
+          "transport_providers",
+          "vehicle_availability",
+          "route_estimation",
+          "transport_options",
+          "shipment_booking",
+          "shipment_tracking"
+        ],
+        "credentials": [
+          {
+            "type": "Agent operator registration (simulated)",
+            "issuer": "TrustRegistry (demonstration)",
+            "id": "SIM-AOR-0004",
+            "validFrom": "2026-03-11",
+            "validUntil": "2027-03-10"
+          }
+        ],
+        "issuedAt": "2026-11-26T16:00:07.414Z",
+        "expiresAt": "2027-05-25T16:00:07.414Z",
+        "simulated": true
+      },
+      "signature": "uaBmRv2CVZAl8uLKvO4PhSIkKe_cmqxmfVF5nB1vDIq_jf2GvXHwAfPVpilyZrFdLQyePnDPs86WSdot63RvPw",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-SUP-A": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-SUP-A",
+        "name": "Bengal Relief Foundation",
+        "status": "active",
+        "credentials": [
+          {
+            "type": "Society registration (simulated)",
+            "issuer": "Registrar of Societies (simulated)",
+            "id": "SIM-SOC-A-2019",
+            "validFrom": "2019-04-12",
+            "validUntil": "2029-04-11"
+          },
+          {
+            "type": "Food safety licence (simulated)",
+            "issuer": "Food Safety Authority (simulated)",
+            "id": "SIM-FSL-A-2026",
+            "validFrom": "2026-02-01",
+            "validUntil": "2027-01-31"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "5YUZIyXsM4uvXPEZPeO6ZkTHkMNkmsX9xjwHcEtKrHTxEO5bci7W8Nvn5oV7fnQzMasizn1p64qIWjQMxXAB2A",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-SUP-B": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-SUP-B",
+        "name": "North Bengal Aid Collective",
+        "status": "active",
+        "credentials": [
+          {
+            "type": "Trust registration (simulated)",
+            "issuer": "Registrar of Trusts (simulated)",
+            "id": "SIM-TRU-B-2015",
+            "validFrom": "2015-08-20",
+            "validUntil": "2030-08-19"
+          },
+          {
+            "type": "Food safety licence (simulated)",
+            "issuer": "Food Safety Authority (simulated)",
+            "id": "SIM-FSL-B-2026",
+            "validFrom": "2026-01-15",
+            "validUntil": "2027-01-14"
+          },
+          {
+            "type": "Drug distribution licence (simulated)",
+            "issuer": "Drugs Control Directorate (simulated)",
+            "id": "SIM-DDL-B-2025",
+            "validFrom": "2025-06-01",
+            "validUntil": "2027-05-31"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "jSF1JTPqTzMtYjmzOeXKDw-cjla8onhxCgrzOJdTFED_5Xvb-dYt04p3IlktNjy1oR4Lt7k9xRAIPleHKW8uuQ",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-SUP-C": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-SUP-C",
+        "name": "Ganga Basin Supplies Pvt Ltd",
+        "status": "active",
+        "credentials": [
+          {
+            "type": "Company registration (simulated)",
+            "issuer": "Registrar of Companies (simulated)",
+            "id": "SIM-COM-C-2012",
+            "validFrom": "2012-11-05",
+            "validUntil": "2032-11-04"
+          },
+          {
+            "type": "GST registration (simulated)",
+            "issuer": "Goods and Services Tax Network (simulated)",
+            "id": "SIM-GST-C-2017",
+            "validFrom": "2017-07-01",
+            "validUntil": "2031-06-30"
+          },
+          {
+            "type": "Food safety licence (simulated)",
+            "issuer": "Food Safety Authority (simulated)",
+            "id": "SIM-FSL-C-2025",
+            "validFrom": "2025-10-01",
+            "validUntil": "2026-09-30"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "gC0mqWPiWmOqv5SIWmV4x4lBdRngMpSSKO-fM2xrYJnF_MIKRq7NcGftnWgpZDS24wM-HguSed_QsWjMi3TsSQ",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-TR-1": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-TR-1",
+        "name": "Malda Fleet Cooperative",
+        "status": "active",
+        "credentials": [
+          {
+            "type": "Cooperative registration (simulated)",
+            "issuer": "Registrar of Cooperative Societies (simulated)",
+            "id": "SIM-COP-TR1-2010",
+            "validFrom": "2010-01-18",
+            "validUntil": "2030-01-17"
+          },
+          {
+            "type": "Goods carriage permit (simulated)",
+            "issuer": "Regional Transport Authority (simulated)",
+            "id": "SIM-GCP-TR1-2026",
+            "validFrom": "2026-04-01",
+            "validUntil": "2027-03-31"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "d9BFvIFEOIzr3080ewRXpiauZv5qwVwipNGN9hejQQKRQrqmSnzJgnEO4OcgnH1LXpwx9EZ3mbOAi5OnRmvTLw",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-TR-2": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-TR-2",
+        "name": "Farakka Barge & Boat Union",
+        "status": "active",
+        "credentials": [
+          {
+            "type": "Union registration (simulated)",
+            "issuer": "Registrar of Trade Unions (simulated)",
+            "id": "SIM-UNI-TR2-2014",
+            "validFrom": "2014-05-09",
+            "validUntil": "2029-05-08"
+          },
+          {
+            "type": "Inland vessel licence (simulated)",
+            "issuer": "Inland Waterways Directorate (simulated)",
+            "id": "SIM-IVL-TR2-2026",
+            "validFrom": "2026-06-01",
+            "validUntil": "2027-05-31"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "9zHYVnzFF9TIOdShOlksILbQvVaHS-17F5CDEmsw6jeh428_INbLtxL4nkuChMBSCm_tI1YZLMH_D3pFDAhF_Q",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-TR-3": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-TR-3",
+        "name": "Teesta Cargo Movers",
+        "status": "revoked",
+        "credentials": [
+          {
+            "type": "Goods carriage permit (simulated)",
+            "issuer": "Regional Transport Authority (simulated)",
+            "id": "SIM-GCP-TR3-2025",
+            "validFrom": "2025-11-01",
+            "validUntil": "2026-10-12"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "ghz_c6EpV20jUCsldPkNBkZDJsZVhfN8G-c6zrP6Lu5d_J2NoTOicgG0rKiLxJPaBaAdasDVV7wMj-MqRIkrxA",
+      "kid": "tr-1a3014b5b792"
+    },
+    "org:ORG-TR-4": {
+      "payload": {
+        "v": 1,
+        "type": "organization",
+        "subjectId": "org:ORG-TR-4",
+        "name": "Murshidabad Relief Logistics",
+        "status": "active",
+        "credentials": [
+          {
+            "type": "Company registration (simulated)",
+            "issuer": "Registrar of Companies (simulated)",
+            "id": "SIM-COM-TR4-2018",
+            "validFrom": "2018-02-14",
+            "validUntil": "2033-02-13"
+          },
+          {
+            "type": "Goods carriage permit (simulated)",
+            "issuer": "Regional Transport Authority (simulated)",
+            "id": "SIM-GCP-TR4-2026",
+            "validFrom": "2026-03-01",
+            "validUntil": "2027-02-28"
+          }
+        ],
+        "issuedAt": "2026-11-26T15:50:32.376Z",
+        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "simulated": true
+      },
+      "signature": "8fTDqzNjrZFXXKA8UdD_ApWJ9_qxJgZfAaoGb7Gdd2u-uTLOmReo8B3FEYcdiZLoczIXDipBZvmsbgpqI_ReLA",
+      "kid": "tr-1a3014b5b792"
+    }
+  }
+}
