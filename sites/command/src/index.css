@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Design tokens: a serious operations-centre look. Light background, navy type, slate
+   surfaces, restrained red and orange for severity, green for verified and done. */
+@theme {
+  --color-navy-950: #0a1a33;
+  --color-navy-900: #0f2445;
+  --color-navy-800: #12305a;
+  --color-navy-700: #1b4079;
+  --color-navy-100: #dfe8f5;
+  --color-navy-50: #eff4fb;
+  --color-ink: #0f1f3d;
+  --color-ink-2: #33415c;
+  --color-muted: #5b6b85;
+  --color-line: #d9e0ea;
+  --color-canvas: #f4f6f9;
+  --color-critical: #b42318;
+  --color-critical-soft: #fef3f2;
+  --color-high: #c2410c;
+  --color-high-soft: #fff4ed;
+  --color-medium: #a16207;
+  --color-medium-soft: #fefce8;
+  --color-ok: #15803d;
+  --color-ok-soft: #ecfdf3;
+  --color-info: #1d4ed8;
+  --color-info-soft: #eff4ff;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+}
+
+html { color-scheme: light; }
+body { margin: 0; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--color-navy-700); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--color-navy-100); }
+.tabular { font-variant-numeric: tabular-nums; }
+.scroll-thin { scrollbar-width: thin; scrollbar-color: #c3cbd9 transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* A request travelling along a link in the network view. Only drawn while a call is in flight. */
+@keyframes rm-travel { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+.rm-link-active { stroke-dasharray: 6 6; animation: rm-travel 0.6s linear infinite; }
+@keyframes rm-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.rm-fade-in { animation: rm-fade-in 0.18s ease-out; }
+
+/* Leaflet inside the dashboard */
+.leaflet-container { font-family: var(--font-sans); background: #e8eef5; border-radius: 10px; }
+.leaflet-popup-content { margin: 10px 12px; font-size: 12.5px; line-height: 1.45; }
+.rm-pin { display: grid; place-items: center; border-radius: 999px; color: #fff; font-weight: 700; font-size: 10px; border: 2px solid #fff; box-shadow: 0 1px 3px rgb(15 31 61 / 0.4); }
+
+/* ---- Agent console: the official runtime's mount, styled as a drawer ---- */
+#agent-console {
+  position: fixed; inset: 0 0 0 auto; width: min(600px, 100vw); z-index: 40;
+  background: #fff; border-left: 1px solid var(--color-line); box-shadow: -12px 0 32px rgb(15 31 61 / 0.12);
+  transform: translateX(104%); visibility: hidden; transition: transform 0.22s ease, visibility 0s linear 0.22s;
+  display: flex; flex-direction: column; overflow-y: auto;
+}
+html[data-console="open"] #agent-console { transform: none; visibility: visible; transition: transform 0.22s ease; }
+html, body { overflow-x: clip; }
+.console-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--color-line); position: sticky; top: 0; background: #fff; z-index: 2; }
+.console-head strong { display: block; font-size: 15px; }
+.console-head span { color: var(--color-muted); font-size: 12.5px; }
+.console-head button { font: inherit; font-weight: 600; padding: 6px 12px; border-radius: 7px; border: 1px solid #c3cbd9; background: #fff; color: var(--color-ink-2); cursor: pointer; }
+.console-note { margin: 12px 18px 0; color: var(--color-muted); font-size: 12.5px; }
+#assistant-status { margin: 8px 18px 0; font-size: 12.5px; font-weight: 600; color: var(--color-ink-2); }
+#agent-app {
+  --ns-font: var(--font-sans);
+  --ns-bg: #ffffff;
+  --ns-fg: #0f1f3d;
+  --ns-primary: #12305a;
+  --ns-accent: #12305a;
+  --ns-border: #d9e0ea;
+  --ns-panelbg: #ffffff;
+  --ns-msgbg: #f4f6f9;
+  --ns-muted: #5b6b85;
+  padding: 12px 18px 24px; display: grid; gap: 12px;
+}
+#agent-app.ns-composed-app [data-ns-slot="chat"] { height: 520px; }
+#agent-app .ns-chat { background: var(--ns-bg); }
+#agent-app .ns-header { flex-wrap: wrap; }
+#agent-app input[type="checkbox"], #agent-app input[type="radio"] { width: auto; }
+#agent-app .ns-settings-body label { margin: 4px 0; font-weight: 400; }
+#agent-app .ns-w-choice { color: var(--ns-fg); }
+#agent-app .ns-consent { background: #fffbeb; }
+#agent-app .ns-msgs:has(.ns-consent-actions) > .ns-turn-status { display: none; }
+#agent-app .ns-msg { overflow-wrap: break-word; }
+#agent-app .ns-consent-actions { flex-wrap: wrap; }
+#agent-app .ns-consent-actions button { white-space: nowrap; }
+/* Tailwind's reset removes button and input chrome; give the runtime's controls theirs back. */
+#agent-app button { cursor: pointer; }
+#agent-app input, #agent-app select, #agent-app textarea { border: 1px solid var(--ns-border); border-radius: 6px; padding: 6px 8px; background: #fff; }
+#agent-app a { color: #1d4ed8; text-decoration: underline; }
+#agent-app summary { cursor: pointer; }

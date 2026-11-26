@@ -1,6 +1,6 @@
 {
   "issuer": "http://localhost:8083/trustregistry",
-  "issuedAt": "2026-11-26T16:00:07.414Z",
+  "issuedAt": "2026-11-26T16:28:11.403Z",
   "attestations": {
     "net:reliefmesh_command": {
       "payload": {
@@ -10,8 +10,17 @@
         "name": "ReliefMesh Command",
         "status": "active",
         "networkUrl": "http://localhost:8080/reliefmesh_command",
-        "networkDigest": null,
-        "capabilities": [],
+        "networkDigest": "sha256:8d76791308426fec88a12fa4d2d078283c93ff1a00a7eb32932b2891978a00a2",
+        "capabilities": [
+          "incident_management",
+          "needs_assessment",
+          "partner_discovery",
+          "trust_verification",
+          "offer_comparison",
+          "resource_allocation",
+          "logistics_coordination",
+          "assistance_requests"
+        ],
         "credentials": [
           {
             "type": "Agent operator registration (simulated)",
@@ -21,11 +30,11 @@
             "validUntil": "2027-03-01"
           }
         ],
-        "issuedAt": "2026-11-26T15:50:32.376Z",
-        "expiresAt": "2027-05-25T15:50:32.376Z",
+        "issuedAt": "2026-11-26T16:28:11.403Z",
+        "expiresAt": "2027-05-25T16:28:11.403Z",
         "simulated": true
       },
-      "signature": "WLZz56xdZqo2oCuFsT_ONCXsH_PHHput_uKRYRHk9Db610DUwpSSR6YzxSUMPkD3mTAC2BJCNW9WM8iUHM9UQQ",
+      "signature": "ZTNeuCf-IRZnjI9CmWsv4YT9Q42IMf1rmyjMKWwwnpeA1q9KNmp1TSsfZX_Q0XLzYbLs9oSdizrSqXo5RA1eJQ",
       "kid": "tr-1a3014b5b792"
     },
     "net:shelterconnect": {

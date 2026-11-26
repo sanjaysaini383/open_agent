@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReliefMesh Command — emergency response coordination</title>
+    <meta name="description" content="ReliefMesh is an open, decentralized multi-agent emergency response coordination network built on the Open Agentic Web. When disaster strikes, agents coordinate before humans have to.">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="alternate" type="application/json" href="./agent-manifest.json" title="Agent manifest">
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      Agent console. The official Open Agentic Web runtime mounts here (#agent-app with its
+      data-ns-slot children), outside the dashboard's own tree, so it stays mounted while
+      the dashboard changes pages. The runtime owns everything inside #agent-app, including
+      the AI model settings where the visitor picks a provider, a model and a key.
+    -->
+    <aside id="agent-console" aria-label="Agent console" inert>
+      <header class="console-head">
+        <div>
+          <strong>Agent console</strong>
+          <span>Talk to EmergencyCommanderAgent and its nine specialists</span>
+        </div>
+        <button type="button" id="agent-console-close" aria-label="Close the agent console">Close</button>
+      </header>
+      <p class="console-note">Agents run in your browser with the model and key you choose below. Your messages, and the dashboard data the agents read, go to that provider. Partner sites never receive your key. A person approves the plan and confirms every external write.</p>
+      <p id="assistant-status" role="status">Connecting the agent runtime…</p>
+      <div id="agent-app">
+        <div data-ns-slot="header"></div>
+        <div data-ns-slot="chat"></div>
+        <div data-ns-slot="agents"></div>
+        <div data-ns-slot="settings"></div>
+      </div>
+    </aside>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
