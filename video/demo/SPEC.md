@@ -2,9 +2,12 @@
 
 GOAL:    A judge believes, in two minutes, that five separate websites coordinated a real
          response with a person in control, and knows where to get the code.
-OUTPUT:  HyperFrames, 1920 x 1080, 30 fps. Target 118–124 s.
-TIME:    the narration is the clock (12 lines, local Kokoro am_michael, ~0.7 s gaps).
-         Music 100 BPM → 18 frames per beat; chapter cuts land on the line starts, not on beats.
+OUTPUT:  HyperFrames, 1920 x 1080, 30 fps. Target 112–120 s.
+TIME:    the narration is the clock (12 lines, one continuous read by edge-tts
+         en-IN-NeerjaNeural at 147 wpm, no pause over 0.42 s; see video/PRODUCTION.md).
+         Every title, tag and camera move is cued to a spoken word; chapter cuts land on
+         the line starts. Music: a CC0 ambient bed 12 dB under the voice, swelling after
+         the last word. Scenes overlap 0.45 s; cuts are a push, an iris or a zoom-through.
 LOOK:    Title worlds: ground #0b0f0e (flat, 1.5% grain via the footage treatment only on
          footage, none on type), ink #eae7dc (cream), eyebrow mint #d1e8e2 at 22 px, 0.18 em
          tracking, uppercase; one accent word per title in coral #e85a4f.

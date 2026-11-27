@@ -129,11 +129,14 @@ Latest full run: **58 checks passed, 0 failed, 0 not run** — see [COMPLIANCE_R
 A two-minute narrated demo is built from a real run of the product, not from mockups:
 `npm run video:record` drives the whole response in Chrome against the five served sites
 with a visible cursor and writes the footage and the time of every click; `npm run
-video:voice` synthesises the narration (locally, with word timings for the captions);
-`npm run video:build` generates the HyperFrames composition in [`video/demo`](video/demo)
-(title cards, the recording in a browser frame with camera pushes, per-word captions,
-sound effects); `npm run video:render` writes `video/demo/renders/reliefmesh-demo.mp4`.
-The script, storylines, spec and review notes are in that folder.
+video:voice` synthesises the narration as one continuous read by a neural voice (with
+word timings for every cue and caption) and builds the music bed; `npm run video:build`
+generates the HyperFrames composition in [`video/demo`](video/demo) (the recording in a
+browser frame with camera paths, overlapping transitions, titles and tags cued to the
+spoken words, per-word captions, effects); `npm run video:render` renders and normalises
+`video/demo/renders/reliefmesh-demo.mp4`. The production standard every film follows is
+[video/PRODUCTION.md](video/PRODUCTION.md); the script, storylines, spec and review notes
+are in `video/demo`. Needs Python 3 with `edge-tts` (`pip install edge-tts`) and ffmpeg.
 
 ## Documentation
 

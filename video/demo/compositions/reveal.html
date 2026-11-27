@@ -1,49 +1,72 @@
 <template>
   <style>
-  #root { position: absolute; inset: 0; overflow: hidden; background: #0b0f0e; color: #eae7dc; font-family: Inter, sans-serif; }
+  #root { position: absolute; inset: 0; overflow: hidden; background: transparent; color: #eae7dc; font-family: Inter, sans-serif; }
+  .clip { position: absolute; inset: 0; }
+  .stage { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  .ground { position: absolute; inset: 0; background: #0b0f0e; }
+  .grid { position: absolute; inset: -96px; background-image: radial-gradient(rgba(234,231,220,0.10) 1.6px, transparent 1.6px); background-size: 48px 48px; }
+  .glow { position: absolute; width: 1400px; height: 1400px; border-radius: 50%; background: radial-gradient(circle, rgba(232,90,79,0.20), rgba(232,90,79,0) 62%); }
   .eyebrow { position: absolute; left: 160px; top: 110px; display: flex; align-items: center; gap: 14px; font-size: 28px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #d1e8e2; opacity: 0; }
   .eyebrow i { width: 10px; height: 10px; border-radius: 999px; background: #e85a4f; }
   .title { position: absolute; left: 160px; width: 1600px; font-size: 84px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
-  .title .w { display: inline-block; margin-right: 0.26em; opacity: 0; filter: blur(6px); }
-  .title .accent { color: #e85a4f; }
-  .sub { position: absolute; left: 160px; width: 1500px; font-size: 34px; font-weight: 500; line-height: 1.4; color: rgba(234, 231, 220, 0.72); opacity: 0; }
+  .title .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .title .li { display: block; transform: translateY(110%); }
+  .accent { color: #e85a4f; }
+  .sub { position: absolute; left: 160px; width: 1500px; font-size: 34px; font-weight: 500; line-height: 1.4; color: rgba(234,231,220,0.72); opacity: 0; }
   .mono { font-family: "JetBrains Mono", monospace; }
 
-    .lockup { position: absolute; left: 160px; top: 250px; display: flex; align-items: center; gap: 36px; }
-    .mark { display: grid; place-items: center; width: 128px; height: 128px; border-radius: 30px; background: linear-gradient(135deg, #e98074, #e85a4f); color: #fff; font-size: 48px; font-weight: 800; letter-spacing: 0.02em; opacity: 0; box-shadow: 0 24px 60px rgba(232,90,79,0.35); }
-    .wordmark { font-size: 112px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; clip-path: inset(0 100% 0 0); }
-    .wordmark small { display: block; margin-top: 6px; font-size: 22px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #d1e8e2; }
+  .mark { position: relative; display: grid; place-items: center; background: linear-gradient(135deg, #e98074, #e85a4f); color: #fff; font-weight: 800; letter-spacing: 0.02em; opacity: 0; box-shadow: 0 24px 60px rgba(232,90,79,0.35); }
+  .mark-ring { position: absolute; inset: -4px; border-radius: inherit; border: 3px solid #e85a4f; opacity: 0; }
+  .wordmark { font-weight: 700; letter-spacing: -0.03em; line-height: 1; clip-path: inset(0 100% 0 0); }
+  .wordmark small { display: block; margin-top: 6px; font-size: 22px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #d1e8e2; }
+
+    .lockup { position: absolute; left: 160px; top: 200px; display: flex; align-items: center; gap: 36px; }
+    .wordmark { font-size: 112px; }
+    .rev-title { top: 420px; }
     .origins { position: absolute; left: 160px; top: 790px; display: flex; flex-wrap: wrap; gap: 14px; }
     .origins span { opacity: 0; padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(209,232,226,0.3); font-size: 28px; color: #d1e8e2; }
     .origins span b { color: #eae7dc; font-weight: 600; }
   </style>
-  <div id="root" data-composition-id="reveal" data-width="1920" data-height="1080">
+  <div id="root" data-composition-id="reveal" data-width="1920" data-height="1080" data-layout-allow-overlap>
+    <div id="reveal-clip" class="clip" data-start="0" data-duration="12.4">
+      <div class="stage" id="reveal-stage">
+        <div class="ground" data-layout-ignore></div>
 
-    <div id="rev-clip" class="clip" data-start="0" data-duration="12.5">
-      <div class="eyebrow" id="rev-eyebrow"><i></i>Open Agentic Web · official runtime, unmodified</div>
-      <div class="lockup"><span class="mark"><span>RM</span></span><div class="wordmark" id="rev-word">ReliefMesh<small>Command</small></div></div>
-      <div class="title" style="top: 440px" id="rev-title"><span class="w">Five</span><span class="w">independent</span><span class="w">websites.</span><span class="w">One</span><span class="w accent">open</span><span class="w">protocol.</span></div>
-      <div class="sub" style="top: 690px" id="rev-sub">Each runs its own agents, on its own origin. Nobody has to adopt anyone's platform.</div>
-      <div class="origins" id="rev-origins">
-        <span><b>reliefmesh_command</b> :8080</span><span><b>shelterconnect</b> :8081</span><span><b>aidsupply</b> :8082</span><span><b>trustregistry</b> :8083</span><span><b>routebridge</b> :8084</span>
+    <div class="grid" id="rev-grid"></div>
+    <div class="glow" id="rev-glow" style="left: -500px; top: 300px"></div>
+    <div class="eyebrow" id="rev-eyebrow"><i></i>Open Agentic Web · official runtime, unmodified</div>
+    <div class="lockup"><span class="mark" id="rev-mark" style="width:128px;height:128px;border-radius:31px;font-size:49px"><span class="mark-ring"></span><span>RM</span></span><div class="wordmark" id="rev-word">ReliefMesh<small>Command</small></div></div>
+    <div class="title rev-title" id="rev-title"><span class="line"><span class="li">Five independent websites.</span></span><span class="line"><span class="li">One <span class="accent">open protocol.</span></span></span></div>
+    <div class="sub" style="top: 660px" id="rev-sub">Each runs its own agents, on its own origin. Nobody has to adopt anyone's platform.</div>
+    <div class="origins" id="rev-origins">
+      <span><b>reliefmesh_command</b> :8080</span><span><b>shelterconnect</b> :8081</span><span><b>aidsupply</b> :8082</span><span><b>trustregistry</b> :8083</span><span><b>routebridge</b> :8084</span>
+    </div>
       </div>
     </div>
   </div>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
-      const landWords = (selector, at, step = 0.07) => { const list = gsap.utils.toArray(selector); list.forEach((el, i) => tl.fromTo(el, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, at + i * step)); return at + list.length * step + 0.16; };
-      const leaveWords = (selector, at, step = 0.03) => { gsap.utils.toArray(selector).forEach((el, i) => tl.to(el, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in" }, at + i * step)); };
-      const show = (selector, at, from = {}) => tl.fromTo(selector, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.4, ease: "power3.out" }, at);
-      const pop = (selector, at) => tl.fromTo(selector, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, at);
+      const stage = document.getElementById("reveal-stage");
+      const rise = (selector, at, step = 0.12) => gsap.utils.toArray(selector).forEach((el, i) => tl.to(el, { y: "0%", duration: 0.7, ease: "power4.out" }, at + i * step));
+      const sink = (selector, at, step = 0.05) => gsap.utils.toArray(selector).forEach((el, i) => tl.to(el, { y: "-110%", duration: 0.4, ease: "power3.in" }, at + i * step));
+      const show = (selector, at, from = {}) => tl.fromTo(selector, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.45, ease: "power3.out" }, at);
+      const pop = (selector, at) => tl.fromTo(selector, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.38, ease: "back.out(1.6)" }, at);
+      const count = (selector, to, at, duration, format) => { const el = document.querySelector(selector); const o = { v: 0 }; tl.to(o, { v: to, duration, ease: "power3.out", onUpdate: () => { el.textContent = format(o.v); } }, at); };
+      const drift = (selector, dur, dx = -48, dy = 0) => tl.fromTo(selector, { x: 0, y: 0 }, { x: dx, y: dy, duration: dur, ease: "none" }, 0);
+      tl.fromTo(stage, { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(120% at 50% 50%)", duration: 0.65, ease: "power2.inOut" }, 0);
 
-      tl.fromTo(".mark", { opacity: 0, scale: 0.4, rotate: -8 }, { opacity: 1, scale: 1, rotate: 0, duration: 0.5, ease: "expo.out" }, 0.1);
-      tl.fromTo("#rev-word", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.55, ease: "power3.out" }, 0.45);
-      show("#rev-eyebrow", 0.9, { y: 8 });
-      landWords("#rev-title .w", 1.9);
-      show("#rev-sub", 4.6, { y: 10 });
-      gsap.utils.toArray("#rev-origins span").forEach((el, i) => pop(el, 7.0 + i * 0.22));
-      tl.to(["#rev-title", "#rev-sub", "#rev-origins", "#rev-eyebrow", ".lockup"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 12.25);
+      drift("#rev-grid", 12.4, -60, -20);
+      drift("#rev-glow", 12.4, 140, -40);
+      tl.fromTo("#rev-mark", { opacity: 0, scale: 0.4, rotate: -10 }, { opacity: 1, scale: 1, rotate: 0, duration: 0.55, ease: "expo.out" }, 0.1);
+      tl.fromTo("#rev-mark .mark-ring", { opacity: 0.9, scale: 1 }, { opacity: 0, scale: 1.9, duration: 0.9, ease: "power2.out" }, 0.25);
+      tl.fromTo("#rev-word", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "power3.out" }, 0.4);
+      show("#rev-eyebrow", 1.0, { y: 10 });
+      rise("#rev-title .li:nth-child(1)", 2.41);
+      rise("#rev-title .line:nth-child(2) .li", 4.28);
+      gsap.utils.toArray("#rev-origins span").forEach((el, i) => pop(el, 7.77 + i * 0.16));
+      show("#rev-sub", 8.96, { y: 12 });
+      tl.to(stage, { opacity: 0, scale: 1.12, duration: 0.45, ease: "power2.in" }, 11.95);
       window.__timelines["reveal"] = tl;
     })();
   </script>

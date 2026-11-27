@@ -1,481 +1,513 @@
 {
-  "voice": "Kokoro am_michael (local)",
+  "voice": "en-IN-NeerjaNeural via edge-tts, rate +7%, pitch +0Hz; pauses capped at 0.42s",
   "narration": "assets/voice/narration.wav",
-  "total": 121.85,
-  "gap": 0.7,
+  "total": 112.99,
+  "rawTotal": 122.38,
+  "pausesShortened": 24,
+  "wordsPerMinute": 146.7,
   "lines": [
     {
       "id": "l01",
       "beat": "hook",
       "text": "When a flood hits, twelve thousand people need food, water and medicine within thirty-six hours.",
-      "wav": "assets/voice/l01.wav",
-      "start": 0,
-      "duration": 6.25,
+      "start": 0.1,
+      "end": 5.57,
+      "duration": 5.47,
       "words": [
         {
           "text": "When",
-          "start": 0,
-          "end": 0.24
+          "start": 0.1,
+          "end": 0.334
         },
         {
           "text": "a",
-          "start": 0.24,
-          "end": 0.32
+          "start": 0.345,
+          "end": 0.38
         },
         {
           "text": "flood",
-          "start": 0.32,
-          "end": 0.64
+          "start": 0.392,
+          "end": 0.707
         },
         {
-          "text": "hits,",
-          "start": 0.64,
-          "end": 1.12
+          "text": "hits",
+          "start": 0.719,
+          "end": 1.081
         },
         {
-          "text": "12,000",
-          "start": 1.12,
-          "end": 2.08
+          "text": "twelve",
+          "start": 1.198,
+          "end": 1.525
+        },
+        {
+          "text": "thousand",
+          "start": 1.537,
+          "end": 1.922
         },
         {
           "text": "people",
-          "start": 2.08,
-          "end": 2.4
+          "start": 1.934,
+          "end": 2.226
         },
         {
           "text": "need",
-          "start": 2.4,
-          "end": 2.72
+          "start": 2.238,
+          "end": 2.46
         },
         {
-          "text": "food,",
-          "start": 2.72,
-          "end": 3.44
+          "text": "food",
+          "start": 2.471,
+          "end": 2.869
         },
         {
-          "text": "water,",
-          "start": 3.44,
-          "end": 3.84
+          "text": "water",
+          "start": 3.032,
+          "end": 3.523
         },
         {
           "text": "and",
-          "start": 3.84,
-          "end": 4.08
+          "start": 3.535,
+          "end": 3.686
         },
         {
           "text": "medicine",
-          "start": 4.08,
-          "end": 4.56
+          "start": 3.698,
+          "end": 4.13
         },
         {
           "text": "within",
-          "start": 4.56,
-          "end": 4.96
+          "start": 4.142,
+          "end": 4.434
         },
         {
-          "text": "36",
-          "start": 4.96,
-          "end": 5.6
+          "text": "thirty-six",
+          "start": 4.446,
+          "end": 5.112
         },
         {
-          "text": "hours.",
-          "start": 5.84,
-          "end": 6.72
+          "text": "hours",
+          "start": 5.123,
+          "end": 5.567
         }
       ]
     },
     {
       "id": "l02",
       "beat": "tension",
-      "text": "The shelters, the suppliers, the carriers and the registry that could help don't share a platform. So coordination happens by phone and spreadsheet.",
-      "wav": "assets/voice/l02.wav",
-      "start": 6.95,
-      "duration": 9.49,
+      "text": "The shelters, the suppliers, the carriers and the registry that could help don't share a platform, so coordination still happens by phone and spreadsheet.",
+      "start": 5.99,
+      "end": 14.78,
+      "duration": 8.79,
       "words": [
         {
-          "text": "shelters,",
-          "start": 6.96,
-          "end": 7.76
+          "text": "The",
+          "start": 5.987,
+          "end": 6.163
+        },
+        {
+          "text": "shelters",
+          "start": 6.174,
+          "end": 6.817
         },
         {
           "text": "the",
-          "start": 7.92,
-          "end": 8.08
+          "start": 6.957,
+          "end": 7.074
         },
         {
-          "text": "suppliers,",
-          "start": 8.08,
-          "end": 9.04
+          "text": "suppliers",
+          "start": 7.085,
+          "end": 7.775
         },
         {
           "text": "the",
-          "start": 9.04,
-          "end": 9.28
+          "start": 7.938,
+          "end": 8.055
         },
         {
-          "text": "carriers,",
-          "start": 9.28,
-          "end": 9.92
+          "text": "carriers",
+          "start": 8.067,
+          "end": 8.604
         },
         {
           "text": "and",
-          "start": 9.92,
-          "end": 10.08
+          "start": 8.616,
+          "end": 8.733
         },
         {
           "text": "the",
-          "start": 10.08,
-          "end": 10.24
+          "start": 8.744,
+          "end": 8.803
         },
         {
           "text": "registry",
-          "start": 10.24,
-          "end": 10.8
+          "start": 8.814,
+          "end": 9.375
         },
         {
           "text": "that",
-          "start": 10.8,
-          "end": 11.04
+          "start": 9.387,
+          "end": 9.609
         },
         {
           "text": "could",
-          "start": 11.04,
-          "end": 11.2
+          "start": 9.62,
+          "end": 9.784
         },
         {
           "text": "help",
-          "start": 11.2,
-          "end": 11.44
+          "start": 9.796,
+          "end": 10.099
         },
         {
           "text": "don't",
-          "start": 11.52,
-          "end": 11.76
+          "start": 10.111,
+          "end": 10.403
         },
         {
           "text": "share",
-          "start": 11.76,
-          "end": 12.08
+          "start": 10.415,
+          "end": 10.672
         },
         {
           "text": "a",
-          "start": 12.08,
-          "end": 12.24
+          "start": 10.684,
+          "end": 10.73
         },
         {
-          "text": "platform.",
-          "start": 12.24,
-          "end": 13.12
+          "text": "platform",
+          "start": 10.742,
+          "end": 11.443
         },
         {
-          "text": "So",
-          "start": 13.12,
-          "end": 13.44
+          "text": "so",
+          "start": 11.56,
+          "end": 11.723
         },
         {
           "text": "coordination",
-          "start": 13.44,
-          "end": 14.4
+          "start": 11.735,
+          "end": 12.471
+        },
+        {
+          "text": "still",
+          "start": 12.483,
+          "end": 12.751
         },
         {
           "text": "happens",
-          "start": 14.4,
-          "end": 14.88
+          "start": 12.763,
+          "end": 13.242
         },
         {
           "text": "by",
-          "start": 14.88,
-          "end": 15.12
+          "start": 13.254,
+          "end": 13.429
         },
         {
           "text": "phone",
-          "start": 15.12,
-          "end": 15.52
+          "start": 13.441,
+          "end": 13.826
         },
         {
           "text": "and",
-          "start": 15.52,
-          "end": 15.68
+          "start": 13.838,
+          "end": 14.071
         },
         {
-          "text": "spreadsheet.",
-          "start": 15.68,
-          "end": 16.88
+          "text": "spreadsheet",
+          "start": 14.083,
+          "end": 14.784
         }
       ]
     },
     {
       "id": "l03",
       "beat": "reveal",
-      "text": "ReliefMesh is five independent websites on the Open Agentic Web. Each runs its own agents, on its own origin. Nobody has to adopt anyone's platform.",
-      "wav": "assets/voice/l03.wav",
-      "start": 17.14,
-      "duration": 11.8,
+      "text": "ReliefMesh changes that. It is five independent websites on the Open Agentic Web, each running its own agents on its own origin. Nobody has to adopt anyone's platform.",
+      "start": 15.2,
+      "end": 26.73,
+      "duration": 11.53,
       "words": [
         {
-          "text": "Mesh",
-          "start": 17.52,
-          "end": 18.16
+          "text": "ReliefMesh",
+          "start": 15.204,
+          "end": 15.94
+        },
+        {
+          "text": "changes",
+          "start": 15.952,
+          "end": 16.466
+        },
+        {
+          "text": "that",
+          "start": 16.477,
+          "end": 16.851
+        },
+        {
+          "text": "It",
+          "start": 17.271,
+          "end": 17.458
         },
         {
           "text": "is",
-          "start": 18.16,
-          "end": 18.4
+          "start": 17.47,
+          "end": 17.598
         },
         {
           "text": "five",
-          "start": 18.4,
-          "end": 18.88
+          "start": 17.61,
+          "end": 17.972
         },
         {
           "text": "independent",
-          "start": 18.88,
-          "end": 19.44
+          "start": 17.984,
+          "end": 18.591
         },
         {
           "text": "websites",
-          "start": 19.44,
-          "end": 20.08
+          "start": 18.603,
+          "end": 19.21
         },
         {
           "text": "on",
-          "start": 20.08,
-          "end": 20.24
+          "start": 19.222,
+          "end": 19.362
         },
         {
           "text": "the",
-          "start": 20.24,
-          "end": 20.4
+          "start": 19.374,
+          "end": 19.467
         },
         {
-          "text": "open",
-          "start": 20.4,
-          "end": 20.72
+          "text": "Open",
+          "start": 19.479,
+          "end": 19.865
         },
         {
-          "text": "agentic",
-          "start": 20.88,
-          "end": 21.52
+          "text": "Agentic",
+          "start": 19.876,
+          "end": 20.367
         },
         {
-          "text": "web.",
-          "start": 21.76,
-          "end": 22.32
+          "text": "Web",
+          "start": 20.379,
+          "end": 20.729
         },
         {
-          "text": "Each",
-          "start": 22.32,
-          "end": 22.8
+          "text": "each",
+          "start": 21.021,
+          "end": 21.29
         },
         {
-          "text": "runs",
-          "start": 22.8,
-          "end": 23.12
+          "text": "running",
+          "start": 21.302,
+          "end": 21.617
         },
         {
           "text": "its",
-          "start": 23.12,
-          "end": 23.36
+          "start": 21.629,
+          "end": 21.792
         },
         {
           "text": "own",
-          "start": 23.36,
-          "end": 23.68
+          "start": 21.804,
+          "end": 22.084
         },
         {
-          "text": "agents,",
-          "start": 23.68,
-          "end": 24.4
+          "text": "agents",
+          "start": 22.096,
+          "end": 22.587
         },
         {
           "text": "on",
-          "start": 24.4,
-          "end": 24.64
+          "start": 22.598,
+          "end": 22.774
         },
         {
           "text": "its",
-          "start": 24.64,
-          "end": 24.88
+          "start": 22.785,
+          "end": 22.96
         },
         {
           "text": "own",
-          "start": 24.88,
-          "end": 25.28
+          "start": 22.972,
+          "end": 23.217
         },
         {
-          "text": "origin.",
-          "start": 25.28,
-          "end": 26.24
+          "text": "origin",
+          "start": 23.229,
+          "end": 23.743
         },
         {
           "text": "Nobody",
-          "start": 26.24,
-          "end": 26.88
+          "start": 24.163,
+          "end": 24.689
         },
         {
           "text": "has",
-          "start": 26.88,
-          "end": 27.04
+          "start": 24.701,
+          "end": 24.934
         },
         {
           "text": "to",
-          "start": 27.04,
-          "end": 27.2
+          "start": 24.946,
+          "end": 25.074
         },
         {
           "text": "adopt",
-          "start": 27.2,
-          "end": 27.68
+          "start": 25.086,
+          "end": 25.518
         },
         {
           "text": "anyone's",
-          "start": 27.68,
-          "end": 28.32
+          "start": 25.53,
+          "end": 26.079
         },
         {
-          "text": "platform.",
-          "start": 28.32,
-          "end": 29.44
+          "text": "platform",
+          "start": 26.091,
+          "end": 26.733
         }
       ]
     },
     {
       "id": "l04",
       "beat": "consent",
-      "text": "Press one button. Before any site is contacted, you are told which origin, why, and what will be sent. Nothing leaves the page until you say so.",
-      "wav": "assets/voice/l04.wav",
-      "start": 29.64,
-      "duration": 9.75,
+      "text": "Press one button. Before any site is contacted, you're told which origin, why, and what will be sent. Nothing leaves the page until you say so.",
+      "start": 27.15,
+      "end": 36.91,
+      "duration": 9.76,
       "words": [
         {
-          "text": "one",
-          "start": 29.92,
-          "end": 30.24
+          "text": "Press",
+          "start": 27.153,
+          "end": 27.492
         },
         {
-          "text": "button.",
-          "start": 30.24,
-          "end": 30.96
+          "text": "one",
+          "start": 27.504,
+          "end": 27.737
+        },
+        {
+          "text": "button",
+          "start": 27.749,
+          "end": 28.216
         },
         {
           "text": "Before",
-          "start": 30.96,
-          "end": 31.44
+          "start": 28.636,
+          "end": 29.174
         },
         {
           "text": "any",
-          "start": 31.44,
-          "end": 31.68
+          "start": 29.185,
+          "end": 29.442
         },
         {
           "text": "site",
-          "start": 31.68,
-          "end": 32
+          "start": 29.454,
+          "end": 29.828
         },
         {
           "text": "is",
-          "start": 32,
-          "end": 32.24
+          "start": 29.84,
+          "end": 29.956
         },
         {
-          "text": "contacted,",
-          "start": 32.24,
-          "end": 33.04
+          "text": "contacted",
+          "start": 29.968,
+          "end": 30.681
         },
         {
-          "text": "you",
-          "start": 33.04,
-          "end": 33.2
-        },
-        {
-          "text": "are",
-          "start": 33.2,
-          "end": 33.36
+          "text": "you're",
+          "start": 30.868,
+          "end": 31.09
         },
         {
           "text": "told",
-          "start": 33.36,
-          "end": 33.76
+          "start": 31.101,
+          "end": 31.417
         },
         {
           "text": "which",
-          "start": 33.76,
-          "end": 34.08
+          "start": 31.428,
+          "end": 31.65
         },
         {
-          "text": "origin,",
-          "start": 34.08,
-          "end": 34.8
+          "text": "origin",
+          "start": 31.662,
+          "end": 32.176
         },
         {
-          "text": "why,",
-          "start": 34.8,
-          "end": 35.28
+          "text": "why",
+          "start": 32.305,
+          "end": 32.737
         },
         {
           "text": "and",
-          "start": 35.28,
-          "end": 35.44
+          "start": 32.854,
+          "end": 33.157
         },
         {
           "text": "what",
-          "start": 35.44,
-          "end": 35.68
+          "start": 33.169,
+          "end": 33.438
         },
         {
           "text": "will",
-          "start": 35.68,
-          "end": 35.92
+          "start": 33.449,
+          "end": 33.613
         },
         {
           "text": "be",
-          "start": 35.92,
-          "end": 36.16
+          "start": 33.625,
+          "end": 33.765
         },
         {
-          "text": "sent.",
-          "start": 36.16,
-          "end": 36.8
+          "text": "sent",
+          "start": 33.777,
+          "end": 34.256
         },
         {
           "text": "Nothing",
-          "start": 36.8,
-          "end": 37.2
+          "start": 34.676,
+          "end": 35.143
         },
         {
           "text": "leaves",
-          "start": 37.2,
-          "end": 37.68
+          "start": 35.155,
+          "end": 35.435
         },
         {
           "text": "the",
-          "start": 37.68,
-          "end": 37.84
+          "start": 35.447,
+          "end": 35.528
         },
         {
           "text": "page",
-          "start": 37.84,
-          "end": 38.16
+          "start": 35.54,
+          "end": 35.914
         },
         {
           "text": "until",
-          "start": 38.16,
-          "end": 38.56
+          "start": 35.926,
+          "end": 36.253
         },
         {
           "text": "you",
-          "start": 38.56,
-          "end": 38.8
+          "start": 36.264,
+          "end": 36.381
         },
         {
           "text": "say",
-          "start": 38.8,
-          "end": 39.12
+          "start": 36.393,
+          "end": 36.603
         },
         {
-          "text": "so.",
-          "start": 39.12,
-          "end": 39.84
+          "text": "so",
+          "start": 36.615,
+          "end": 36.907
         }
       ]
     },
@@ -483,244 +515,264 @@
       "id": "l05",
       "beat": "discovery",
       "text": "The agents find the partners by URL and load their published networks from their own origins. Every request on this graph is real.",
-      "wav": "assets/voice/l05.wav",
-      "start": 40.09,
-      "duration": 8.9,
+      "start": 37.33,
+      "end": 45.46,
+      "duration": 8.13,
       "words": [
         {
+          "text": "The",
+          "start": 37.327,
+          "end": 37.607
+        },
+        {
           "text": "agents",
-          "start": 40.16,
-          "end": 40.64
+          "start": 37.619,
+          "end": 38.028
         },
         {
           "text": "find",
-          "start": 40.64,
-          "end": 40.96
+          "start": 38.039,
+          "end": 38.343
         },
         {
           "text": "the",
-          "start": 40.96,
-          "end": 41.12
+          "start": 38.355,
+          "end": 38.437
         },
         {
           "text": "partners",
-          "start": 41.12,
-          "end": 41.6
+          "start": 38.448,
+          "end": 39.021
         },
         {
           "text": "by",
-          "start": 41.6,
-          "end": 41.92
+          "start": 39.032,
+          "end": 39.173
         },
         {
           "text": "URL",
-          "start": 41.92,
-          "end": 42.72
+          "start": 39.184,
+          "end": 39.745
         },
         {
           "text": "and",
-          "start": 42.88,
-          "end": 43.12
+          "start": 39.757,
+          "end": 39.955
         },
         {
           "text": "load",
-          "start": 43.12,
-          "end": 43.52
+          "start": 39.967,
+          "end": 40.224
         },
         {
           "text": "their",
-          "start": 43.52,
-          "end": 43.76
+          "start": 40.236,
+          "end": 40.376
         },
         {
           "text": "published",
-          "start": 43.76,
-          "end": 44.24
+          "start": 40.388,
+          "end": 40.902
         },
         {
           "text": "networks",
-          "start": 44.24,
-          "end": 44.8
+          "start": 40.913,
+          "end": 41.462
         },
         {
           "text": "from",
-          "start": 44.8,
-          "end": 44.96
+          "start": 41.474,
+          "end": 41.719
         },
         {
           "text": "their",
-          "start": 44.96,
-          "end": 45.12
+          "start": 41.731,
+          "end": 41.93
         },
         {
           "text": "own",
-          "start": 45.12,
-          "end": 45.52
+          "start": 41.941,
+          "end": 42.163
         },
         {
-          "text": "origins.",
-          "start": 45.52,
-          "end": 46.56
+          "text": "origins",
+          "start": 42.175,
+          "end": 42.794
         },
         {
           "text": "Every",
-          "start": 46.56,
-          "end": 46.96
+          "start": 43.214,
+          "end": 43.646
         },
         {
           "text": "request",
-          "start": 46.96,
-          "end": 47.44
+          "start": 43.658,
+          "end": 44.149
         },
         {
           "text": "on",
-          "start": 47.44,
-          "end": 47.6
+          "start": 44.16,
+          "end": 44.289
         },
         {
           "text": "this",
-          "start": 47.6,
-          "end": 47.84
+          "start": 44.301,
+          "end": 44.499
         },
         {
           "text": "graph",
-          "start": 47.84,
-          "end": 48.32
+          "start": 44.511,
+          "end": 44.908
         },
         {
           "text": "is",
-          "start": 48.32,
-          "end": 48.64
+          "start": 44.92,
+          "end": 45.083
         },
         {
-          "text": "real.",
-          "start": 48.64,
-          "end": 49.44
+          "text": "real",
+          "start": 45.095,
+          "end": 45.457
         }
       ]
     },
     {
       "id": "l06",
       "beat": "trust",
-      "text": "Each partner's attestation is verified in your browser: the signature checked, the network file hashed and compared with what the registry attested.",
-      "wav": "assets/voice/l06.wav",
-      "start": 49.69,
-      "duration": 9.45,
+      "text": "Each partner's attestation is verified right in your browser: the signature is checked, and the network file is hashed and compared with what the registry attested.",
+      "start": 45.88,
+      "end": 55.09,
+      "duration": 9.21,
       "words": [
         {
-          "text": "partners",
-          "start": 49.84,
-          "end": 50.32
+          "text": "Each",
+          "start": 45.877,
+          "end": 46.193
         },
         {
-          "text": "at",
-          "start": 50.48,
-          "end": 50.72
+          "text": "partner's",
+          "start": 46.204,
+          "end": 46.777
         },
         {
-          "text": "a",
-          "start": 50.72,
-          "end": 50.88
-        },
-        {
-          "text": "station",
-          "start": 50.88,
-          "end": 51.2
+          "text": "attestation",
+          "start": 46.788,
+          "end": 47.478
         },
         {
           "text": "is",
-          "start": 51.2,
-          "end": 51.44
+          "start": 47.489,
+          "end": 47.653
         },
         {
           "text": "verified",
-          "start": 51.44,
-          "end": 52.08
+          "start": 47.665,
+          "end": 48.26
+        },
+        {
+          "text": "right",
+          "start": 48.272,
+          "end": 48.576
         },
         {
           "text": "in",
-          "start": 52.08,
-          "end": 52.24
+          "start": 48.587,
+          "end": 48.693
         },
         {
           "text": "your",
-          "start": 52.24,
-          "end": 52.48
+          "start": 48.704,
+          "end": 48.833
         },
         {
-          "text": "browser,",
-          "start": 52.48,
-          "end": 53.44
+          "text": "browser",
+          "start": 48.844,
+          "end": 49.382
         },
         {
           "text": "the",
-          "start": 53.44,
-          "end": 53.68
+          "start": 49.569,
+          "end": 49.686
         },
         {
           "text": "signature",
-          "start": 53.68,
-          "end": 54.32
+          "start": 49.697,
+          "end": 50.305
         },
         {
-          "text": "checked,",
-          "start": 54.32,
-          "end": 55.04
+          "text": "is",
+          "start": 50.316,
+          "end": 50.445
         },
         {
-          "text": "the",
-          "start": 55.04,
-          "end": 55.2
-        },
-        {
-          "text": "network",
-          "start": 55.2,
-          "end": 55.68
-        },
-        {
-          "text": "file",
-          "start": 55.68,
-          "end": 56.16
-        },
-        {
-          "text": "hashed",
-          "start": 56.16,
-          "end": 56.64
+          "text": "checked",
+          "start": 50.457,
+          "end": 50.842
         },
         {
           "text": "and",
-          "start": 56.64,
-          "end": 56.8
-        },
-        {
-          "text": "compared",
-          "start": 56.8,
-          "end": 57.28
-        },
-        {
-          "text": "with",
-          "start": 57.28,
-          "end": 57.52
-        },
-        {
-          "text": "what",
-          "start": 57.52,
-          "end": 57.68
+          "start": 50.982,
+          "end": 51.181
         },
         {
           "text": "the",
-          "start": 57.68,
-          "end": 57.84
+          "start": 51.193,
+          "end": 51.274
+        },
+        {
+          "text": "network",
+          "start": 51.286,
+          "end": 51.73
+        },
+        {
+          "text": "file",
+          "start": 51.742,
+          "end": 52.104
+        },
+        {
+          "text": "is",
+          "start": 52.115,
+          "end": 52.256
+        },
+        {
+          "text": "hashed",
+          "start": 52.267,
+          "end": 52.7
+        },
+        {
+          "text": "and",
+          "start": 52.711,
+          "end": 52.875
+        },
+        {
+          "text": "compared",
+          "start": 52.886,
+          "end": 53.377
+        },
+        {
+          "text": "with",
+          "start": 53.389,
+          "end": 53.541
+        },
+        {
+          "text": "what",
+          "start": 53.552,
+          "end": 53.763
+        },
+        {
+          "text": "the",
+          "start": 53.774,
+          "end": 53.856
         },
         {
           "text": "registry",
-          "start": 57.84,
-          "end": 58.48
+          "start": 53.868,
+          "end": 54.44
         },
         {
-          "text": "attested.",
-          "start": 58.48,
-          "end": 59.2
+          "text": "attested",
+          "start": 54.452,
+          "end": 55.094
         }
       ]
     },
@@ -728,384 +780,414 @@
       "id": "l07",
       "beat": "hostile",
       "text": "One supplier is unverified, priced far below the rest, and its notes tell the agent to approve immediately. It is flagged, excluded, and never obeyed.",
-      "wav": "assets/voice/l07.wav",
-      "start": 59.84,
-      "duration": 10.71,
+      "start": 55.51,
+      "end": 65.4,
+      "duration": 9.89,
       "words": [
         {
+          "text": "One",
+          "start": 55.514,
+          "end": 55.9
+        },
+        {
           "text": "supplier",
-          "start": 60.13,
-          "end": 60.85
+          "start": 55.912,
+          "end": 56.519
         },
         {
           "text": "is",
-          "start": 60.85,
-          "end": 61.01
+          "start": 56.531,
+          "end": 56.671
         },
         {
-          "text": "unverified,",
-          "start": 61.01,
-          "end": 62.13
+          "text": "unverified",
+          "start": 56.683,
+          "end": 57.477
         },
         {
           "text": "priced",
-          "start": 62.13,
-          "end": 62.61
+          "start": 57.606,
+          "end": 57.944
         },
         {
           "text": "far",
-          "start": 62.61,
-          "end": 62.85
+          "start": 57.956,
+          "end": 58.225
         },
         {
           "text": "below",
-          "start": 62.85,
-          "end": 63.25
+          "start": 58.236,
+          "end": 58.505
         },
         {
           "text": "the",
-          "start": 63.25,
-          "end": 63.49
+          "start": 58.517,
+          "end": 58.61
         },
         {
-          "text": "rest,",
-          "start": 63.49,
-          "end": 63.97
+          "text": "rest",
+          "start": 58.622,
+          "end": 59.078
         },
         {
           "text": "and",
-          "start": 63.97,
-          "end": 64.21
+          "start": 59.194,
+          "end": 59.393
         },
         {
           "text": "its",
-          "start": 64.21,
-          "end": 64.45
+          "start": 59.405,
+          "end": 59.568
         },
         {
           "text": "notes",
-          "start": 64.45,
-          "end": 64.85
+          "start": 59.58,
+          "end": 59.93
         },
         {
           "text": "tell",
-          "start": 64.85,
-          "end": 65.17
+          "start": 59.942,
+          "end": 60.176
         },
         {
           "text": "the",
-          "start": 65.17,
-          "end": 65.33
+          "start": 60.187,
+          "end": 60.351
         },
         {
           "text": "agent",
-          "start": 65.33,
-          "end": 65.73
+          "start": 60.363,
+          "end": 60.678
         },
         {
           "text": "to",
-          "start": 65.73,
-          "end": 65.89
+          "start": 60.69,
+          "end": 60.807
         },
         {
           "text": "approve",
-          "start": 65.89,
-          "end": 66.37
+          "start": 60.818,
+          "end": 61.285
         },
         {
-          "text": "immediately.",
-          "start": 66.37,
-          "end": 67.33
+          "text": "immediately",
+          "start": 61.297,
+          "end": 62.103
         },
         {
           "text": "It",
-          "start": 67.33,
-          "end": 67.57
+          "start": 62.523,
+          "end": 62.71
         },
         {
           "text": "is",
-          "start": 67.57,
-          "end": 67.81
+          "start": 62.722,
+          "end": 62.85
         },
         {
-          "text": "flagged,",
-          "start": 67.81,
-          "end": 68.61
+          "text": "flagged",
+          "start": 62.862,
+          "end": 63.306
         },
         {
-          "text": "excluded,",
-          "start": 68.61,
-          "end": 69.33
+          "text": "excluded",
+          "start": 63.505,
+          "end": 64.194
         },
         {
           "text": "and",
-          "start": 69.33,
-          "end": 69.49
+          "start": 64.311,
+          "end": 64.556
         },
         {
           "text": "never",
-          "start": 69.49,
-          "end": 69.89
+          "start": 64.568,
+          "end": 64.953
         },
         {
-          "text": "obeyed.",
-          "start": 69.89,
-          "end": 71.09
+          "text": "obeyed",
+          "start": 64.965,
+          "end": 65.397
         }
       ]
     },
     {
       "id": "l08",
       "beat": "allocation",
-      "text": "A deterministic engine allocates every shortage within budget and explains each line. A model may explain the plan. It cannot change a number.",
-      "wav": "assets/voice/l08.wav",
-      "start": 71.25,
-      "duration": 9.81,
+      "text": "A deterministic engine allocates every shortage within budget and explains each line. A model may explain the plan, but it cannot change a single number.",
+      "start": 65.82,
+      "end": 75.28,
+      "duration": 9.46,
       "words": [
         {
+          "text": "A",
+          "start": 65.817,
+          "end": 65.981
+        },
+        {
           "text": "deterministic",
-          "start": 71.41,
-          "end": 72.37
+          "start": 65.992,
+          "end": 66.81
         },
         {
           "text": "engine",
-          "start": 72.37,
-          "end": 72.85
+          "start": 66.822,
+          "end": 67.207
         },
         {
           "text": "allocates",
-          "start": 72.85,
-          "end": 73.57
+          "start": 67.219,
+          "end": 67.85
         },
         {
           "text": "every",
-          "start": 73.57,
-          "end": 73.89
+          "start": 67.861,
+          "end": 68.2
         },
         {
           "text": "shortage",
-          "start": 73.89,
-          "end": 74.45
+          "start": 68.212,
+          "end": 68.668
         },
         {
           "text": "within",
-          "start": 74.45,
-          "end": 74.85
+          "start": 68.679,
+          "end": 68.983
         },
         {
           "text": "budget",
-          "start": 74.85,
-          "end": 75.33
+          "start": 68.995,
+          "end": 69.404
         },
         {
           "text": "and",
-          "start": 75.33,
-          "end": 75.57
+          "start": 69.415,
+          "end": 69.544
         },
         {
           "text": "explains",
-          "start": 75.57,
-          "end": 76.13
+          "start": 69.555,
+          "end": 70.151
         },
         {
           "text": "each",
-          "start": 76.13,
-          "end": 76.53
+          "start": 70.163,
+          "end": 70.432
         },
         {
-          "text": "line.",
-          "start": 76.53,
-          "end": 77.17
+          "text": "line",
+          "start": 70.443,
+          "end": 70.84
         },
         {
           "text": "A",
-          "start": 77.17,
-          "end": 77.49
+          "start": 71.26,
+          "end": 71.412
         },
         {
           "text": "model",
-          "start": 77.49,
-          "end": 77.81
+          "start": 71.424,
+          "end": 71.809
         },
         {
           "text": "may",
-          "start": 77.89,
-          "end": 78.13
+          "start": 71.821,
+          "end": 71.996
         },
         {
           "text": "explain",
-          "start": 78.13,
-          "end": 78.61
+          "start": 72.008,
+          "end": 72.51
         },
         {
           "text": "the",
-          "start": 78.61,
-          "end": 78.85
+          "start": 72.522,
+          "end": 72.604
         },
         {
-          "text": "plan.",
-          "start": 78.85,
-          "end": 79.49
+          "text": "plan",
+          "start": 72.616,
+          "end": 73.071
         },
         {
-          "text": "It",
-          "start": 79.49,
-          "end": 79.73
+          "text": "but",
+          "start": 73.223,
+          "end": 73.41
+        },
+        {
+          "text": "it",
+          "start": 73.422,
+          "end": 73.527
         },
         {
           "text": "cannot",
-          "start": 79.73,
-          "end": 80.21
+          "start": 73.538,
+          "end": 73.877
         },
         {
           "text": "change",
-          "start": 80.21,
-          "end": 80.53
+          "start": 73.889,
+          "end": 74.286
         },
         {
           "text": "a",
-          "start": 80.53,
-          "end": 80.77
+          "start": 74.298,
+          "end": 74.391
         },
         {
-          "text": "number.",
-          "start": 80.77,
-          "end": 81.57
+          "text": "single",
+          "start": 74.403,
+          "end": 74.8
+        },
+        {
+          "text": "number",
+          "start": 74.812,
+          "end": 75.279
         }
       ]
     },
     {
       "id": "l09",
       "beat": "approval",
-      "text": "Nothing is written anywhere until a person approves. Then the reservation is confirmed in the supplier's own window, on the supplier's origin. Transport, the same way.",
-      "wav": "assets/voice/l09.wav",
-      "start": 81.76,
-      "duration": 11.41,
+      "text": "Nothing is written anywhere until a person approves. Then the reservation is confirmed in the supplier's own window, on the supplier's origin. Transport works the same way.",
+      "start": 75.7,
+      "end": 86.25,
+      "duration": 10.55,
       "words": [
         {
-          "text": "is",
-          "start": 82.13,
-          "end": 82.29
+          "text": "Nothing",
+          "start": 75.699,
+          "end": 76.131
         },
         {
-          "text": "writ",
-          "start": 82.29,
-          "end": 82.77
+          "text": "is",
+          "start": 76.143,
+          "end": 76.283
+        },
+        {
+          "text": "written",
+          "start": 76.295,
+          "end": 76.68
         },
         {
           "text": "anywhere",
-          "start": 82.77,
-          "end": 83.25
+          "start": 76.692,
+          "end": 77.241
         },
         {
           "text": "until",
-          "start": 83.33,
-          "end": 83.73
+          "start": 77.253,
+          "end": 77.568
         },
         {
           "text": "a",
-          "start": 83.73,
-          "end": 83.89
+          "start": 77.58,
+          "end": 77.638
         },
         {
           "text": "person",
-          "start": 83.89,
-          "end": 84.21
+          "start": 77.65,
+          "end": 78.047
         },
         {
-          "text": "approves.",
-          "start": 84.21,
-          "end": 85.17
+          "text": "approves",
+          "start": 78.059,
+          "end": 78.62
         },
         {
           "text": "Then",
-          "start": 85.17,
-          "end": 85.49
+          "start": 79.04,
+          "end": 79.378
         },
         {
           "text": "the",
-          "start": 85.49,
-          "end": 85.65
+          "start": 79.39,
+          "end": 79.46
         },
         {
           "text": "reservation",
-          "start": 85.65,
-          "end": 86.45
+          "start": 79.472,
+          "end": 80.126
         },
         {
           "text": "is",
-          "start": 86.45,
-          "end": 86.69
+          "start": 80.138,
+          "end": 80.301
         },
         {
           "text": "confirmed",
-          "start": 86.69,
-          "end": 87.25
+          "start": 80.313,
+          "end": 80.885
         },
         {
           "text": "in",
-          "start": 87.25,
-          "end": 87.41
+          "start": 80.897,
+          "end": 80.991
         },
         {
           "text": "the",
-          "start": 87.41,
-          "end": 87.57
+          "start": 81.002,
+          "end": 81.084
         },
         {
           "text": "supplier's",
-          "start": 87.57,
-          "end": 88.29
+          "start": 81.096,
+          "end": 81.715
         },
         {
           "text": "own",
-          "start": 88.29,
-          "end": 88.61
+          "start": 81.727,
+          "end": 81.96
         },
         {
           "text": "window",
-          "start": 88.61,
-          "end": 89.09
+          "start": 81.972,
+          "end": 82.416
         },
         {
           "text": "on",
-          "start": 89.25,
-          "end": 89.41
+          "start": 82.556,
+          "end": 82.72
         },
         {
           "text": "the",
-          "start": 89.41,
-          "end": 89.65
+          "start": 82.731,
+          "end": 82.801
         },
         {
           "text": "supplier's",
-          "start": 89.65,
-          "end": 90.45
+          "start": 82.813,
+          "end": 83.409
         },
         {
-          "text": "origin.",
-          "start": 90.45,
-          "end": 91.41
+          "text": "origin",
+          "start": 83.421,
+          "end": 83.946
         },
         {
           "text": "Transport",
-          "start": 91.41,
-          "end": 92.21
+          "start": 84.366,
+          "end": 85.055
+        },
+        {
+          "text": "works",
+          "start": 85.067,
+          "end": 85.441
         },
         {
           "text": "the",
-          "start": 92.37,
-          "end": 92.53
+          "start": 85.453,
+          "end": 85.558
         },
         {
           "text": "same",
-          "start": 92.53,
-          "end": 93.01
+          "start": 85.57,
+          "end": 85.92
         },
         {
-          "text": "way.",
-          "start": 93.01,
-          "end": 93.73
+          "text": "way",
+          "start": 85.932,
+          "end": 86.247
         }
       ]
     },
@@ -1113,209 +1195,244 @@
       "id": "l10",
       "beat": "tracking",
       "text": "Shipments are tracked to delivery, and every consent, decision and receipt lands in a hash-chained audit trail.",
-      "wav": "assets/voice/l10.wav",
-      "start": 93.87,
-      "duration": 7.08,
+      "start": 86.67,
+      "end": 93.05,
+      "duration": 6.38,
       "words": [
         {
           "text": "Shipments",
-          "start": 93.73,
-          "end": 94.37
+          "start": 86.667,
+          "end": 87.286
         },
         {
           "text": "are",
-          "start": 94.37,
-          "end": 94.53
+          "start": 87.298,
+          "end": 87.426
         },
         {
           "text": "tracked",
-          "start": 94.53,
-          "end": 94.93
+          "start": 87.438,
+          "end": 87.765
         },
         {
           "text": "to",
-          "start": 94.93,
-          "end": 95.17
+          "start": 87.777,
+          "end": 87.87
         },
         {
-          "text": "delivery,",
-          "start": 95.17,
-          "end": 95.97
+          "text": "delivery",
+          "start": 87.882,
+          "end": 88.454
         },
         {
           "text": "and",
-          "start": 95.97,
-          "end": 96.21
+          "start": 88.56,
+          "end": 88.817
         },
         {
           "text": "every",
-          "start": 96.21,
-          "end": 96.61
+          "start": 88.828,
+          "end": 89.144
         },
         {
-          "text": "consent,",
-          "start": 96.61,
-          "end": 97.49
+          "text": "consent",
+          "start": 89.155,
+          "end": 89.728
         },
         {
-          "text": "decision,",
-          "start": 97.49,
-          "end": 98.05
+          "text": "decision",
+          "start": 89.903,
+          "end": 90.475
         },
         {
           "text": "and",
-          "start": 98.05,
-          "end": 98.21
+          "start": 90.487,
+          "end": 90.639
         },
         {
           "text": "receipt",
-          "start": 98.21,
-          "end": 98.69
+          "start": 90.651,
+          "end": 91.083
         },
         {
           "text": "lands",
-          "start": 98.69,
-          "end": 99.09
+          "start": 91.095,
+          "end": 91.492
         },
         {
           "text": "in",
-          "start": 99.09,
-          "end": 99.17
+          "start": 91.504,
+          "end": 91.644
         },
         {
           "text": "a",
-          "start": 99.17,
-          "end": 99.25
+          "start": 91.655,
+          "end": 91.702
         },
         {
           "text": "hash-chained",
-          "start": 99.25,
-          "end": 100.13
+          "start": 91.714,
+          "end": 92.31
         },
         {
           "text": "audit",
-          "start": 100.13,
-          "end": 100.61
+          "start": 92.321,
+          "end": 92.602
         },
         {
-          "text": "trail.",
-          "start": 100.61,
-          "end": 101.49
+          "text": "trail",
+          "start": 92.613,
+          "end": 93.046
         }
       ]
     },
     {
       "id": "l11",
       "beat": "stack",
-      "text": "The official runtime, unmodified. Twelve call paths passing the official partner check. Two hundred and sixty-seven automated tests. And an interoperability inspector anyone can use.",
-      "wav": "assets/voice/l11.wav",
-      "start": 101.66,
-      "duration": 13.35,
+      "text": "Under the hood: the official runtime, unmodified. Twelve call paths passing the official partner check. Two hundred and sixty-seven automated tests. And an interoperability inspector anyone can use.",
+      "start": 93.47,
+      "end": 106.51,
+      "duration": 13.04,
       "words": [
         {
-          "text": "official",
-          "start": 101.73,
-          "end": 102.29
-        },
-        {
-          "text": "runtime,",
-          "start": 102.29,
-          "end": 103.33
-        },
-        {
-          "text": "unmodified,",
-          "start": 103.33,
-          "end": 104.69
-        },
-        {
-          "text": "twelve",
-          "start": 104.69,
-          "end": 105.25
-        },
-        {
-          "text": "call",
-          "start": 105.25,
-          "end": 105.65
-        },
-        {
-          "text": "path",
-          "start": 105.65,
-          "end": 106.13
-        },
-        {
-          "text": "passing",
-          "start": 106.13,
-          "end": 106.53
+          "text": "Under",
+          "start": 93.466,
+          "end": 93.816
         },
         {
           "text": "the",
-          "start": 106.53,
-          "end": 106.69
+          "start": 93.828,
+          "end": 93.921
+        },
+        {
+          "text": "hood",
+          "start": 93.933,
+          "end": 94.213
+        },
+        {
+          "text": "the",
+          "start": 94.4,
+          "end": 94.552
         },
         {
           "text": "official",
-          "start": 106.69,
-          "end": 107.17
+          "start": 94.564,
+          "end": 95.043
+        },
+        {
+          "text": "runtime",
+          "start": 95.054,
+          "end": 95.627
+        },
+        {
+          "text": "unmodified",
+          "start": 95.744,
+          "end": 96.631
+        },
+        {
+          "text": "Twelve",
+          "start": 97.051,
+          "end": 97.484
+        },
+        {
+          "text": "call",
+          "start": 97.495,
+          "end": 97.799
+        },
+        {
+          "text": "paths",
+          "start": 97.811,
+          "end": 98.185
+        },
+        {
+          "text": "passing",
+          "start": 98.196,
+          "end": 98.652
+        },
+        {
+          "text": "the",
+          "start": 98.664,
+          "end": 98.769
+        },
+        {
+          "text": "official",
+          "start": 98.78,
+          "end": 99.248
         },
         {
           "text": "partner",
-          "start": 107.17,
-          "end": 107.41
+          "start": 99.259,
+          "end": 99.75
         },
         {
-          "text": "check,",
-          "start": 107.73,
-          "end": 108.53
+          "text": "check",
+          "start": 99.762,
+          "end": 100.171
         },
         {
-          "text": "267",
-          "start": 108.53,
-          "end": 109.81
+          "text": "Two",
+          "start": 100.591,
+          "end": 100.824
         },
         {
-          "text": "automated",
-          "start": 110.05,
-          "end": 110.77
-        },
-        {
-          "text": "tests,",
-          "start": 110.77,
-          "end": 111.49
+          "text": "hundred",
+          "start": 100.836,
+          "end": 101.116
         },
         {
           "text": "and",
-          "start": 111.49,
-          "end": 111.73
+          "start": 101.128,
+          "end": 101.256
+        },
+        {
+          "text": "sixty-seven",
+          "start": 101.268,
+          "end": 102.016
+        },
+        {
+          "text": "automated",
+          "start": 102.028,
+          "end": 102.588
+        },
+        {
+          "text": "tests",
+          "start": 102.6,
+          "end": 103.161
+        },
+        {
+          "text": "And",
+          "start": 103.581,
+          "end": 103.826
         },
         {
           "text": "an",
-          "start": 111.73,
-          "end": 111.97
+          "start": 103.838,
+          "end": 103.931
         },
         {
           "text": "interoperability",
-          "start": 111.97,
-          "end": 113.01
+          "start": 103.943,
+          "end": 104.807
         },
         {
           "text": "inspector",
-          "start": 113.01,
-          "end": 113.65
+          "start": 104.819,
+          "end": 105.45
         },
         {
           "text": "anyone",
-          "start": 113.73,
-          "end": 114.21
+          "start": 105.462,
+          "end": 105.894
         },
         {
           "text": "can",
-          "start": 114.21,
-          "end": 114.53
+          "start": 105.905,
+          "end": 106.069
         },
         {
-          "text": "use.",
-          "start": 114.53,
-          "end": 115.09
+          "text": "use",
+          "start": 106.081,
+          "end": 106.513
         }
       ]
     },
@@ -1323,109 +1440,59 @@
       "id": "l12",
       "beat": "claim",
       "text": "ReliefMesh. When disaster strikes, agents coordinate before humans have to.",
-      "wav": "assets/voice/l12.wav",
-      "start": 115.71,
-      "duration": 5.44,
+      "start": 106.93,
+      "end": 112.17,
+      "duration": 5.24,
       "words": [
         {
-          "text": "The",
-          "start": 6.72,
-          "end": 6.96
-        },
-        {
-          "text": "Relief",
-          "start": 16.88,
-          "end": 17.52
-        },
-        {
-          "text": "Press",
-          "start": 29.44,
-          "end": 29.92
-        },
-        {
-          "text": "The",
-          "start": 39.84,
-          "end": 40.16
-        },
-        {
-          "text": "Each",
-          "start": 49.44,
-          "end": 49.84
-        },
-        {
-          "text": "One",
-          "start": 59.65,
-          "end": 60.13
-        },
-        {
-          "text": "A",
-          "start": 71.09,
-          "end": 71.41
-        },
-        {
-          "text": "Nothing",
-          "start": 81.57,
-          "end": 82.13
-        },
-        {
-          "text": "The",
-          "start": 101.49,
-          "end": 101.73
-        },
-        {
-          "text": "Relief",
-          "start": 115.5,
-          "end": 116.14
-        },
-        {
-          "text": "Mesh",
-          "start": 116.14,
-          "end": 116.7
+          "text": "ReliefMesh",
+          "start": 106.933,
+          "end": 107.879
         },
         {
           "text": "When",
-          "start": 116.94,
-          "end": 117.26
+          "start": 108.299,
+          "end": 108.556
         },
         {
           "text": "disaster",
-          "start": 117.26,
-          "end": 117.82
+          "start": 108.568,
+          "end": 109.117
         },
         {
-          "text": "strikes,",
-          "start": 117.82,
-          "end": 118.54
+          "text": "strikes",
+          "start": 109.129,
+          "end": 109.689
         },
         {
           "text": "agents",
-          "start": 118.54,
-          "end": 119.02
+          "start": 109.865,
+          "end": 110.309
         },
         {
           "text": "coordinate",
-          "start": 119.02,
-          "end": 119.74
+          "start": 110.32,
+          "end": 110.834
         },
         {
           "text": "before",
-          "start": 119.74,
-          "end": 120.06
+          "start": 110.846,
+          "end": 111.208
         },
         {
           "text": "humans",
-          "start": 120.06,
-          "end": 120.54
+          "start": 111.22,
+          "end": 111.652
         },
         {
           "text": "have",
-          "start": 120.54,
-          "end": 120.86
+          "start": 111.664,
+          "end": 111.862
         },
         {
-          "text": "to.",
-          "start": 120.86,
-          "end": 121.82
+          "text": "to",
+          "start": 111.874,
+          "end": 112.166
         }
       ]
     }

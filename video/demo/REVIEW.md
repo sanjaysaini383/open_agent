@@ -1,64 +1,68 @@
-# REVIEW — ReliefMesh demo film
+# REVIEW — ReliefMesh demo film (second cut)
 
-Render: `renders/reliefmesh-demo.mp4`, 1920×1080, 30 fps, 124.25 s. Built from storyline A
-of `STORYLINES.md` to `SPEC.md`, timed to a twelve-line narration (`script/voiceover.json`).
+Render: `renders/reliefmesh-demo.mp4`, 1920×1080, 30 fps, 116 s. Built to
+[`video/PRODUCTION.md`](../PRODUCTION.md) from storyline A of `STORYLINES.md`, timed to the
+twelve-line narration in `script/voiceover.json`.
 
-## Creative calls
+## What changed from the first cut, and why
 
-- The reference the person gave (a narrated 140 s hackathon demo: hook → name card →
-  feature chapters in a browser frame → stack card → claim, per-word captions, effects on
-  cuts and clicks) sets the form. This film follows that shape at two minutes.
-- Storyline A, one incident from need to receipt, was built. Not built: B (five browser
-  windows on one stage, the film about the protocol) and C (opening inside the hostile
-  supplier's note and zooming out).
-- Every product shot is the real recording (`tests/e2e/support/record-demo.mjs` drives the
-  real workflow against the five served sites with a visible cursor; `video/footage/beats.json`
-  holds the time of every click). Nothing on screen is a mockup. The stack card sits over a
-  dimmed still of the Command Center after the run, the one "title over a screenshot" the
-  reference itself uses.
-- Chapter footage is sped up where the UI only scrolls or waits (2.5× on tracking, 1.8× on
-  the approval) and slowed where a table is read (0.44× on trust, 0.43× on allocation).
-- Captions are per-word karaoke on a light pill, as in the reference, four words a group.
+The first cut was judged basic: the Kokoro narration was flat with artificial pauses, every
+scene entered with the same fade-and-scale, shots sat still, and there was no music. The
+pipeline was changed rather than the animations patched:
 
-## Sound
+- **Voice.** One continuous read by a female Indian-English neural voice
+  (`en-IN-NeerjaNeural`, edge-tts) at 147 wpm. The engine's 0.83 s sentence breaks were cut
+  down to 0.42 s from the middle of each silence; 24 pauses shortened, word times shifted to
+  match. Measured: no silence of 0.5 s or longer anywhere in the narration
+  (`silencedetect`, −35 dB), the longest gap between any two words is 0.42 s.
+- **Music.** A CC0 ambient loop ("Overlook", credited in `assets/music/CREDITS.md`) looped to
+  the film's length, −18 LUFS, mounted at 0.3 with an automation lane that keeps it at 62 %
+  under the voice and lets it rise after the last word.
+- **Transitions.** Scenes overlap by 0.45 s. Push, iris and zoom-through alternate; the
+  outgoing scene is visible under the incoming one (scene roots are transparent, the ground
+  travels with the stage). Checked in frames: three instants inside each of four cuts.
+- **Camera.** Every product chapter has a camera path cued to the narration and a 3.5 %
+  creep on each hold. The hostile-supplier chapter travels across the card from its
+  "Unverified" badge to its price lines to the "Excluded" label as the words are spoken.
+- **Opening.** The first frame is inside the real map with the incident marker and a pulse,
+  pulling out to the dashboard while the number counts to 12,000 on the word "twelve".
+- **Cues.** Every title line, tag and number lands on a spoken word (`wAt` in `build.mjs`);
+  three short tags at most per chapter. The weak window-prompt shot from the first cut is
+  gone: the approval cuts, through an iris, straight to the supplier's own window, where the
+  "Reserved" receipt replaces the question as the narration says "window", then pushes to the
+  carrier's window on "Transport".
+- **Ending.** The tagline appears word by word on its own word times, then the address and
+  the honesty line, then the mesh draws itself behind the mark while the music swells.
 
-- Narration: local Kokoro (`am_michael`) via `npx hyperframes tts`, joined with 0.7 s gaps.
-  HeyGen Voice Turbo was tried first and refused ("needs a HyperFrames plan"); re-voicing
-  with a HeyGen voice is a one-command change (`script/make-voice.mjs`) once a plan exists.
-- Music: none. The catalog needs the `heygen` CLI and generated music needs a Pro plan;
-  Openverse returned no usable bed. The film carries narration and effects only. To add a
-  bed, drop a track at `assets/music/bed.mp3` and mount it in `index.html` at `data-volume="0.14"`.
-- Effects (bundled library, CC0): a whoosh or a glitch on each chapter cut, a click on each
-  real cursor click in the footage, a pop when a badge or a fact lands, one riser cresting
-  on the cut into the approval. Each is on its own Studio lane and ends when its sound ends.
-- Measured, not heard. The render came out at −20.0 LUFS integrated, true peak −1.0 dBTP
-  (ffmpeg ebur128), so the mix was normalised in place with ffmpeg `loudnorm` (picture
-  copied, audio re-encoded): −16.3 LUFS, −1.2 dBTP. `npx hyperframes audio` on the file
-  finds sound from 0.08 s to 121 s with its peak moment at 74.8 s (the riser into the
-  approval). Nobody listened to it.
+## Sound, measured
 
-## What was measured and what was looked at
+- Narration file: −21.1 LUFS, LRA 1.9 LU, 113.0 s, 274 words.
+- The mix after `script/finish.py` (loudnorm −16 LUFS / −1.5 dBTP): see the numbers printed
+  by `npm run video:render`; they are recorded at the end of this file after each render.
+- Nobody listened to the file in this session: there is no audio output in the agent's
+  environment. The voice was chosen from a known female voice id, the pauses and the rate
+  were measured, and the pronunciation of "ReliefMesh", "AidSupply" and "RouteBridge" is the
+  engine's default. A person should listen once before publishing (PRODUCTION.md §5.3).
 
-- `npx hyperframes check --json`: ok, no errors. Two `contrast_aa_failure` warnings remain
-  on caption words: the karaoke colour tween passes through intermediate greys below 3:1
-  for a few frames; inactive words sit at 3.6:1 and the active word at 14:1. Kept on purpose.
-- Snapshots at twenty instants, the review sheets (scene starts and mids, fourteen cut
-  strips, the phone sheet): titles land dead still, no title overlaps, captions never stack,
-  the chapter label paints above the camera, seams dip for one or two frames with a whoosh.
-- The frames were looked at as stills; motion between them was judged from the strips.
+## What was looked at
+
+- `npx hyperframes check --json`: ok, no errors, no warnings. Two `info` findings remain:
+  the drifting dot grid and the glow extend past the canvas on purpose.
+- Snapshots at 23 instants across the film and 12 instants inside transitions, read as
+  contact sheets: the counter is hidden until it starts, titles do not wrap, origin pills
+  clear the captions, chapter labels clear the tag row, "12 / 12" and "267" count in the
+  large type, the mesh lines sit behind the text at 20 % opacity.
 
 ## Weakest shot
 
-The window-prompt chapter (s-prompt, 2 s): the dialog is small in the frame even at 1.55×.
-With more time: capture the prompt at a tighter scale, or cut straight from the approval to
-AidSupply's window and let the narration carry the prompt.
+The tracking chapter runs the recording at about 2.8× to fit three status clicks into
+4.4 s; the table scrolls fast. With more time: record the three clicks closer together, or
+give the chapter a line of its own.
 
 ## Warnings kept on purpose
 
-- `contrast_aa_failure` on caption words (above).
-- No music bed (above).
+None. The two info-level findings above are intentional overflow.
 
-## Next turn
+## Latest render measurements
 
-Re-run `node script/build.mjs` after changing timings in `script/voice-meta.json` or
-footage offsets in `script/build.mjs`; then `npx hyperframes check --json` and render.
+(filled in by the person running `npm run video:render`; the script prints before/after.)

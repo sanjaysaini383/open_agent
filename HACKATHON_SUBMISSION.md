@@ -165,9 +165,10 @@ In [`docs/screenshots/`](docs/screenshots), produced by `npm run screenshots` fr
 
 ## Demo video
 
-`video/demo/renders/reliefmesh-demo.mp4` (two minutes, 1080p, narrated, captioned),
-rendered with `npm run video:render` from a real run of the product. Upload it to YouTube
-or Devpost and paste the link here: not uploaded yet.
+`video/demo/renders/reliefmesh-demo.mp4` (116 s, 1080p, narrated by a neural voice,
+captioned, with music), rendered with `npm run video:render` from a real run of the
+product to the standard in [video/PRODUCTION.md](video/PRODUCTION.md). Upload it to
+YouTube or Devpost and paste the link here: not uploaded yet.
 
 ## Demo script (under two minutes)
 

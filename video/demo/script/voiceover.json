@@ -1,18 +1,22 @@
 {
-  "voice": "f9a2c5a6b6be456a8ed59dac8a319f2a",
-  "voiceName": "Lachie - Direct & Reassuring (HeyGen Voice Turbo)",
+  "provider": "edge-tts",
+  "voice": "en-IN-NeerjaNeural",
+  "voiceName": "Neerja (Microsoft neural, Indian English, female)",
+  "rate": "+7%",
+  "pitch": "+0Hz",
+  "targetWpm": [140, 160],
   "lines": [
     { "id": "l01", "beat": "hook", "text": "When a flood hits, twelve thousand people need food, water and medicine within thirty-six hours." },
-    { "id": "l02", "beat": "tension", "text": "The shelters, the suppliers, the carriers and the registry that could help don't share a platform. So coordination happens by phone and spreadsheet." },
-    { "id": "l03", "beat": "reveal", "text": "ReliefMesh is five independent websites on the Open Agentic Web. Each runs its own agents, on its own origin. Nobody has to adopt anyone's platform." },
-    { "id": "l04", "beat": "consent", "text": "Press one button. Before any site is contacted, you are told which origin, why, and what will be sent. Nothing leaves the page until you say so." },
+    { "id": "l02", "beat": "tension", "text": "The shelters, the suppliers, the carriers and the registry that could help don't share a platform, so coordination still happens by phone and spreadsheet." },
+    { "id": "l03", "beat": "reveal", "text": "ReliefMesh changes that. It is five independent websites on the Open Agentic Web, each running its own agents on its own origin. Nobody has to adopt anyone's platform." },
+    { "id": "l04", "beat": "consent", "text": "Press one button. Before any site is contacted, you're told which origin, why, and what will be sent. Nothing leaves the page until you say so." },
     { "id": "l05", "beat": "discovery", "text": "The agents find the partners by URL and load their published networks from their own origins. Every request on this graph is real." },
-    { "id": "l06", "beat": "trust", "text": "Each partner's attestation is verified in your browser: the signature checked, the network file hashed and compared with what the registry attested." },
+    { "id": "l06", "beat": "trust", "text": "Each partner's attestation is verified right in your browser: the signature is checked, and the network file is hashed and compared with what the registry attested." },
     { "id": "l07", "beat": "hostile", "text": "One supplier is unverified, priced far below the rest, and its notes tell the agent to approve immediately. It is flagged, excluded, and never obeyed." },
-    { "id": "l08", "beat": "allocation", "text": "A deterministic engine allocates every shortage within budget and explains each line. A model may explain the plan. It cannot change a number." },
-    { "id": "l09", "beat": "approval", "text": "Nothing is written anywhere until a person approves. Then the reservation is confirmed in the supplier's own window, on the supplier's origin. Transport, the same way." },
+    { "id": "l08", "beat": "allocation", "text": "A deterministic engine allocates every shortage within budget and explains each line. A model may explain the plan, but it cannot change a single number." },
+    { "id": "l09", "beat": "approval", "text": "Nothing is written anywhere until a person approves. Then the reservation is confirmed in the supplier's own window, on the supplier's origin. Transport works the same way." },
     { "id": "l10", "beat": "tracking", "text": "Shipments are tracked to delivery, and every consent, decision and receipt lands in a hash-chained audit trail." },
-    { "id": "l11", "beat": "stack", "text": "The official runtime, unmodified. Twelve call paths passing the official partner check. Two hundred and sixty-seven automated tests. And an interoperability inspector anyone can use." },
+    { "id": "l11", "beat": "stack", "text": "Under the hood: the official runtime, unmodified. Twelve call paths passing the official partner check. Two hundred and sixty-seven automated tests. And an interoperability inspector anyone can use." },
     { "id": "l12", "beat": "claim", "text": "ReliefMesh. When disaster strikes, agents coordinate before humans have to." }
   ]
 }
