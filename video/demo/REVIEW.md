@@ -63,6 +63,11 @@ give the chapter a line of its own.
 
 None. The two info-level findings above are intentional overflow.
 
-## Latest render measurements
+## Latest render measurements (2026-11-27)
 
-(filled in by the person running `npm run video:render`; the script prints before/after.)
+- Render: 3480 frames, motion blur on, 0 failed frames; H.264 1920×1080 30 fps, AAC 48 kHz, 116.0 s.
+- Mix before `finish.py`: −17.6 LUFS, peak −1.0 dBFS, LRA 2.2 LU. After: −15.8 LUFS,
+  peak −1.0 dBFS, LRA 2.2 LU.
+- `silencedetect` at −40 dB over the finished file: no silence of 0.4 s or longer anywhere.
+- `npx hyperframes audio`: sound from 0.13 s; the steepest rise at 30.3 s (the consent
+  click), the peak at 58.4 s (the hostile supplier's "Excluded" tag).
