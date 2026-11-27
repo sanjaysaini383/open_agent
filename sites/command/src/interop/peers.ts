@@ -199,7 +199,7 @@ async function execute(grant: Grant, actionName: string, args: Record<string, un
   const store = useStore.getState();
   const interactionId = uid("ix");
   const started = performance.now();
-  store.addInteraction({ id: interactionId, at: new Date().toISOString(), from: "command", to: target.id, kind: expect, label: actionName, status: "pending" });
+  store.addInteraction({ id: interactionId, at: new Date().toISOString(), from: "command", to: target.id, kind: expect, label: actionName, status: "pending", agent: grant.agent });
   try {
     // prepare() validates the arguments against the partner's own schema before anything is sent.
     const plan = runtime.engine.actions.prepare({ kind: "action", action: entry.ref, arguments: args });

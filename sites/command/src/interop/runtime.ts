@@ -186,6 +186,12 @@ function describe(event: any): string {
   return String(event.agent || event.tool || event.url || event.reason || event.kind);
 }
 
+/** The agent whose task is in progress, so a request can be attributed to it. */
+function runningAgent(activity: AgentActivity[]): string | undefined {
+  for (let index = activity.length - 1; index >= 0; index -= 1) if (activity[index].status === "running") return activity[index].agent;
+  return undefined;
+}
+
 function onTrace(event: any): void {
   const line: TraceLine = {
     t: new Date(event.wall || Date.now()).toISOString(),
@@ -229,7 +235,7 @@ function onTrace(event: any): void {
     if (event.phase === "start") {
       const id = uid("ix");
       fetchSpans.set(event.id, id);
-      const interaction: NetworkInteraction = { id, at: line.t, from: "command", to: peerIdForHost(String(event.peerOrigin)), kind: "discover", label: "Load manifest and network definition", status: "pending" };
+      const interaction: NetworkInteraction = { id, at: line.t, from: "command", to: peerIdForHost(String(event.peerOrigin)), kind: "discover", label: "Load manifest and network definition", status: "pending", agent: runningAgent(store.activity) };
       store.addInteraction(interaction);
     } else if (event.phase === "end") {
       const id = fetchSpans.get(event.id);
@@ -245,7 +251,7 @@ function onTrace(event: any): void {
     if (event.phase === "start") {
       const id = uid("ix");
       fetchSpans.set(event.id, id);
-      store.addInteraction({ id, at: line.t, from: "command", to: peerIdForHost(String(event.peerOrigin)), kind: "llm", label: `Run ${event.network} with the visitor's model`, status: "pending" });
+      store.addInteraction({ id, at: line.t, from: "command", to: peerIdForHost(String(event.peerOrigin)), kind: "llm", label: `Run ${event.network} with the visitor's model`, status: "pending", agent: runningAgent(store.activity) });
     } else if (event.phase === "end") {
       const id = fetchSpans.get(event.id);
       if (id) {

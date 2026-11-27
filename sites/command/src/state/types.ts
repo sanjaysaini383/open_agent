@@ -182,6 +182,8 @@ export interface NetworkInteraction {
   kind: "consent" | "discover" | "read" | "write" | "llm";
   label: string;
   status: "pending" | "ok" | "failed" | "declined" | "refused";
+  /** The agent on whose behalf the request was made, when known. */
+  agent?: string;
   durationMs?: number;
   detail?: string;
 }
