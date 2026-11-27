@@ -178,9 +178,9 @@ The registry's **authority and credentials are simulated**. The **signatures are
 
 ## The dashboard interface
 
-Command's interface is a dark command-centre by default, with a light theme, built on
-semantic design tokens (`src/index.css`: CSS variables on `:root` and
-`html[data-theme="light"]`, exposed to Tailwind through `@theme inline`). Every component
+Command's interface is a whitish, neutral command-centre by default, with a dark theme, built on
+semantic design tokens (`src/index.css`: CSS variables for the default theme and
+`html[data-theme="dark"]`, exposed to Tailwind through `@theme inline`). Every component
 is written once against those tokens. Motion uses Framer Motion and is short, eased and
 optional: `prefers-reduced-motion` turns it off.
 

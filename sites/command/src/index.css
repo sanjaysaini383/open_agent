@@ -7,7 +7,7 @@
    emerald for success. The light theme keeps the same semantic names, so every component
    is written once against the semantic tokens and follows the theme at run time.
    ------------------------------------------------------------------------------------ */
-:root {
+html[data-theme="dark"] {
   color-scheme: dark;
   --canvas: #080d18;
   --surface: #141f30;
@@ -50,47 +50,49 @@
   --backdrop: rgba(3, 7, 14, 0.66);
 }
 
-html[data-theme="light"] {
+/* The default: a whitish, neutral theme. Off-white canvas, white cards, warm-grey lines,
+   a charcoal primary and teal highlights. Red is kept only for critical states. */
+html[data-theme="light"], html:not([data-theme="dark"]) {
   color-scheme: light;
-  --canvas: #f3f5f9;
+  --canvas: #f6f6f4;
   --surface: #ffffff;
-  --surface-2: #f8fafc;
-  --surface-3: #eef2f7;
-  --surface-4: #e3e9f1;
-  --line: #dde3ec;
-  --line-strong: #c3cbd9;
-  --ink: #0f1f3d;
-  --ink-2: #33415c;
-  --muted: #5b6b85;
-  --faint: #94a3b8;
-  --accent: #0891b2;
-  --accent-strong: #0e7490;
-  --accent-text: #0e7490;
-  --accent-soft: #e0f6fb;
+  --surface-2: #fafaf8;
+  --surface-3: #f0f0ec;
+  --surface-4: #e6e6e1;
+  --line: #e5e5e0;
+  --line-strong: #cfcfc8;
+  --ink: #1c1c1a;
+  --ink-2: #44443f;
+  --muted: #6b6b64;
+  --faint: #a3a39b;
+  --accent: #1f2a2e;
+  --accent-strong: #0f1719;
+  --accent-text: #0f766e;
+  --accent-soft: #edf3f1;
   --accent-ink: #ffffff;
-  --accent-2: #1d4ed8;
-  --accent-2-text: #1d4ed8;
-  --accent-2-soft: #e6eeff;
+  --accent-2: #0f766e;
+  --accent-2-text: #0f766e;
+  --accent-2-soft: #e6f4f1;
   --critical: #b42318;
-  --critical-text: #991b1b;
-  --critical-soft: #fef3f2;
-  --high: #c2410c;
-  --high-text: #9a3412;
-  --high-soft: #fff4ed;
+  --critical-text: #9a1f16;
+  --critical-soft: #fdf2f1;
+  --high: #b45309;
+  --high-text: #92400e;
+  --high-soft: #fff7ed;
   --medium: #a16207;
   --medium-text: #854d0e;
   --medium-soft: #fefce8;
   --ok: #15803d;
   --ok-text: #166534;
   --ok-soft: #ecfdf3;
-  --info: #1d4ed8;
-  --info-text: #1e40af;
-  --info-soft: #eff4ff;
-  --shadow-card: 0 1px 2px rgba(15, 31, 61, 0.06);
-  --shadow-pop: 0 20px 50px rgba(15, 31, 61, 0.18), 0 0 0 1px var(--line);
-  --shadow-glow: 0 0 0 1px rgba(8, 145, 178, 0.3), 0 8px 24px rgba(8, 145, 178, 0.14);
-  --map-bg: #e8eef5;
-  --backdrop: rgba(15, 31, 61, 0.45);
+  --info: #4b5563;
+  --info-text: #374151;
+  --info-soft: #f2f3f5;
+  --shadow-card: 0 1px 2px rgba(28, 28, 26, 0.06);
+  --shadow-pop: 0 20px 50px rgba(28, 28, 26, 0.16), 0 0 0 1px var(--line);
+  --shadow-glow: 0 0 0 1px rgba(31, 42, 46, 0.25), 0 8px 24px rgba(31, 42, 46, 0.14);
+  --map-bg: #ecece8;
+  --backdrop: rgba(28, 28, 26, 0.4);
 }
 
 @theme inline {
@@ -159,7 +161,7 @@ button:disabled { cursor: not-allowed; }
   background-size: 40px 40px;
   background-position: -1px -1px;
 }
-html[data-theme="light"] .rm-canvas { background-image: none; }
+html:not([data-theme="dark"]) .rm-canvas { background-image: none; }
 
 /* ---- animations ---------------------------------------------------------------- */
 @keyframes rm-travel { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }

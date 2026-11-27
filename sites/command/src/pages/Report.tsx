@@ -26,7 +26,7 @@ export function ReportPage() {
   const run = state.runs[incidentId];
   const [chain, setChain] = useState<{ valid: boolean; reason: string } | null>(null);
   useEffect(() => { let live = true; void verifyChain(state.audit).then((result) => { if (live) setChain(result); }); return () => { live = false; }; }, [state.audit]);
-  useEffect(() => { document.documentElement.dataset.theme = "light"; return () => { const prefs = localStorage.getItem("reliefmesh-ui-prefs"); document.documentElement.dataset.theme = prefs && /"theme":"light"/.test(prefs) ? "light" : "dark"; }; }, []);
+  useEffect(() => { document.documentElement.dataset.theme = "light"; return () => { const prefs = localStorage.getItem("reliefmesh-ui-prefs"); document.documentElement.dataset.theme = prefs && /"theme":"dark"/.test(prefs) ? "dark" : "light"; }; }, []);
   if (!incident || !run) return <div className="p-8"><p>No incident has the id “{incidentId}”.</p><Link to="/incidents" className="underline">Back</Link></div>;
 
   const plan = run.plan;

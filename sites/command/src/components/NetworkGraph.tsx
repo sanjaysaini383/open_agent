@@ -82,12 +82,12 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
   const run = activeIncidentId ? runs[activeIncidentId] : null;
   const activeStep = run ? STEPS.find((step) => run.steps[step.id].status === "running") : undefined;
 
-  const ink = dark ? "#e9eff9" : "#0f1f3d";
-  const muted = dark ? "#8494ad" : "#5b6b85";
-  const faint = dark ? "#2d3d5c" : "#c3cbd9";
+  const ink = dark ? "#e9eff9" : "#1c1c1a";
+  const muted = dark ? "#8494ad" : "#6b6b64";
+  const faint = dark ? "#2d3d5c" : "#cfcfc8";
   const surface = dark ? "#141f30" : "#ffffff";
-  const surface2 = dark ? "#101827" : "#f8fafc";
-  const accent = dark ? "#22d3ee" : "#0891b2";
+  const surface2 = dark ? "#101827" : "#fafaf8";
+  const accent = dark ? "#22d3ee" : "#0f766e";
   const okColor = dark ? "#34d399" : "#15803d";
   const failColor = dark ? "#ef5e5e" : "#b42318";
 

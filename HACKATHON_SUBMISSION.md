@@ -128,7 +128,7 @@ plain ES modules for the partner sites.
 
 ## The interface
 
-A dark command-centre (light theme available): collapsible sidebar, command palette
+A clean whitish command-centre (dark theme available): collapsible sidebar, command palette
 (Ctrl+K), keyboard shortcuts, an alert centre derived from state, animated metric cards, a
 live map, and a live agent network whose nodes open each agent's identity, task, history and
 actions. Dedicated pages for a scenario simulator (five disasters; start, pause, resume,
@@ -161,7 +161,7 @@ In [`docs/screenshots/`](docs/screenshots), produced by `npm run screenshots` fr
 - [x] `19-command-palette.png` — Ctrl+K: pages, incidents, agents, approvals, scenarios, actions
 - [x] `20-alert-centre.png` — alerts derived from state
 - [x] `21-scenario-simulator.png` — five predefined disasters
-- [x] `22-command-center-light.png` — the light theme
+- [x] `22-command-center-dark.png` — the dark theme
 
 ## Demo script (under two minutes)
 
