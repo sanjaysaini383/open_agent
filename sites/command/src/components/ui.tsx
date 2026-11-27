@@ -78,11 +78,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ variant = "secondary", size = "md", busy, feedback, className, children, disabled, ...rest }: ButtonProps) {
   const variants = {
-    primary: "bg-accent text-accent-ink border-accent hover:bg-accent-strong hover:shadow-glow",
-    secondary: "bg-surface-3 text-ink border-line-strong hover:bg-surface-4 hover:border-faint",
+    primary: "btn-primary rm-shine text-accent-ink hover:shadow-glow",
+    secondary: "rm-shine bg-surface-3 text-ink border-line-strong hover:bg-surface-4 hover:border-faint",
     outline: "bg-transparent text-ink-2 border-line-strong hover:bg-surface-3",
     ghost: "bg-transparent text-ink-2 border-transparent hover:bg-surface-3 hover:text-ink",
-    danger: "bg-critical text-white border-critical hover:brightness-110",
+    danger: "rm-shine bg-critical text-white border-critical hover:brightness-110",
   };
   const sizes = { xs: "px-2 py-0.5 text-[11.5px] gap-1", sm: "px-2.5 py-1 text-[12.5px]", md: "px-3.5 py-2 text-[13.5px]" };
   return (
@@ -92,7 +92,7 @@ export function Button({ variant = "secondary", size = "md", busy, feedback, cla
       disabled={disabled || busy}
       data-feedback={feedback || undefined}
       className={cx(
-        "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md border font-semibold transition-[background-color,border-color,box-shadow,transform,color] duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100",
+        "rm-lift inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md border font-semibold disabled:cursor-not-allowed disabled:opacity-50",
         sizes[size],
         feedback === "success" ? "border-ok/40 bg-ok-soft text-ok-text" : feedback === "error" ? "border-critical/40 bg-critical-soft text-critical-text" : variants[variant],
         className,
@@ -164,9 +164,17 @@ export function Tooltip({ text, children, side = "top", className }: { text: Rea
 
 // ---- surfaces --------------------------------------------------------------------
 
-export function Card({ children, className, padded = true, tone }: { children: ReactNode; className?: string; padded?: boolean; tone?: "critical" | "accent" | "warn" }) {
+/** A glass card. It reveals itself as it scrolls into view (once), unless motion is reduced. */
+export function Card({ children, className, padded = true, tone, reveal = true }: { children: ReactNode; className?: string; padded?: boolean; tone?: "critical" | "accent" | "warn"; reveal?: boolean }) {
+  const off = useMotionOff();
   const edge = tone === "critical" ? "border-critical/40" : tone === "accent" ? "border-accent/40" : tone === "warn" ? "border-high/40" : "border-line";
-  return <section className={cx("rounded-[12px] border bg-surface shadow-card", edge, padded && "p-5", className)}>{children}</section>;
+  const classes = cx("glass glass-hover rounded-[14px] border", edge, padded && "p-5", className);
+  if (off || !reveal) return <section className={classes}>{children}</section>;
+  return (
+    <motion.section className={classes} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px 0px" }} transition={{ duration: 0.45, ease: EASE }}>
+      {children}
+    </motion.section>
+  );
 }
 
 export function CardHeader({ title, subtitle, actions, icon, className }: { title: ReactNode; subtitle?: ReactNode; actions?: ReactNode; icon?: ReactNode; className?: string }) {
@@ -218,7 +226,7 @@ export function Stat({ label, value, number, format, hint, tone = "neutral", ico
 }) {
   const deltaColor = { neutral: "text-muted", ok: "text-ok-text", warn: "text-high-text", critical: "text-critical-text", info: "text-info-text", navy: "text-accent-2-text", accent: "text-accent-text" }[deltaTone];
   return (
-    <div className={cx("relative overflow-hidden rounded-[12px] border border-line bg-surface p-4 shadow-card", className)}>
+    <div className={cx("glass glass-hover relative overflow-hidden rounded-[14px] border border-line p-4", className)}>
       {tone !== "neutral" && <span aria-hidden className={cx("absolute inset-x-0 top-0 h-0.5", { ok: "bg-ok", warn: "bg-high", critical: "bg-critical", info: "bg-info", navy: "bg-accent-2", accent: "bg-accent" }[tone])} />}
       <div className="flex items-center justify-between gap-2 text-[11.5px] font-semibold uppercase tracking-wide text-muted">
         <span>{label}</span>
@@ -376,7 +384,7 @@ export function Modal({ title, children, onClose, footer, wide, tone = "navy" }:
       ref={ref}
       aria-labelledby={headingId}
       onCancel={(event) => { event.preventDefault(); onClose?.(); }}
-      className={cx("m-auto w-[min(94vw,var(--w))] max-w-none rounded-xl border border-line-strong bg-surface p-0 text-ink shadow-pop backdrop:bg-[var(--backdrop)] backdrop:backdrop-blur-sm", "max-h-[90vh]")}
+      className={cx("glass-strong m-auto w-[min(94vw,var(--w))] max-w-none rounded-xl border border-line-strong p-0 text-ink shadow-pop backdrop:bg-[var(--backdrop)] backdrop:backdrop-blur-sm", "max-h-[90vh]")}
       style={{ ["--w" as string]: wide ? "980px" : "620px" }}
     >
       <motion.div initial={off ? false : { opacity: 0, scale: 0.975, y: 6 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.2, ease: EASE }}>
@@ -416,7 +424,7 @@ export function Drawer({ open, onClose, title, subtitle, children, footer, width
             role="dialog"
             aria-modal="true"
             aria-labelledby={headingId}
-            className="fixed inset-y-0 right-0 z-50 flex w-[min(100vw,var(--w))] flex-col border-l border-line-strong bg-surface text-ink shadow-pop"
+            className="glass-strong fixed inset-y-0 right-0 z-50 flex w-[min(100vw,var(--w))] flex-col border-l border-line-strong text-ink shadow-pop"
             style={{ ["--w" as string]: `${width}px` }}
             initial={off ? false : { x: "100%" }}
             animate={{ x: 0 }}

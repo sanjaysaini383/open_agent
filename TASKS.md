@@ -96,7 +96,7 @@ Verification for each area is in [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md).
 ## Phase 9 — Interface redesign (command centre)
 
 - [x] Plan from an inspection of the codebase ([docs/UI_PLAN.md](docs/UI_PLAN.md))
-- [x] Design system: semantic tokens, whitish (default) and dark themes, Inter and JetBrains
+- [x] Design system: semantic tokens, teal glass (default) and whitish themes, Inter and JetBrains
       Mono, UI kit with press and loading feedback, tooltips, skeletons, sortable tables,
       pagination, breadcrumbs, drawers, segmented controls, toast stack
 - [x] Motion with Framer Motion: page transitions, staggered entrances, animated counters,

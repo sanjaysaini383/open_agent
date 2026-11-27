@@ -12,7 +12,7 @@ import type { NetworkInteraction, PeerRecord } from "@/state/types";
 import { useUi } from "@/state/ui";
 import { Badge, cx } from "./ui";
 
-const ROLE_COLOR: Record<PeerRecord["role"], string> = { trust: "#34d399", shelter: "#2dd4bf", supplier: "#60a5fa", logistics: "#f59e0b", other: "#94a3b8" };
+const ROLE_COLOR: Record<PeerRecord["role"], string> = { trust: "#7fcfa6", shelter: "#6fdccf", supplier: "#d1e8e2", logistics: "#ffcb9a", other: "#93aba5" };
 const WIDTH = 960;
 const HEIGHT = 540;
 const CENTER = { x: WIDTH / 2, y: HEIGHT / 2 };
@@ -82,14 +82,14 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
   const run = activeIncidentId ? runs[activeIncidentId] : null;
   const activeStep = run ? STEPS.find((step) => run.steps[step.id].status === "running") : undefined;
 
-  const ink = dark ? "#e9eff9" : "#1c1c1a";
-  const muted = dark ? "#8494ad" : "#6b6b64";
-  const faint = dark ? "#2d3d5c" : "#cfcfc8";
-  const surface = dark ? "#141f30" : "#ffffff";
-  const surface2 = dark ? "#101827" : "#fafaf8";
-  const accent = dark ? "#22d3ee" : "#0f766e";
-  const okColor = dark ? "#34d399" : "#15803d";
-  const failColor = dark ? "#ef5e5e" : "#b42318";
+  const ink = dark ? "#e7f2ef" : "#1c1c1a";
+  const muted = dark ? "#93aba5" : "#6b6b64";
+  const faint = dark ? "#43524d" : "#cfcfc8";
+  const surface = dark ? "#2c3531" : "#ffffff";
+  const surface2 = dark ? "#222c29" : "#fafaf8";
+  const accent = dark ? "#6fdccf" : "#0f766e";
+  const okColor = dark ? "#7fcfa6" : "#15803d";
+  const failColor = dark ? "#e3796a" : "#b42318";
 
   const agentNodes = AGENTS.filter((agent) => agent.name !== "EmergencyCommanderAgent");
 
@@ -156,10 +156,10 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
             <g key={agent.name} transform={`translate(${at.x}, ${at.y})`} className="cursor-pointer" onClick={() => inspect(agent.name)} role="button" tabIndex={0} aria-label={`${agent.name} details`} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") inspect(agent.name); }}>
               {active && !off && <circle r={24} fill="none" stroke={accent} strokeWidth={1.5}><animate attributeName="r" values="24;40" dur="1.4s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.8;0" dur="1.4s" repeatCount="indefinite" /></circle>}
               <circle r={23} fill={active ? accent : surface} stroke={stroke} strokeWidth={active ? 0 : 1.75} />
-              <text textAnchor="middle" y={4.5} fontSize={12} fontWeight={700} fill={active ? (dark ? "#04161d" : "#fff") : ink}>{owns ? owns.number : "·"}</text>
+              <text textAnchor="middle" y={4.5} fontSize={12} fontWeight={700} fill={active ? (dark ? "#07201e" : "#fff") : ink}>{owns ? owns.number : "·"}</text>
               <text textAnchor="middle" y={38} fontSize={11.5} fontWeight={600} fill={active ? accent : muted}>{SHORT[agent.name] ?? agent.name}</text>
               {stepState === "done" && <circle cx={17} cy={-16} r={4} fill={okColor} />}
-              {stepState === "warning" && <circle cx={17} cy={-16} r={4} fill={dark ? "#f59e0b" : "#c2410c"} />}
+              {stepState === "warning" && <circle cx={17} cy={-16} r={4} fill={dark ? "#d9b08c" : "#c2410c"} />}
               {stepState === "failed" && <circle cx={17} cy={-16} r={4} fill={failColor} />}
             </g>
           );
@@ -171,7 +171,7 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
           const status = peer.discovery?.status;
           const connected = status === "connected";
           const trust = peer.role === "trust" ? (connected ? "trust anchor" : "") : peer.trust?.decision ?? "";
-          const trustColor = trust === "verified" || trust === "trust anchor" ? okColor : trust === "caution" ? (dark ? "#f59e0b" : "#c2410c") : trust === "blocked" ? failColor : muted;
+          const trustColor = trust === "verified" || trust === "trust anchor" ? okColor : trust === "caution" ? (dark ? "#d9b08c" : "#c2410c") : trust === "blocked" ? failColor : muted;
           const pending = interactions.some((item) => item.to === peer.id && item.status === "pending");
           let host = peer.networkUrl;
           try { host = new URL(peer.networkUrl).host; } catch { /* keep the raw value */ }

@@ -93,7 +93,7 @@ export function CommandPalette() {
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
-        className="fixed left-1/2 top-[12vh] z-[71] w-[min(94vw,640px)] -translate-x-1/2 overflow-hidden rounded-xl border border-line-strong bg-surface text-ink shadow-pop"
+        className="glass-strong fixed left-1/2 top-[12vh] z-[71] w-[min(94vw,640px)] -translate-x-1/2 overflow-hidden rounded-xl border border-line-strong text-ink shadow-pop"
         initial={off ? false : { opacity: 0, scale: 0.97, y: -8 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={off ? undefined : { opacity: 0, scale: 0.98, y: -4 }}

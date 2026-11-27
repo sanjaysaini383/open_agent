@@ -22,7 +22,7 @@ import { Badge, Button, IconButton, Kbd, Modal, SimBadge, Tooltip, cx } from "./
 function Logo({ compact }: { compact: boolean }) {
   return (
     <div className={cx("flex h-[60px] items-center gap-2.5 border-b border-line", compact ? "justify-center px-2" : "px-4")}>
-      <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent text-[12px] font-bold tracking-wide text-accent-ink shadow-glow" aria-hidden>
+      <span className="btn-primary rm-shine relative grid h-9 w-9 shrink-0 place-items-center rounded-lg text-[12px] font-bold tracking-wide text-accent-ink shadow-glow" aria-hidden>
         RM
       </span>
       {!compact && (
@@ -45,7 +45,7 @@ function Sidebar({ collapsed, mobileOpen, onClose }: { collapsed: boolean; mobil
   return (
     <aside
       className={cx(
-        "fixed inset-y-0 left-0 z-50 flex shrink-0 flex-col border-r border-line bg-surface-2 transition-[transform,width] duration-200 ease-out lg:static lg:translate-x-0",
+        "glass-strong fixed inset-y-0 left-0 z-50 flex shrink-0 flex-col border-r border-line transition-[transform,width] duration-200 ease-out lg:static lg:translate-x-0",
         collapsed ? "w-[68px]" : "w-[236px]",
         mobileOpen ? "translate-x-0 shadow-pop" : "-translate-x-full",
       )}
@@ -71,7 +71,7 @@ function Sidebar({ collapsed, mobileOpen, onClose }: { collapsed: boolean; mobil
                     className={({ isActive }) => cx(
                       "group relative flex items-center gap-2.5 rounded-md py-2 text-[13.5px] font-medium transition-colors",
                       collapsed ? "justify-center px-0" : "px-2.5",
-                      isActive ? "bg-accent-soft text-accent-text" : "text-ink-2 hover:bg-surface-3 hover:text-ink",
+                      isActive ? "bg-accent-soft text-accent-text shadow-[inset_0_1px_0_var(--glass-sheen)]" : "text-ink-2 hover:bg-surface-3 hover:text-ink",
                     )}
                   >
                     {({ isActive }) => (
@@ -272,7 +272,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       {menu && <button type="button" aria-label="Close menu" className="fixed inset-0 z-40 bg-[var(--backdrop)] lg:hidden" onClick={() => setMenu(false)} />}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex h-[60px] items-center gap-2 border-b border-line bg-canvas/85 px-3 backdrop-blur-md lg:px-5">
+        <header className="glass-strong sticky top-0 z-30 flex h-[60px] items-center gap-2 border-b border-line px-3 lg:px-5">
           <button type="button" className="shrink-0 rounded p-1.5 text-ink-2 lg:hidden" aria-label="Open menu" onClick={() => setMenu(true)}><Menu size={19} /></button>
           <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
             <IncidentSelector />

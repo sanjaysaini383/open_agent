@@ -127,9 +127,9 @@ await page.goto("/#/simulator");
 await page.getByRole("heading", { name: "Scenario Simulator" }).waitFor();
 await shot("21-scenario-simulator", { fullPage: true });
 await page.goto("/");
-await page.getByRole("button", { name: "Switch to the dark theme" }).click();
-await shot("22-command-center-dark", { fullPage: true });
 await page.getByRole("button", { name: "Switch to the light theme" }).click();
+await shot("22-command-center-light", { fullPage: true });
+await page.getByRole("button", { name: "Switch to the dark theme" }).click();
 
 const inspector = await context.newPage();
 await inspector.goto(`http://localhost:8090/?url=${encodeURIComponent(`${COMMAND}/reliefmesh_command`)}`);
