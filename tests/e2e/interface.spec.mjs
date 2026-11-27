@@ -25,13 +25,13 @@ async function untilSettled(page, settled, timeout = 120_000) {
 
 test("the shell: theme toggle, sidebar collapse, shortcuts dialog and the command palette navigate", async ({ page }) => {
   await open(page);
-  // Teal glass by default; the whitish theme on request, remembered in this browser.
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.getByRole("button", { name: "Switch to the light theme" }).click();
+  // Warm cream by default; the charcoal-teal theme on request, remembered in this browser.
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  expect(JSON.parse(await page.evaluate(() => localStorage.getItem("reliefmesh-ui-prefs"))).state.theme).toBe("light");
   await page.getByRole("button", { name: "Switch to the dark theme" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  expect(JSON.parse(await page.evaluate(() => localStorage.getItem("reliefmesh-ui-prefs"))).state.theme).toBe("dark");
+  await page.getByRole("button", { name: "Switch to the light theme" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 
   await page.getByRole("button", { name: "Collapse the sidebar" }).click();
   await expect(page.getByRole("button", { name: "Expand the sidebar" })).toBeVisible();

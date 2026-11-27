@@ -84,7 +84,7 @@ hardcoded response is ever presented as a live one.
 
 ## The command-centre interface
 
-A charcoal-teal glass operations interface (whitish theme available) with a collapsible sidebar, a command
+A warm, minimal glass operations interface in cream, sand, salmon and coral (charcoal-teal theme available) with a collapsible sidebar, a command
 palette (**Ctrl+K**), keyboard shortcuts (**?**), an alert centre, animated metric cards,
 a live map and a live agent network whose nodes open an agent's identity, task, history and
 actions. Beyond the ten-step workflow it has a **Scenario Simulator** (flood, earthquake,

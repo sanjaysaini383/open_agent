@@ -1,5 +1,5 @@
 // Interface preferences that belong to this browser, not to the demonstration data:
-// colour theme (teal glass by default; whitish available), sidebar mode and the coordinator's
+// colour theme (warm cream by default; charcoal-teal available), sidebar mode and the coordinator's
 // display name. Kept apart from the persisted dashboard state so Reset demo never
 // touches them.
 import { create } from "zustand";
@@ -27,7 +27,7 @@ function applyTheme(theme: Theme): void {
 export const usePrefs = create<Prefs>()(
   persist(
     (set, get) => ({
-      theme: "dark",
+      theme: "light",
       sidebarCollapsed: false,
       displayName: "Coordinator",
       shortcutsSeen: false,
@@ -62,7 +62,7 @@ export interface Palette {
 export function palette(theme: Theme): Palette {
   return theme === "dark"
     ? { accent: "#6fdccf", accent2: "#ffcb9a", ok: "#7fcfa6", high: "#d9b08c", critical: "#e3796a", muted: "#93aba5", faint: "#65807a", ink: "#e7f2ef", grid: "#2b3733", surface: "#2c3531", line: "#43524d" }
-    : { accent: "#1f2a2e", accent2: "#0f766e", ok: "#15803d", high: "#b45309", critical: "#b42318", muted: "#6b6b64", faint: "#a3a39b", ink: "#1c1c1a", grid: "#e5e5e0", surface: "#ffffff", line: "#cfcfc8" };
+    : { accent: "#e85a4f", accent2: "#d8c3a5", ok: "#5f8f5a", high: "#c07d3a", critical: "#c8382d", muted: "#8e8d8a", faint: "#b3b0aa", ink: "#2b2927", grid: "#e0d9c8", surface: "#f6f3eb", line: "#c9b797" };
 }
 
 export function usePalette(): Palette {

@@ -12,7 +12,10 @@ import type { NetworkInteraction, PeerRecord } from "@/state/types";
 import { useUi } from "@/state/ui";
 import { Badge, cx } from "./ui";
 
-const ROLE_COLOR: Record<PeerRecord["role"], string> = { trust: "#7fcfa6", shelter: "#6fdccf", supplier: "#d1e8e2", logistics: "#ffcb9a", other: "#93aba5" };
+const ROLE_COLOR: Record<"dark" | "light", Record<PeerRecord["role"], string>> = {
+  dark: { trust: "#7fcfa6", shelter: "#6fdccf", supplier: "#d1e8e2", logistics: "#ffcb9a", other: "#93aba5" },
+  light: { trust: "#5f8f5a", shelter: "#e98074", supplier: "#8e8d8a", logistics: "#c9a66b", other: "#b3b0aa" },
+};
 const WIDTH = 960;
 const HEIGHT = 540;
 const CENTER = { x: WIDTH / 2, y: HEIGHT / 2 };
@@ -82,14 +85,14 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
   const run = activeIncidentId ? runs[activeIncidentId] : null;
   const activeStep = run ? STEPS.find((step) => run.steps[step.id].status === "running") : undefined;
 
-  const ink = dark ? "#e7f2ef" : "#1c1c1a";
-  const muted = dark ? "#93aba5" : "#6b6b64";
-  const faint = dark ? "#43524d" : "#cfcfc8";
-  const surface = dark ? "#2c3531" : "#ffffff";
-  const surface2 = dark ? "#222c29" : "#fafaf8";
-  const accent = dark ? "#6fdccf" : "#0f766e";
-  const okColor = dark ? "#7fcfa6" : "#15803d";
-  const failColor = dark ? "#e3796a" : "#b42318";
+  const ink = dark ? "#e7f2ef" : "#2b2927";
+  const muted = dark ? "#93aba5" : "#8e8d8a";
+  const faint = dark ? "#43524d" : "#c9b797";
+  const surface = dark ? "#2c3531" : "#f8f6f0";
+  const surface2 = dark ? "#222c29" : "#efebe0";
+  const accent = dark ? "#6fdccf" : "#e85a4f";
+  const okColor = dark ? "#7fcfa6" : "#5f8f5a";
+  const failColor = dark ? "#e3796a" : "#c8382d";
 
   const agentNodes = AGENTS.filter((agent) => agent.name !== "EmergencyCommanderAgent");
 
@@ -159,7 +162,7 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
               <text textAnchor="middle" y={4.5} fontSize={12} fontWeight={700} fill={active ? (dark ? "#07201e" : "#fff") : ink}>{owns ? owns.number : "·"}</text>
               <text textAnchor="middle" y={38} fontSize={11.5} fontWeight={600} fill={active ? accent : muted}>{SHORT[agent.name] ?? agent.name}</text>
               {stepState === "done" && <circle cx={17} cy={-16} r={4} fill={okColor} />}
-              {stepState === "warning" && <circle cx={17} cy={-16} r={4} fill={dark ? "#d9b08c" : "#c2410c"} />}
+              {stepState === "warning" && <circle cx={17} cy={-16} r={4} fill={dark ? "#d9b08c" : "#c07d3a"} />}
               {stepState === "failed" && <circle cx={17} cy={-16} r={4} fill={failColor} />}
             </g>
           );
@@ -171,7 +174,7 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
           const status = peer.discovery?.status;
           const connected = status === "connected";
           const trust = peer.role === "trust" ? (connected ? "trust anchor" : "") : peer.trust?.decision ?? "";
-          const trustColor = trust === "verified" || trust === "trust anchor" ? okColor : trust === "caution" ? (dark ? "#d9b08c" : "#c2410c") : trust === "blocked" ? failColor : muted;
+          const trustColor = trust === "verified" || trust === "trust anchor" ? okColor : trust === "caution" ? (dark ? "#d9b08c" : "#c07d3a") : trust === "blocked" ? failColor : muted;
           const pending = interactions.some((item) => item.to === peer.id && item.status === "pending");
           let host = peer.networkUrl;
           try { host = new URL(peer.networkUrl).host; } catch { /* keep the raw value */ }
@@ -180,8 +183,8 @@ export function NetworkGraph({ compact = false }: { compact?: boolean }) {
           return (
             <g key={peer.id} transform={`translate(${at.x}, ${at.y})`} className={cx(front && "cursor-pointer")} onClick={open} role={front ? "button" : undefined} tabIndex={front ? 0 : undefined} aria-label={front ? `${peer.label}: ${front} details` : undefined} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") open(); }}>
               {pending && !off && <rect x={-96} y={-40} width={192} height={80} rx={12} fill="none" stroke={accent} strokeWidth={1.5} opacity={0.6}><animate attributeName="opacity" values="0.6;0.1;0.6" dur="1.2s" repeatCount="indefinite" /></rect>}
-              <rect x={-90} y={-36} width={180} height={72} rx={10} fill={surface} stroke={connected ? ROLE_COLOR[peer.role] : faint} strokeWidth={connected ? 1.75 : 1.25} strokeDasharray={connected ? undefined : "4 4"} />
-              <rect x={-90} y={-36} width={5} height={72} rx={2.5} fill={ROLE_COLOR[peer.role]} opacity={connected ? 1 : 0.5} />
+              <rect x={-90} y={-36} width={180} height={72} rx={10} fill={surface} stroke={connected ? ROLE_COLOR[theme][peer.role] : faint} strokeWidth={connected ? 1.75 : 1.25} strokeDasharray={connected ? undefined : "4 4"} />
+              <rect x={-90} y={-36} width={5} height={72} rx={2.5} fill={ROLE_COLOR[theme][peer.role]} opacity={connected ? 1 : 0.5} />
               <text x={-76} y={-15} fontSize={12.5} fontWeight={700} fill={ink}>{peer.label}</text>
               <text x={-76} y={1} fontSize={10} fill={muted} fontFamily="ui-monospace, monospace">{host}</text>
               <text x={-76} y={16} fontSize={10} fill={muted}>

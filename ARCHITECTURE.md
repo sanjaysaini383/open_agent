@@ -178,9 +178,9 @@ The registry's **authority and credentials are simulated**. The **signatures are
 
 ## The dashboard interface
 
-Command's interface is a charcoal-teal glass command-centre by default (palette #2C3531, #116466, #D9B08C, #FFCB9A, #D1E8E2), with a whitish theme, built on
+Command's interface is a warm, minimal glass command-centre by default (palette #EAE7DC cream, #D8C3A5 sand, #8E8D8A grey, #E98074 salmon, #E85A4F coral), with a charcoal-teal theme, built on
 semantic design tokens (`src/index.css`: CSS variables for the default theme and
-`html[data-theme="light"]`, exposed to Tailwind through `@theme inline`). Every component
+`html[data-theme="dark"]`, exposed to Tailwind through `@theme inline`). Every component
 is written once against those tokens. Motion uses Framer Motion and is short, eased and
 optional: `prefers-reduced-motion` turns it off.
 
