@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReliefMesh thumbnail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=JetBrains+Mono:wght@600&display=block" rel="stylesheet">
+<style>
+  /* 1920x1080 master; render.mjs also writes a 1280x720 copy for YouTube. */
+  :root { --ground: #0b0f0e; --ink: #eae7dc; --mint: #d1e8e2; --coral: #e85a4f; --salmon: #e98074; --sand: #d8c3a5; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); font-family: Inter, sans-serif; color: var(--ink); }
+  .canvas { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+
+  .grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(234,231,220,0.09) 2px, transparent 2px); background-size: 52px 52px; }
+  .glow { position: absolute; border-radius: 50%; }
+  .glow.a { right: -420px; top: -360px; width: 1500px; height: 1500px; background: radial-gradient(circle, rgba(232,90,79,0.42), rgba(232,90,79,0) 62%); }
+  .glow.b { left: -500px; bottom: -700px; width: 1300px; height: 1300px; background: radial-gradient(circle, rgba(209,232,226,0.10), rgba(209,232,226,0) 60%); }
+
+  /* the product, angled into the frame from the right */
+  .stage { position: absolute; left: 950px; top: 120px; width: 1240px; perspective: 2400px; }
+  .browser { width: 1240px; border-radius: 22px; overflow: hidden; background: #26262b; transform: rotateY(-16deg) rotateX(4deg) rotateZ(-1deg); transform-origin: 0% 50%;
+             box-shadow: 0 60px 140px rgba(0,0,0,0.65), 0 0 0 2px rgba(234,231,220,0.16), 0 0 120px rgba(232,90,79,0.25); }
+  .bar { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 22px; }
+  .bar i { width: 14px; height: 14px; border-radius: 50%; background: rgba(234,231,220,0.3); }
+  .bar span { margin-left: 26px; padding: 6px 22px; border-radius: 999px; background: rgba(0,0,0,0.4); color: rgba(234,231,220,0.75); font: 600 18px "JetBrains Mono", monospace; }
+  .browser img { display: block; width: 1240px; height: 775px; object-fit: cover; object-position: left top; }
+
+  /* the hook: the hostile supplier the agents refused */
+  .threat { position: absolute; left: 1100px; top: 470px; width: 560px; transform: rotate(-3deg); }
+  .threat img { display: block; width: 560px; border-radius: 20px; box-shadow: 0 40px 90px rgba(0,0,0,0.6), 0 0 0 4px var(--coral), 0 0 60px rgba(232,90,79,0.6); }
+  .stamp { position: absolute; right: -54px; top: -46px; transform: rotate(8deg); padding: 14px 26px; border-radius: 14px; background: var(--coral); color: #fff;
+           font-size: 40px; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; box-shadow: 0 18px 40px rgba(0,0,0,0.45); white-space: nowrap; }
+  .stamp small { display: block; font-size: 22px; font-weight: 700; letter-spacing: 0.06em; opacity: 0.92; }
+
+  /* left column: brand, headline, proof */
+  .brand { position: absolute; left: 96px; top: 84px; display: flex; align-items: center; gap: 22px; }
+  .mark { display: grid; place-items: center; width: 92px; height: 92px; border-radius: 24px; background: linear-gradient(135deg, var(--salmon), var(--coral)); color: #fff; font-size: 36px; font-weight: 900; box-shadow: 0 18px 44px rgba(232,90,79,0.45); }
+  .brand b { display: block; font-size: 52px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .brand small { display: block; margin-top: 8px; font-size: 22px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); }
+
+  .headline { position: absolute; left: 92px; top: 290px; width: 900px; font-weight: 900; letter-spacing: -0.045em; line-height: 0.95; text-shadow: 0 10px 40px rgba(0,0,0,0.55); }
+  .headline .l1 { display: block; font-size: 146px; }
+  .headline .l2 { display: block; font-size: 146px; }
+  .headline .l3 { display: block; margin-top: 30px; font-size: 90px; color: var(--coral); letter-spacing: -0.035em; }
+
+  .proof { position: absolute; left: 96px; top: 860px; display: flex; gap: 16px; }
+  .proof span { display: flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: rgba(11,15,14,0.85); border: 2px solid rgba(209,232,226,0.35); font-size: 30px; font-weight: 700; color: var(--mint); white-space: nowrap; }
+  .proof span i { width: 12px; height: 12px; border-radius: 50%; background: var(--coral); }
+
+  .vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 30% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%); }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="grid"></div>
+    <div class="glow a"></div>
+    <div class="glow b"></div>
+
+    <div class="stage">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>localhost:8080 · ReliefMesh Command</span></div>
+        <img src="assets/command.png" alt="">
+      </div>
+    </div>
+
+    <div class="threat">
+      <img src="assets/hostile.png" alt="">
+      <div class="stamp">Excluded<small>prompt injection caught</small></div>
+    </div>
+
+    <div class="vignette"></div>
+
+    <div class="brand">
+      <div class="mark">RM</div>
+      <div><b>ReliefMesh</b><small>Open Agentic Web</small></div>
+    </div>
+
+    <div class="headline">
+      <span class="l1">AI agents</span>
+      <span class="l2">coordinate.</span>
+      <span class="l3">Humans approve.</span>
+    </div>
+
+    <div class="proof">
+      <span><i></i>5 independent websites</span>
+      <span><i></i>Real demo</span>
+    </div>
+  </div>
+</body>
+</html>

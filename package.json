@@ -31,7 +31,8 @@
     "video:record": "node tests/e2e/support/record-demo.mjs video/footage",
     "video:voice": "cd video/demo && python -I script/tts_edge.py && python -I script/make-music.py",
     "video:build": "cd video/demo && node script/build.mjs && npx hyperframes check",
-    "video:render": "cd video/demo && npx hyperframes render -o renders/reliefmesh-demo-raw.mp4 --quality delivery --video-frame-format png && python -I script/finish.py renders/reliefmesh-demo-raw.mp4 renders/reliefmesh-demo.mp4"
+    "video:thumbnail": "node video/thumbnail/render.mjs",
+    "video:render":"cd video/demo && npx hyperframes render -o renders/reliefmesh-demo-raw.mp4 --quality delivery --video-frame-format png && python -I script/finish.py renders/reliefmesh-demo-raw.mp4 renders/reliefmesh-demo.mp4"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0"
