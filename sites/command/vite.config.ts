@@ -25,6 +25,7 @@ export default defineConfig({
           react: ["react", "react-dom", "react-router-dom"],
           charts: ["recharts"],
           map: ["leaflet", "react-leaflet"],
+          motion: ["framer-motion"],
         },
       },
     },

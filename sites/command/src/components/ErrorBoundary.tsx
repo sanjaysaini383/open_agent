@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode; resetKey?: s
   render() {
     if (!this.state.error) return this.props.children;
     return (
-      <div role="alert" className="rounded-[10px] border border-red-200 bg-critical-soft p-5 text-[13.5px] text-[#7a271a]">
+      <div role="alert" className="rounded-[10px] border border-critical/30 bg-critical-soft p-5 text-[13.5px] text-critical-text">
         <p className="text-[15px] font-semibold">This page could not be displayed</p>
         <p className="mt-1">{this.state.error.message}</p>
         <p className="mt-2 text-[12.5px]">Your data is unaffected. Choose another page from the menu, or reload. If it keeps happening, use Reset demo in the top bar.</p>

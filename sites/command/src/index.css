@@ -1,81 +1,229 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
-/* Design tokens: a serious operations-centre look. Light background, navy type, slate
-   surfaces, restrained red and orange for severity, green for verified and done. */
-@theme {
-  --color-navy-950: #0a1a33;
-  --color-navy-900: #0f2445;
-  --color-navy-800: #12305a;
-  --color-navy-700: #1b4079;
-  --color-navy-100: #dfe8f5;
-  --color-navy-50: #eff4fb;
-  --color-ink: #0f1f3d;
-  --color-ink-2: #33415c;
-  --color-muted: #5b6b85;
-  --color-line: #d9e0ea;
-  --color-canvas: #f4f6f9;
-  --color-critical: #b42318;
-  --color-critical-soft: #fef3f2;
-  --color-high: #c2410c;
-  --color-high-soft: #fff4ed;
-  --color-medium: #a16207;
-  --color-medium-soft: #fefce8;
-  --color-ok: #15803d;
-  --color-ok-soft: #ecfdf3;
-  --color-info: #1d4ed8;
-  --color-info-soft: #eff4ff;
+/* ------------------------------------------------------------------------------------
+   Design tokens. Dark is the default: a deep midnight command-centre surface with an
+   electric-cyan primary accent, blue as the secondary accent, restrained red for critical,
+   emerald for success. The light theme keeps the same semantic names, so every component
+   is written once against the semantic tokens and follows the theme at run time.
+   ------------------------------------------------------------------------------------ */
+:root {
+  color-scheme: dark;
+  --canvas: #080d18;
+  --surface: #141f30;
+  --surface-2: #101827;
+  --surface-3: #1a2741;
+  --surface-4: #223252;
+  --line: #1d2a40;
+  --line-strong: #2d3d5c;
+  --ink: #e9eff9;
+  --ink-2: #bcc8db;
+  --muted: #8494ad;
+  --faint: #5c6b84;
+  --accent: #22d3ee;
+  --accent-strong: #06b6d4;
+  --accent-text: #67e8f9;
+  --accent-soft: rgba(34, 211, 238, 0.12);
+  --accent-ink: #04161d;
+  --accent-2: #3b82f6;
+  --accent-2-text: #93c5fd;
+  --accent-2-soft: rgba(59, 130, 246, 0.14);
+  --critical: #ef5e5e;
+  --critical-text: #fca5a5;
+  --critical-soft: rgba(239, 94, 94, 0.13);
+  --high: #f59e0b;
+  --high-text: #fcd34d;
+  --high-soft: rgba(245, 158, 11, 0.13);
+  --medium: #eab308;
+  --medium-text: #fde047;
+  --medium-soft: rgba(234, 179, 8, 0.12);
+  --ok: #34d399;
+  --ok-text: #6ee7b7;
+  --ok-soft: rgba(52, 211, 153, 0.12);
+  --info: #60a5fa;
+  --info-text: #93c5fd;
+  --info-soft: rgba(96, 165, 250, 0.13);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-pop: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--line-strong);
+  --shadow-glow: 0 0 0 1px rgba(34, 211, 238, 0.35), 0 8px 28px rgba(34, 211, 238, 0.16);
+  --map-bg: #0b1322;
+  --backdrop: rgba(3, 7, 14, 0.66);
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #f3f5f9;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #eef2f7;
+  --surface-4: #e3e9f1;
+  --line: #dde3ec;
+  --line-strong: #c3cbd9;
+  --ink: #0f1f3d;
+  --ink-2: #33415c;
+  --muted: #5b6b85;
+  --faint: #94a3b8;
+  --accent: #0891b2;
+  --accent-strong: #0e7490;
+  --accent-text: #0e7490;
+  --accent-soft: #e0f6fb;
+  --accent-ink: #ffffff;
+  --accent-2: #1d4ed8;
+  --accent-2-text: #1d4ed8;
+  --accent-2-soft: #e6eeff;
+  --critical: #b42318;
+  --critical-text: #991b1b;
+  --critical-soft: #fef3f2;
+  --high: #c2410c;
+  --high-text: #9a3412;
+  --high-soft: #fff4ed;
+  --medium: #a16207;
+  --medium-text: #854d0e;
+  --medium-soft: #fefce8;
+  --ok: #15803d;
+  --ok-text: #166534;
+  --ok-soft: #ecfdf3;
+  --info: #1d4ed8;
+  --info-text: #1e40af;
+  --info-soft: #eff4ff;
+  --shadow-card: 0 1px 2px rgba(15, 31, 61, 0.06);
+  --shadow-pop: 0 20px 50px rgba(15, 31, 61, 0.18), 0 0 0 1px var(--line);
+  --shadow-glow: 0 0 0 1px rgba(8, 145, 178, 0.3), 0 8px 24px rgba(8, 145, 178, 0.14);
+  --map-bg: #e8eef5;
+  --backdrop: rgba(15, 31, 61, 0.45);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-text: var(--accent-2-text);
+  --color-accent-2-soft: var(--accent-2-soft);
+  --color-critical: var(--critical);
+  --color-critical-text: var(--critical-text);
+  --color-critical-soft: var(--critical-soft);
+  --color-high: var(--high);
+  --color-high-text: var(--high-text);
+  --color-high-soft: var(--high-soft);
+  --color-medium: var(--medium);
+  --color-medium-text: var(--medium-text);
+  --color-medium-soft: var(--medium-soft);
+  --color-ok: var(--ok);
+  --color-ok-text: var(--ok-text);
+  --color-ok-soft: var(--ok-soft);
+  --color-info: var(--info);
+  --color-info-text: var(--info-text);
+  --color-info-soft: var(--info-soft);
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  --shadow-card: var(--shadow-card);
+  --shadow-pop: var(--shadow-pop);
+  --shadow-glow: var(--shadow-glow);
+  --radius-card: 12px;
 }
 
-html { color-scheme: light; }
-body { margin: 0; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-:focus-visible { outline: 2px solid var(--color-navy-700); outline-offset: 2px; border-radius: 4px; }
-::selection { background: var(--color-navy-100); }
+html { scroll-behavior: smooth; }
+html, body { overflow-x: clip; }
+body {
+  margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--font-sans); font-size: 14px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-feature-settings: "cv11", "ss01";
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--accent-soft); color: var(--ink); }
 .tabular { font-variant-numeric: tabular-nums; }
-.scroll-thin { scrollbar-width: thin; scrollbar-color: #c3cbd9 transparent; }
+.scroll-thin { scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 8px; }
+button, [role="button"] { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+/* A faint grid behind the canvas: the operations-room feel, without gradients. */
+.rm-canvas {
+  background-color: var(--canvas);
+  background-image: linear-gradient(to right, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
 }
+html[data-theme="light"] .rm-canvas { background-image: none; }
 
-/* A request travelling along a link in the network view. Only drawn while a call is in flight. */
+/* ---- animations ---------------------------------------------------------------- */
 @keyframes rm-travel { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
 .rm-link-active { stroke-dasharray: 6 6; animation: rm-travel 0.6s linear infinite; }
 @keyframes rm-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 .rm-fade-in { animation: rm-fade-in 0.18s ease-out; }
-
-/* Leaflet inside the dashboard */
-.leaflet-container { font-family: var(--font-sans); background: #e8eef5; border-radius: 10px; }
-.leaflet-popup-content { margin: 10px 12px; font-size: 12.5px; line-height: 1.45; }
-.rm-pin { display: grid; place-items: center; border-radius: 999px; color: #fff; font-weight: 700; font-size: 10px; border: 2px solid #fff; box-shadow: 0 1px 3px rgb(15 31 61 / 0.4); }
-
-/* ---- Agent console: the official runtime's mount, styled as a drawer ---- */
-#agent-console {
-  position: fixed; inset: 0 0 0 auto; width: min(600px, 100vw); z-index: 40;
-  background: #fff; border-left: 1px solid var(--color-line); box-shadow: -12px 0 32px rgb(15 31 61 / 0.12);
-  transform: translateX(104%); visibility: hidden; transition: transform 0.22s ease, visibility 0s linear 0.22s;
-  display: flex; flex-direction: column; overflow-y: auto;
+@keyframes rm-pulse-ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.4); opacity: 0; } }
+.rm-pulse { position: relative; display: inline-block; width: 8px; height: 8px; border-radius: 999px; background: currentColor; }
+.rm-pulse::after { content: ""; position: absolute; inset: 0; border-radius: 999px; background: currentColor; animation: rm-pulse-ring 1.6s ease-out infinite; }
+@keyframes rm-shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+.rm-skeleton {
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-4) 50%, var(--surface-3) 75%);
+  background-size: 200% 100%; animation: rm-shimmer 1.6s linear infinite;
 }
-html[data-console="open"] #agent-console { transform: none; visibility: visible; transition: transform 0.22s ease; }
-html, body { overflow-x: clip; }
-.console-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--color-line); position: sticky; top: 0; background: #fff; z-index: 2; }
+@keyframes rm-spin { to { transform: rotate(360deg); } }
+.rm-route-live { stroke-dasharray: 8 8; animation: rm-travel 0.9s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .rm-pulse::after { display: none; }
+}
+
+/* ---- Leaflet inside the dashboard ---------------------------------------------- */
+.leaflet-container { font-family: var(--font-sans); background: var(--map-bg); border-radius: 10px; }
+/* Dark theme: the standard OpenStreetMap tiles, inverted and desaturated. No API key. */
+.rm-tiles-dark { filter: invert(1) hue-rotate(185deg) saturate(0.55) brightness(0.82) contrast(0.95); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-pop); }
+.leaflet-popup-content { margin: 10px 12px; font-size: 12.5px; line-height: 1.45; }
+.leaflet-popup-content em { color: var(--muted); }
+.leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
+.leaflet-bar { border: 1px solid var(--line-strong) !important; box-shadow: var(--shadow-card) !important; }
+.leaflet-bar a { background: var(--surface) !important; color: var(--ink) !important; border-bottom-color: var(--line) !important; }
+.leaflet-bar a:hover { background: var(--surface-3) !important; }
+.leaflet-control-attribution { background: color-mix(in srgb, var(--surface) 80%, transparent) !important; color: var(--muted) !important; font-size: 10px !important; }
+.leaflet-control-attribution a { color: var(--accent-text) !important; }
+.rm-pin { display: grid; place-items: center; border-radius: 999px; color: #fff; font-weight: 700; font-size: 10px; border: 2px solid var(--surface); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.45); }
+.rm-pin-hot { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 6px color-mix(in srgb, var(--critical) 28%, transparent); }
+
+/* ---- Agent console: the official runtime's mount, styled as a drawer ----------------- */
+#agent-console {
+  position: fixed; inset: 0 0 0 auto; width: min(620px, 100vw); z-index: 60;
+  background: var(--surface-2); border-left: 1px solid var(--line-strong); box-shadow: -16px 0 48px rgba(0, 0, 0, 0.45);
+  transform: translateX(104%); visibility: hidden; transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.26s;
+  display: flex; flex-direction: column; overflow-y: auto; color: var(--ink);
+}
+html[data-console="open"] #agent-console { transform: none; visibility: visible; transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1); }
+.console-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface-2); z-index: 2; }
 .console-head strong { display: block; font-size: 15px; }
-.console-head span { color: var(--color-muted); font-size: 12.5px; }
-.console-head button { font: inherit; font-weight: 600; padding: 6px 12px; border-radius: 7px; border: 1px solid #c3cbd9; background: #fff; color: var(--color-ink-2); cursor: pointer; }
-.console-note { margin: 12px 18px 0; color: var(--color-muted); font-size: 12.5px; }
-#assistant-status { margin: 8px 18px 0; font-size: 12.5px; font-weight: 600; color: var(--color-ink-2); }
+.console-head span { color: var(--muted); font-size: 12.5px; }
+.console-head button { font: inherit; font-weight: 600; font-size: 12.5px; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+.console-head button:hover { background: var(--surface-3); }
+.console-note { margin: 12px 18px 0; color: var(--muted); font-size: 12.5px; }
+#assistant-status { margin: 8px 18px 0; font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
 #agent-app {
   --ns-font: var(--font-sans);
-  --ns-bg: #ffffff;
-  --ns-fg: #0f1f3d;
-  --ns-primary: #12305a;
-  --ns-accent: #12305a;
-  --ns-border: #d9e0ea;
-  --ns-panelbg: #ffffff;
-  --ns-msgbg: #f4f6f9;
-  --ns-muted: #5b6b85;
+  --ns-bg: var(--surface);
+  --ns-fg: var(--ink);
+  --ns-primary: var(--accent);
+  --ns-accent: var(--accent);
+  --ns-border: var(--line-strong);
+  --ns-panelbg: var(--surface);
+  --ns-msgbg: var(--surface-3);
+  --ns-muted: var(--muted);
   padding: 12px 18px 24px; display: grid; gap: 12px;
 }
 #agent-app.ns-composed-app [data-ns-slot="chat"] { height: 520px; }
@@ -84,13 +232,26 @@ html, body { overflow-x: clip; }
 #agent-app input[type="checkbox"], #agent-app input[type="radio"] { width: auto; }
 #agent-app .ns-settings-body label { margin: 4px 0; font-weight: 400; }
 #agent-app .ns-w-choice { color: var(--ns-fg); }
-#agent-app .ns-consent { background: #fffbeb; }
+#agent-app .ns-consent { background: var(--high-soft); color: var(--ink); }
 #agent-app .ns-msgs:has(.ns-consent-actions) > .ns-turn-status { display: none; }
 #agent-app .ns-msg { overflow-wrap: break-word; }
 #agent-app .ns-consent-actions { flex-wrap: wrap; }
 #agent-app .ns-consent-actions button { white-space: nowrap; }
 /* Tailwind's reset removes button and input chrome; give the runtime's controls theirs back. */
 #agent-app button { cursor: pointer; }
-#agent-app input, #agent-app select, #agent-app textarea { border: 1px solid var(--ns-border); border-radius: 6px; padding: 6px 8px; background: #fff; }
-#agent-app a { color: #1d4ed8; text-decoration: underline; }
+#agent-app button.ns-primary, #agent-app #ns-send, #agent-app #ns-apply { color: var(--accent-ink); }
+#agent-app input, #agent-app select, #agent-app textarea { border: 1px solid var(--ns-border); border-radius: 6px; padding: 6px 8px; background: var(--surface-2); color: var(--ink); }
+#agent-app a { color: var(--accent-text); text-decoration: underline; }
 #agent-app summary { cursor: pointer; }
+
+/* ---- printing the report page ---------------------------------------------------- */
+@media print {
+  html { color-scheme: light; }
+  body { background: #fff; color: #111; }
+  .print-hidden, #agent-console { display: none !important; }
+  .print-page { padding: 0 !important; max-width: none !important; }
+  .print-page * { box-shadow: none !important; }
+  .print-page table { page-break-inside: auto; }
+  .print-page tr { page-break-inside: avoid; }
+  .print-page h2 { page-break-after: avoid; }
+}

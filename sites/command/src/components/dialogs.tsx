@@ -1,7 +1,9 @@
 // The dialogs that keep a person in the loop. Each is driven by a request in the UI
 // store and resolves a promise the runtime or the workflow is waiting on.
 import { useEffect, useState } from "react";
-import { ExternalLink, Globe2, ShieldAlert } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ExternalLink, Globe2, Info, ShieldAlert, X, XCircle } from "lucide-react";
+import { AnimatePresence, EASE, motion, useMotionOff } from "./motion";
+import type { ToastItem } from "@/state/ui";
 import { overallFulfilmentPct } from "@/domain/allocation";
 import { logisticsTotals } from "@/domain/logistics";
 import { inr, num, price, RESOURCES } from "@/domain/resources";
@@ -118,7 +120,7 @@ export function PlanPreview({ run, compact = false }: { run: WorkflowRun; compac
           ["Shortage covered", `${overallFulfilmentPct(plan)}%`, `${num(plan.unfulfilled.reduce((sum, line) => sum + line.quantity, 0))} units unfulfilled`],
           ["Longest delivery", `${transport.longestHours || plan.estimatedCompletionHours} h`, transport.late ? `${transport.late} shipment(s) late` : "all assigned shipments on time"],
         ].map(([label, value, hint]) => (
-          <div key={label} className="rounded-lg border border-line bg-slate-50 p-3">
+          <div key={label} className="rounded-lg border border-line bg-surface-2 p-3">
             <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">{label}</div>
             <div className="tabular mt-0.5 text-[18px] font-semibold">{value}</div>
             <div className="text-[12px] text-muted">{hint}</div>
@@ -270,7 +272,7 @@ export function ActionReviewDialog() {
         ) : (
           <p className="text-[13.5px] text-ink-2">An agent proposed the action below. It runs only if you confirm.</p>
         )}
-        <details className="rounded-lg border border-line bg-slate-50 p-3 text-[12.5px]" open={!approval}>
+        <details className="rounded-lg border border-line bg-surface-2 p-3 text-[12.5px]" open={!approval}>
           <summary className="cursor-pointer font-semibold">Technical details</summary>
           {review.items.map((item, index) => (
             <pre key={index} className="mt-2 whitespace-pre-wrap break-words font-mono text-[12px]">{`${item.action} on ${item.origin} (${item.effect})\n${JSON.stringify(item.arguments, null, 2)}`}</pre>
@@ -281,19 +283,38 @@ export function ActionReviewDialog() {
   );
 }
 
-export function Toast() {
-  const toast = useUi((state) => state.toast);
-  const clear = useUi((state) => state.clearToast);
+function ToastCard({ toast }: { toast: ToastItem }) {
+  const dismiss = useUi((state) => state.dismissToast);
+  const off = useMotionOff();
   useEffect(() => {
-    if (!toast) return;
-    const timer = window.setTimeout(clear, toast.tone === "error" ? 9000 : 5000);
+    const timer = window.setTimeout(() => dismiss(toast.id), toast.tone === "error" ? 9000 : toast.tone === "warn" ? 7000 : 5000);
     return () => window.clearTimeout(timer);
-  }, [toast, clear]);
-  if (!toast) return null;
-  const tone = { ok: "border-green-200 bg-ok-soft text-[#05603a]", warn: "border-orange-200 bg-high-soft text-[#7c2d12]", error: "border-red-200 bg-critical-soft text-[#7a271a]" }[toast.tone];
+  }, [toast, dismiss]);
+  const tone = { ok: "border-ok/30 bg-ok-soft text-ok-text", warn: "border-high/30 bg-high-soft text-high-text", error: "border-critical/30 bg-critical-soft text-critical-text", info: "border-info/30 bg-info-soft text-info-text" }[toast.tone];
+  const Icon = { ok: CheckCircle2, warn: AlertTriangle, error: XCircle, info: Info }[toast.tone];
   return (
-    <div role="status" className={`rm-fade-in fixed bottom-5 left-1/2 z-50 max-w-[min(92vw,640px)] -translate-x-1/2 rounded-lg border px-4 py-2.5 text-[13.5px] font-medium shadow-lg ${tone}`}>
-      {toast.text}
+    <motion.div
+      layout={!off}
+      role="status"
+      initial={off ? false : { opacity: 0, y: 12, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={off ? undefined : { opacity: 0, y: 8, scale: 0.98, transition: { duration: 0.14 } }}
+      transition={{ duration: 0.22, ease: EASE }}
+      className={`pointer-events-auto flex max-w-[min(92vw,640px)] items-start gap-2.5 rounded-lg border px-3.5 py-2.5 text-[13.5px] font-medium shadow-pop backdrop-blur ${tone}`}
+    >
+      <Icon size={16} className="mt-0.5 shrink-0" aria-hidden />
+      <span className="min-w-0 flex-1">{toast.text}</span>
+      <button type="button" aria-label="Dismiss notification" onClick={() => dismiss(toast.id)} className="-mr-1 rounded p-0.5 opacity-70 hover:opacity-100"><X size={14} /></button>
+    </motion.div>
+  );
+}
+
+/** Notifications stack at the bottom of the screen; each dismisses itself or on click. */
+export function Toasts() {
+  const toasts = useUi((state) => state.toasts);
+  return (
+    <div className="pointer-events-none fixed inset-x-0 bottom-5 z-[80] flex flex-col items-center gap-2 px-4" aria-live="polite">
+      <AnimatePresence initial={false}>{toasts.map((toast) => <ToastCard key={toast.id} toast={toast} />)}</AnimatePresence>
     </div>
   );
 }
