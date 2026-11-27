@@ -1,8 +1,8 @@
 # REVIEW — ReliefMesh demo film (second cut)
 
 Render: `renders/reliefmesh-demo.mp4`, 1920×1080, 30 fps, 116 s. Built to
-[`video/PRODUCTION.md`](../PRODUCTION.md) from storyline A of `STORYLINES.md`, timed to the
-twelve-line narration in `script/voiceover.json`.
+[`video/PRODUCTION.md`](../PRODUCTION.md): one incident followed from need to receipt,
+timed to the twelve-line narration in `script/voiceover.json`.
 
 ## What changed from the first cut, and why
 
