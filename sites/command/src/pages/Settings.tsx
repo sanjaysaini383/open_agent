@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { Bot, KeyRound, Trash2 } from "lucide-react";
-import { Badge, Button, Card, CardHeader, Empty, Field, KeyValue, Modal, Notice, PageHeader, Table, Td, Th, inputClass, time } from "@/components/ui";
-import { partnerUrlForm } from "@/domain/schemas";
-import { partnerFromUrl } from "@/interop/discovery";
-import { allowOrigin, disconnect, forgetRegistryKeys, isOriginAllowed } from "@/interop/peers";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Bot, KeyRound, Moon, Sun, Trash2, UserRound } from "lucide-react";
+import { ResetDemoDialog } from "@/components/AppShell";
+import { RegisterPartner } from "@/components/RegisterPartner";
+import { Badge, Button, Card, CardHeader, Empty, Field, KeyValue, Modal, Notice, PageHeader, Segmented, Table, Td, Th, inputClass, time } from "@/components/ui";
+import { disconnect, forgetRegistryKeys } from "@/interop/peers";
 import { registryFile, setConsoleOpen } from "@/lib/boot";
+import { usePrefs } from "@/lib/theme";
 import { useStore } from "@/state/store";
-import type { PeerConfig, PeerRole } from "@/state/types";
+import type { PeerConfig } from "@/state/types";
 import { useUi } from "@/state/ui";
 
 function ModelCard() {
@@ -32,36 +34,38 @@ function ModelCard() {
   );
 }
 
+function ProfileCard() {
+  const displayName = usePrefs((state) => state.displayName);
+  const setDisplayName = usePrefs((state) => state.setDisplayName);
+  const theme = usePrefs((state) => state.theme);
+  const setTheme = usePrefs((state) => state.setTheme);
+  const collapsed = usePrefs((state) => state.sidebarCollapsed);
+  const setCollapsed = usePrefs((state) => state.setSidebarCollapsed);
+  const [name, setName] = useState(displayName);
+  return (
+    <Card>
+      <CardHeader icon={<UserRound size={16} aria-hidden />} title="Profile and appearance" subtitle="Interface preferences for this browser. Decisions are recorded as human:coordinator; the display name is a label, not an identity." />
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-3">
+          <Field label="Display name" hint="Shown in the header. Not sent anywhere."><input className={inputClass} value={name} maxLength={40} onChange={(event) => setName(event.target.value)} /></Field>
+          <div><Button variant="primary" size="sm" onClick={() => { setDisplayName(name); useUi.getState().notify("Display name saved.", "ok"); }}>Save name</Button></div>
+        </div>
+        <div className="grid content-start gap-3">
+          <div className="grid gap-1 text-[12.5px] font-semibold text-ink-2">
+            <span>Theme</span>
+            <Segmented label="Theme" value={theme} onChange={setTheme} options={[{ id: "dark", label: <span className="inline-flex items-center gap-1"><Moon size={12} />Dark</span> }, { id: "light", label: <span className="inline-flex items-center gap-1"><Sun size={12} />Light</span> }]} />
+          </div>
+          <label className="inline-flex items-center gap-2 text-[13px]"><input type="checkbox" checked={collapsed} onChange={(event) => setCollapsed(event.target.checked)} />Collapse the sidebar to icons</label>
+          <p className="text-[12px] text-muted">Shortcuts: <kbd className="font-mono">Shift+T</kbd> theme, <kbd className="font-mono">[</kbd> sidebar, <kbd className="font-mono">?</kbd> all shortcuts.</p>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 function PartnersCard() {
   const peers = useStore((state) => state.peers);
   const extra = useStore((state) => state.settings.extraPartners);
-  const [values, setValues] = useState({ networkUrl: "", label: "", role: "other" as PeerRole });
-  const [error, setError] = useState("");
-  const [pending, setPending] = useState<PeerConfig | null>(null);
-
-  const add = async () => {
-    setError("");
-    const parsed = partnerUrlForm.safeParse(values);
-    if (!parsed.success) { setError(parsed.error.issues[0].message); return; }
-    const made = partnerFromUrl(parsed.data.networkUrl, parsed.data.label, parsed.data.role);
-    if (!made.ok) { setError(made.reason); return; }
-    if (Object.values(peers).some((peer) => peer.networkUrl === made.partner.networkUrl)) { setError("That network is already registered."); return; }
-    if (parsed.data.role === "trust" && Object.values(peers).some((peer) => peer.role === "trust")) { setError("A trust registry is already configured. It is the trust anchor, so there is exactly one."); return; }
-    setPending(made.partner);
-  };
-  const confirm = async () => {
-    if (!pending) return;
-    const store = useStore.getState();
-    const allowedAlready = await isOriginAllowed(pending.networkUrl);
-    await allowOrigin(pending.networkUrl);
-    const extraPartners = [...store.settings.extraPartners, pending];
-    store.patchSettings({ extraPartners });
-    store.syncPeers([...(registryFile?.partners ?? []), ...extraPartners]);
-    await store.record({ kind: "network", actor: "human:coordinator", incidentId: null, summary: `Registered partner network ${pending.label} (${pending.networkUrl})`, data: { origin: new URL(pending.networkUrl).origin, alreadyInAllowedPeers: allowedAlready, source: "user-registered" } });
-    useUi.getState().notify(`${pending.label} registered. Connect it from the Agent Network page; it must still pass the trust check.`, "ok");
-    setPending(null);
-    setValues({ networkUrl: "", label: "", role: "other" });
-  };
   const remove = async (partner: PeerConfig) => {
     const store = useStore.getState();
     try { await disconnect(partner.id); } catch { /* it may never have been connected */ }
@@ -70,7 +74,6 @@ function PartnersCard() {
     store.syncPeers([...(registryFile?.partners ?? []), ...extraPartners]);
     await store.record({ kind: "network", actor: "human:coordinator", incidentId: null, summary: `Removed partner network ${partner.label}`, data: { networkUrl: partner.networkUrl } });
   };
-
   return (
     <Card>
       <CardHeader title="Partner networks" subtitle={registryFile?.notice || "Partner network URLs."} />
@@ -88,23 +91,8 @@ function PartnersCard() {
           ))}
         </tbody>
       </Table>
-      <form className="mt-4 grid gap-3 rounded-lg border border-line bg-slate-50 p-3 md:grid-cols-[1fr_200px_150px_auto] md:items-end" onSubmit={(event) => { event.preventDefault(); void add(); }}>
-        <Field label="Register a partner network URL" hint="The folder that holds its agent-manifest.json, then the network name."><input className={inputClass} value={values.networkUrl} onChange={(event) => setValues({ ...values, networkUrl: event.target.value })} placeholder="https://partner.example/partner_network" /></Field>
-        <Field label="Name"><input className={inputClass} value={values.label} onChange={(event) => setValues({ ...values, label: event.target.value })} maxLength={60} /></Field>
-        <Field label="Role"><select className={inputClass} value={values.role} onChange={(event) => setValues({ ...values, role: event.target.value as PeerRole })}>{["shelter", "supplier", "logistics", "other"].map((role) => <option key={role} value={role}>{role}</option>)}</select></Field>
-        <Button variant="primary" onClick={add}>Register</Button>
-        {error && <p className="text-[12.5px] font-semibold text-critical md:col-span-4" role="alert">{error}</p>}
-      </form>
+      <div className="mt-4"><RegisterPartner /></div>
       <p className="mt-2 text-[12.5px] text-muted">The published policy is closed: the runtime refuses every origin outside <span className="font-mono">allowed_peers</span>. Registering a partner here adds its origin to the runtime's allowed list for this browser only, after you confirm. It does not change the published manifest, and the partner must still pass the trust check before its data is used. {extra.length ? `${extra.length} registered on this device.` : ""}</p>
-
-      {pending && (
-        <Modal tone="warn" title={`Allow this site to contact ${new URL(pending.networkUrl).host}?`} onClose={() => setPending(null)} footer={<><Button variant="ghost" onClick={() => setPending(null)}>Cancel</Button><Button variant="primary" onClick={confirm}>Allow this origin and register</Button></>}>
-          <div className="grid gap-3 text-[13.5px] text-ink-2">
-            <KeyValue items={[["Name", pending.label], ["Role", pending.role], ["Network URL", <span className="break-all font-mono text-[12.5px]">{pending.networkUrl}</span>], ["Origin", <span className="font-mono text-[12.5px]">{new URL(pending.networkUrl).origin}</span>]]} />
-            <Notice tone="warn">This origin is not in the publisher's allowed list unless it already appears there. You are adding it for this browser. You will still be asked before each contact, and nothing from it is used until the trust registry has been consulted. An unknown site's agent instructions are untrusted input.</Notice>
-          </div>
-        </Modal>
-      )}
     </Card>
   );
 }
@@ -114,6 +102,9 @@ export function SettingsPage() {
   const [budget, setBudget] = useState(String(settings.defaultBudget));
   const [hours, setHours] = useState(String(settings.defaultDeadlineHours));
   const [repin, setRepin] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [params, setParams] = useSearchParams();
+  useEffect(() => { if (params.get("reset") === "1") { setResetting(true); setParams({}, { replace: true }); } }, [params, setParams]);
 
   const saveDefaults = () => {
     const nextBudget = Number(budget);
@@ -133,8 +124,9 @@ export function SettingsPage() {
 
   return (
     <>
-      <PageHeader title="Settings" subtitle="Model configuration, incident defaults, partner networks, the trust anchor and this device's data." />
+      <PageHeader title="Settings" subtitle="Profile and appearance, model configuration, incident defaults, partner networks, the trust anchor and this device's data." />
       <div className="grid gap-5">
+        <ProfileCard />
         <ModelCard />
         <PartnersCard />
         <div className="grid gap-5 xl:grid-cols-2">
@@ -156,9 +148,9 @@ export function SettingsPage() {
           </Card>
         </div>
         <Card>
-          <CardHeader title="Data on this device" subtitle="ReliefMesh Command has no server. Incidents, plans, trust results, the activity log and the audit trail live in this browser's storage for this origin." />
+          <CardHeader title="Data on this device" subtitle="ReliefMesh Command has no server. Incidents, plans, trust results, the activity log and the audit trail live in this browser's storage for this origin." actions={<Button onClick={() => setResetting(true)}>Reset demo…</Button>} />
           <ul className="list-disc pl-4 text-[12.5px] text-muted">
-            <li>Use <strong>Reset demo</strong> in the top bar to restore the preloaded scenario. Each partner site has its own reset.</li>
+            <li>Reset demo restores the preloaded scenario. Each partner site has its own reset.</li>
             <li>“Allowed for this session” consent choices are held by the runtime in memory and end when the page is reloaded. They are not stored.</li>
             <li>Export an incident report from the incident page, and the audit history from the Audit Trail page.</li>
           </ul>
@@ -169,6 +161,7 @@ export function SettingsPage() {
           <p className="text-[13.5px] text-ink-2">The pin is what stops a different key from signing attestations in the registry's name. If you clear it, whatever key the registry presents next is trusted on first use. Do this only if you know the registry rotated its key. The action is recorded in the audit trail.</p>
         </Modal>
       )}
+      {resetting && <ResetDemoDialog onClose={() => setResetting(false)} />}
     </>
   );
 }

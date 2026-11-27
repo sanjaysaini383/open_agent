@@ -39,7 +39,7 @@ export function AssessmentView({ incidentId }: { incidentId: string }) {
           const total = assessment.totals[resource];
           const covered = total.required ? Math.round((total.inStock / total.required) * 100) : 100;
           return (
-            <div key={resource} className="rounded-lg border border-line bg-white p-3.5">
+            <div key={resource} className="rounded-lg border border-line bg-surface p-3.5">
               <div className="text-[12px] font-semibold text-muted">{RESOURCES[resource].label}</div>
               <div className="tabular mt-1 text-[22px] font-semibold text-critical">{num(total.shortage)} <span className="text-[12.5px] font-medium text-muted">short</span></div>
               <div className="tabular mt-0.5 text-[12.5px] text-muted">{num(total.required)} required · {num(total.inStock)} in stock</div>
@@ -118,7 +118,7 @@ export function TrustRow({ evaluation, extra }: { evaluation: TrustEvaluation; e
         <Td className="text-muted">{[...evaluation.blockers, ...evaluation.warnings][0] || "No concerns."}</Td>
         <Td>{extra}</Td>
       </tr>
-      {open && <tr><Td colSpan={6} className="bg-slate-50"><EvidenceList evaluation={evaluation} /></Td></tr>}
+      {open && <tr><Td colSpan={6} className="bg-surface-2"><EvidenceList evaluation={evaluation} /></Td></tr>}
     </>
   );
 }
@@ -174,7 +174,7 @@ export function OffersView({ incidentId }: { incidentId: string }) {
                 const injected = offer.flags.some((flag) => flag.kind === "instruction_injection");
                 const overridable = offer.trust === "unverified" && !injected;
                 return (
-                  <tr key={offer.offerId} className={offer.eligible ? undefined : "bg-slate-50/70"}>
+                  <tr key={offer.offerId} className={offer.eligible ? undefined : "bg-surface-2/70"}>
                     <Td right>{offer.rank || "—"}</Td>
                     <Td>
                       <span className="font-medium">{offer.supplierName}</span>
@@ -228,14 +228,14 @@ export function NegotiationView({ incidentId }: { incidentId: string }) {
       </div>
       <ol className="grid gap-2">
         {run.negotiation.map((event) => (
-          <li key={event.id} className="rm-fade-in rounded-lg border border-line bg-white p-3">
+          <li key={event.id} className="rm-fade-in rounded-lg border border-line bg-surface p-3">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px]">
               <Badge tone="navy">Round {event.round}</Badge>
               <span className="font-semibold">{event.supplierName}</span>
               <span className="text-muted">{num(event.quantity)} × {RESOURCES[event.resource].label.toLowerCase()}</span>
               <span className="tabular ml-auto flex items-center gap-1.5">
-                <span className="text-muted">list {price(event.listUnitPrice)}</span><ArrowRight size={12} className="text-slate-400" aria-hidden />
-                <span className="text-muted">asked {price(event.targetUnitPrice)}</span><ArrowRight size={12} className="text-slate-400" aria-hidden />
+                <span className="text-muted">list {price(event.listUnitPrice)}</span><ArrowRight size={12} className="text-faint" aria-hidden />
+                <span className="text-muted">asked {price(event.targetUnitPrice)}</span><ArrowRight size={12} className="text-faint" aria-hidden />
                 <strong>{event.quotedUnitPrice !== null ? price(event.quotedUnitPrice) : "no quote"}</strong>
               </span>
               <Badge tone={outcome[event.outcome]}>{event.outcome}{event.saving > 0 ? ` · saves ${inr(event.saving)}` : ""}</Badge>
@@ -266,7 +266,7 @@ export function AllocationView({ incidentId }: { incidentId: string }) {
           ["Unfulfilled", num(plan.unfulfilled.reduce((sum, line) => sum + line.quantity, 0)), "units"],
           ["Estimated completion", `${plan.estimatedCompletionHours} h`, run.lanesSource === "routebridge" ? "transit from RouteBridge" : "transit is ReliefMesh's estimate"],
         ].map(([label, value, hint]) => (
-          <div key={label} className="rounded-lg border border-line bg-white p-3.5">
+          <div key={label} className="rounded-lg border border-line bg-surface p-3.5">
             <div className="text-[11.5px] font-semibold uppercase tracking-wide text-muted">{label}</div>
             <div className="tabular mt-1 text-[21px] font-semibold">{value}</div>
             <div className="text-[12px] text-muted">{hint}</div>
@@ -307,7 +307,7 @@ export function AllocationView({ incidentId }: { incidentId: string }) {
         </Notice>
       )}
       {plan.excludedOffers.length > 0 && (
-        <details className="rounded-lg border border-line bg-white p-3 text-[12.5px]">
+        <details className="rounded-lg border border-line bg-surface p-3 text-[12.5px]">
           <summary className="cursor-pointer font-semibold">{plan.excludedOffers.length} offer(s) were not available to the engine</summary>
           <ul className="mt-2 list-disc pl-4 text-muted">{plan.excludedOffers.map((offer) => <li key={offer.offerId}><span className="font-mono">{offer.offerId}</span> ({offer.supplierName}): {offer.reasons.join(" ")}</li>)}</ul>
         </details>
@@ -324,7 +324,7 @@ function FragmentRow({ children, open, onToggle, reasons }: { children: React.Re
         {children}
         <Td><Button size="sm" variant="ghost" onClick={onToggle} aria-expanded={open}>{open ? <ChevronDown size={13} aria-hidden /> : <ChevronRight size={13} aria-hidden />}Reasons</Button></Td>
       </tr>
-      {open && <tr><Td colSpan={8} className="bg-slate-50"><ul className="list-disc pl-5 text-[12.5px] text-ink-2">{reasons.map((reason, index) => <li key={index}>{reason}</li>)}</ul></Td></tr>}
+      {open && <tr><Td colSpan={8} className="bg-surface-2"><ul className="list-disc pl-5 text-[12.5px] text-ink-2">{reasons.map((reason, index) => <li key={index}>{reason}</li>)}</ul></Td></tr>}
     </>
   );
 }
@@ -379,7 +379,7 @@ function FragmentRowWide({ children, open, onToggle, detail }: { children: React
   return (
     <>
       <tr>{children}<Td><Button size="sm" variant="ghost" onClick={onToggle} aria-expanded={open}>{open ? <ChevronDown size={13} aria-hidden /> : <ChevronRight size={13} aria-hidden />}Details</Button></Td></tr>
-      {open && <tr><Td colSpan={9} className="bg-slate-50">{detail}</Td></tr>}
+      {open && <tr><Td colSpan={9} className="bg-surface-2">{detail}</Td></tr>}
     </>
   );
 }
@@ -425,7 +425,7 @@ export function RisksView({ incidentId }: { incidentId: string }) {
     <div className="grid gap-4">
       <ul className="grid gap-2">
         {run.risks.map((risk) => (
-          <li key={risk.id} className="rounded-lg border border-line bg-white p-3">
+          <li key={risk.id} className="rounded-lg border border-line bg-surface p-3">
             <div className="flex flex-wrap items-center gap-2"><Badge tone={tone[risk.severity]}><span className="capitalize">{risk.severity}</span></Badge><Badge tone="neutral">{risk.category}</Badge><span className="text-[13.5px] font-semibold">{risk.title}</span></div>
             <p className="mt-1 text-[12.5px] text-ink-2">{risk.detail}</p>
             <p className="mt-1 text-[12.5px] text-muted"><span className="font-semibold">Recommended:</span> {risk.recommendation}</p>
@@ -463,7 +463,7 @@ function WriteCard({ title, partner, state, action, disabled, disabledReason, on
   const run = async () => { setBusy(true); try { const outcome = await action() as { ok: boolean; reason?: string }; if (!outcome.ok) useUi.getState().notify(outcome.reason || "Not completed.", "warn"); } finally { setBusy(false); } };
   const badge = { none: <Badge tone="neutral">Not started</Badge>, pending: <Badge tone="info">Waiting in {partner}'s window</Badge>, confirmed: <Badge tone="ok">Confirmed</Badge>, declined: <Badge tone="warn">Declined in {partner}'s window</Badge>, refused: <Badge tone="critical">Refused by {partner}</Badge>, unknown: <Badge tone="critical">Outcome unknown</Badge> }[state.status];
   return (
-    <div className="rounded-lg border border-line bg-white p-4">
+    <div className="rounded-lg border border-line bg-surface p-4">
       <div className="flex flex-wrap items-center justify-between gap-2"><h3 className="text-[14px] font-semibold">{title}</h3>{badge}</div>
       <p className="mt-1 text-[12.5px] text-muted">Written to {partner}. You confirm it in {partner}'s own window; this page only receives the receipt.</p>
       {state.status === "confirmed" && <div className="mt-2"><KeyValue items={[["Receipt", <span className="font-mono">{state.reference}</span>], ["Confirmed", time(state.at)], ...(state.total ? [["Total", inr(state.total)] as [string, React.ReactNode]] : []), ["Partner says", state.summary || "—"]]} /></div>}
@@ -477,7 +477,7 @@ function WriteCard({ title, partner, state, action, disabled, disabledReason, on
   );
 }
 
-export function ExecutionView({ incidentId }: { incidentId: string }) {
+export function ExecutionView({ incidentId, showTracking = true }: { incidentId: string; showTracking?: boolean }) {
   const run = useRunOf(incidentId);
   const peers = useStore((state) => state.peers);
   const [approving, setApproving] = useState(false);
@@ -505,7 +505,7 @@ export function ExecutionView({ incidentId }: { incidentId: string }) {
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {run.plan && !approved && <Button variant="primary" onClick={() => setApproving(true)}>Review and approve or reject</Button>}
           {run.approval.note && <span className="text-[12.5px] text-muted">Note: {run.approval.note}</span>}
-          {run.approval.digest && <span className="font-mono text-[11.5px] text-slate-400" title="SHA-256 of the exact plan that was reviewed. Execution re-checks it.">approved digest {run.approval.digest.slice(0, 16)}…</span>}
+          {run.approval.digest && <span className="font-mono text-[11.5px] text-faint" title="SHA-256 of the exact plan that was reviewed. Execution re-checks it.">approved digest {run.approval.digest.slice(0, 16)}…</span>}
         </div>
       </Card>
 
@@ -524,7 +524,7 @@ export function ExecutionView({ incidentId }: { incidentId: string }) {
             <Button size="sm" variant="primary" busy={busy === "deliver"} disabled={!undelivered} onClick={() => act("deliver", () => recordDeliveries(incidentId))}><PackageCheck size={13} aria-hidden />Record {undelivered || ""} delivery receipt{undelivered === 1 ? "" : "s"} at {label("shelter")}</Button>
           </>}
         />
-        {run.shipments.length ? (
+        {!showTracking ? <p className="text-[12.5px] text-muted">{run.shipments.length ? `${run.shipments.length} booked shipment(s): see the shipment control table above.` : `Shipments appear once the booking is confirmed in ${label("logistics")}'s window.`}</p> : run.shipments.length ? (
           <>
             <div className="mb-3 flex flex-wrap gap-2 text-[12.5px]">
               {(["planned", "dispatched", "in_transit", "delayed", "delivered", "cancelled", "failed"] as ShipmentStatus[]).map((status) => <Badge key={status} tone={status === "delivered" ? "ok" : status === "delayed" || status === "failed" ? "critical" : counts[status] ? "info" : "neutral"}>{STATUS_LABEL[status]}: {counts[status]}</Badge>)}

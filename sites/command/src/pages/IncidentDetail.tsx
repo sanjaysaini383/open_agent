@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Download, Pencil } from "lucide-react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Download, Pencil, Printer } from "lucide-react";
 import { ActivityPanel } from "@/components/ActivityPanel";
 import { IncidentFormDialog } from "@/components/IncidentForm";
 import { IncidentMap } from "@/components/IncidentMap";
 import { InteractionLog, NetworkGraph } from "@/components/NetworkGraph";
-import { WorkflowPanel } from "@/components/Workflow";
+import { runCoordination, WorkflowPanel } from "@/components/Workflow";
 import { PartnerExplorer } from "@/components/PartnerExplorer";
 import { AllocationView, AssessmentView, ExecutionView, FleetView, LogisticsView, NegotiationView, OffersView, RisksView, TrustRow } from "@/components/views";
-import { Badge, Button, Card, CardHeader, Empty, KeyValue, Notice, PageHeader, SeverityBadge, SimBadge, Table, Tabs, Th, time } from "@/components/ui";
+import { Badge, Breadcrumbs, Button, Card, CardHeader, Empty, KeyValue, Notice, PageHeader, SeverityBadge, SimBadge, Table, Tabs, Th, time } from "@/components/ui";
 import { inr, num, RESOURCE_IDS, RESOURCES } from "@/domain/resources";
 import { exportIncidentReport } from "@/lib/export";
+import { AUTOMATED_STEPS } from "@/state/seed";
 import { useStore } from "@/state/store";
 import type { StepId } from "@/state/types";
+import { useUi } from "@/state/ui";
 
 type TabId = "assess" | "discover" | "trust" | "offers" | "negotiate" | "allocate" | "logistics" | "execute" | "risks" | "activity";
 
@@ -45,6 +47,7 @@ function TrustTab() {
 
 export function IncidentDetailPage() {
   const { incidentId = "" } = useParams();
+  const [params, setParams] = useSearchParams();
   const incident = useStore((state) => state.incidents.find((item) => item.id === incidentId));
   const run = useStore((state) => state.runs[incidentId]);
   const [tab, setTab] = useState<TabId>("assess");
@@ -54,6 +57,14 @@ export function IncidentDetailPage() {
   // Follow the workflow: show the results of whichever step is running or just finished.
   const running = run ? (Object.entries(run.steps).find(([, state]) => state.status === "running")?.[0] as StepId | undefined) : undefined;
   useEffect(() => { if (running) setTab(STEP_TAB[running]); }, [running]);
+  // The command palette can ask for the workflow to start or continue.
+  useEffect(() => {
+    if (params.get("run") === "1" && incident && run && !useUi.getState().busyIncident) {
+      setParams({}, { replace: true });
+      const next = AUTOMATED_STEPS.find((step) => !["done", "warning"].includes(run.steps[step].status));
+      if (next && incident.status !== "closed") void runCoordination(incident.id, next);
+    }
+  }, [params, incident, run, setParams]);
 
   if (!incident || !run) {
     return <Empty title="Incident not found" action={<Link to="/incidents" className="underline">Back to incidents</Link>}>No incident has the id “{incidentId}”.</Empty>;
@@ -66,7 +77,7 @@ export function IncidentDetailPage() {
 
   return (
     <>
-      <Link to="/incidents" className="mb-2 inline-flex items-center gap-1 text-[12.5px] font-semibold text-muted hover:text-ink"><ArrowLeft size={13} aria-hidden />All incidents</Link>
+      <Breadcrumbs items={[{ label: "Command Center", to: "/" }, { label: "Incidents", to: "/incidents" }, { label: incident.id }]} />
       <PageHeader
         title={incident.name}
         subtitle={<span className="flex flex-wrap items-center gap-2"><span className="font-mono text-[12.5px]">{incident.id}</span><SeverityBadge severity={incident.severity} /><Badge tone={incident.status === "active" ? "ok" : "neutral"}><span className="capitalize">{incident.status}</span></Badge><SimBadge /><span>{incident.location.name}</span></span>}
@@ -74,6 +85,7 @@ export function IncidentDetailPage() {
           <Button onClick={() => setEditing(true)} disabled={incident.status === "closed"}><Pencil size={13} aria-hidden />Edit</Button>
           <Button onClick={() => report("md")}><Download size={13} aria-hidden />Export report</Button>
           <Button variant="ghost" onClick={() => report("json")}>JSON</Button>
+          <Link to={`/report/${incident.id}`} className="inline-flex items-center gap-1.5 rounded-md border border-line-strong bg-surface-3 px-3.5 py-2 text-[13.5px] font-semibold text-ink hover:bg-surface-4"><Printer size={13} aria-hidden />Report / PDF</Link>
         </>}
       />
       {incident.status === "closed" && <div className="mb-4"><Notice tone="warn">This incident is closed. Reopen it on the Incidents page to run workflow steps.</Notice></div>}
@@ -100,8 +112,8 @@ export function IncidentDetailPage() {
 
         <div className="grid min-w-0 content-start gap-5">
           <Card>
-            <CardHeader title="Live agent network" subtitle="Requests between this site and each independent partner site, as they happen." />
-            <NetworkGraph />
+            <CardHeader title="Live agent network" subtitle="Requests between this site and each independent partner site, as they happen. Click a node for details." />
+            <NetworkGraph compact />
             <details className="mt-3 text-[12.5px]"><summary className="cursor-pointer font-semibold text-ink-2">Recent cross-origin interactions</summary><div className="mt-2"><InteractionLog limit={10} /></div></details>
           </Card>
 

@@ -35,7 +35,7 @@ export function ResourceRequestsPage() {
         title="Resource Requests"
         subtitle="What each shelter needs, what it has, and what the plan allocates. Shelters publish their own requests on ShelterConnect; this site reads them, with your consent, and never edits them."
         actions={<>
-          {shelter && <a href={shelter.siteUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-[#c3cbd9] bg-white px-3.5 py-2 text-[13.5px] font-semibold text-ink-2 hover:bg-slate-50"><ExternalLink size={14} aria-hidden />Publish a request on {shelter.label}</a>}
+          {shelter && <a href={shelter.siteUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-line-strong bg-surface px-3.5 py-2 text-[13.5px] font-semibold text-ink-2 hover:bg-surface-2"><ExternalLink size={14} aria-hidden />Publish a request on {shelter.label}</a>}
           <Button variant="primary" disabled={!incident || !!busy || incident.status === "closed"} busy={!!incident && busy === incident.id} onClick={refresh}>Read requests again</Button>
         </>}
       />

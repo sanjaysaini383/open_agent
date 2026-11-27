@@ -1,10 +1,41 @@
-import { ExternalLink, KeyRound } from "lucide-react";
-import { ReportButton, TrustRow } from "@/components/views";
-import { Badge, Button, Card, CardHeader, Empty, KeyValue, Notice, PageHeader, Stat, Table, Td, Th, time } from "@/components/ui";
+// Trust and security center: verified, caution, unverified and blocked subjects, expired
+// credentials, suspicious activity, trust profiles with their evidence, and the
+// verification history. Every result here was produced by a real check against
+// TrustRegistry; nothing is fabricated when a check has not run.
+import { useMemo, useState } from "react";
+import { ExternalLink, KeyRound, ShieldAlert, ShieldCheck } from "lucide-react";
+import { EvidenceList, ReportButton } from "@/components/views";
+import { Badge, Button, Card, CardHeader, Drawer, Empty, KeyValue, Notice, PageHeader, Segmented, Stat, Table, Td, Th, TrustBadge, cx, time } from "@/components/ui";
 import { NETWORK_WEIGHTS, ORGANIZATION_WEIGHTS, THRESHOLDS } from "@/domain/trust";
+import type { TrustEvaluation } from "@/domain/types";
 import { useActiveIncident, useStore } from "@/state/store";
 import { useUi } from "@/state/ui";
 import { runStep } from "@/workflow/steps";
+
+type Filter = "all" | "verified" | "caution" | "unverified" | "blocked";
+
+function Profile({ evaluation, onClose }: { evaluation: TrustEvaluation | null; onClose: () => void }) {
+  const audit = useStore((state) => state.audit);
+  const peers = useStore((state) => state.peers);
+  const history = useMemo(() => (evaluation ? audit.filter((entry) => (entry.kind === "trust" || entry.kind === "security") && (entry.summary.includes(evaluation.name) || entry.summary.includes(evaluation.subjectId))).slice(-12).reverse() : []), [audit, evaluation]);
+  const peer = evaluation ? Object.values(peers).find((item) => item.trust?.subjectId === evaluation.subjectId) : undefined;
+  return (
+    <Drawer open={!!evaluation} onClose={onClose} title={evaluation ? <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-accent-text" aria-hidden />{evaluation.name}</span> : ""} subtitle={evaluation ? <span className="font-mono text-[11.5px]">{evaluation.subjectId}</span> : undefined} width={560}>
+      {evaluation && (
+        <div className="grid gap-5">
+          <div className="flex flex-wrap items-center gap-2"><TrustBadge decision={evaluation.decision} score={evaluation.score} />{evaluation.signatureVerified ? <Badge tone="ok">Signature verified (ECDSA P-256)</Badge> : <Badge tone="neutral">No verified signature</Badge>}<Badge>{evaluation.subjectType === "agent_network" ? "Partner network" : "Organisation"}</Badge>{peer?.overridden && <Badge tone="warn">Allowed by a person</Badge>}</div>
+          <KeyValue items={[["Checked", time(evaluation.evaluatedAt)], ["Registry", <span className="break-all font-mono text-[12px]">{evaluation.registry}</span>], ...(peer ? [["Network URL", <span className="break-all font-mono text-[12px]">{peer.networkUrl}</span>] as [string, React.ReactNode]] : [])]} />
+          <section><h3 className="mb-1.5 text-[11.5px] font-semibold uppercase tracking-wide text-muted">Evidence</h3><EvidenceList evaluation={evaluation} /></section>
+          <section>
+            <h3 className="mb-1.5 text-[11.5px] font-semibold uppercase tracking-wide text-muted">Verification history</h3>
+            {history.length ? <ol className="grid gap-1 text-[12.5px]">{history.map((entry) => <li key={entry.seq} className="rounded-md border border-line bg-surface-2 px-2.5 py-1.5"><span className="text-faint">{time(entry.at)}</span> · <span className="font-mono text-[11.5px]">{entry.actor}</span> · {entry.summary}</li>)}</ol> : <p className="text-[12.5px] text-muted">No audit entries mention this subject yet.</p>}
+          </section>
+          {(evaluation.decision === "unverified" || evaluation.decision === "blocked") && <div><ReportButton subjectId={evaluation.subjectId} name={evaluation.name} reason={evaluation.decision === "unverified" ? "identity_mismatch" : "other"} details={[...evaluation.blockers, ...evaluation.warnings].join(" ") || "Flagged during a ReliefMesh trust check."} /></div>}
+        </div>
+      )}
+    </Drawer>
+  );
+}
 
 export function TrustPage() {
   const incident = useActiveIncident();
@@ -12,12 +43,21 @@ export function TrustPage() {
   const orgTrust = useStore((state) => state.orgTrust);
   const settings = useStore((state) => state.settings);
   const consentLog = useStore((state) => state.consentLog);
+  const audit = useStore((state) => state.audit);
+  const runs = useStore((state) => state.runs);
   const busy = useUi((state) => state.busyIncident);
+  const [filter, setFilter] = useState<Filter>("all");
+  const [profile, setProfile] = useState<TrustEvaluation | null>(null);
   const registry = Object.values(peers).find((peer) => peer.role === "trust");
   const networks = Object.values(peers).filter((peer) => peer.role !== "trust");
   const evaluations = [...networks.map((peer) => peer.trust).filter((item): item is NonNullable<typeof item> => !!item), ...Object.values(orgTrust)];
   const count = (decision: string) => evaluations.filter((item) => item.decision === decision).length;
   const signed = evaluations.filter((item) => item.signatureVerified).length;
+  const expired = evaluations.filter((item) => item.evidence.some((evidence) => /expired/i.test(evidence.detail) && evidence.status !== "pass") || item.warnings.some((warning) => /expired/i.test(warning)));
+  const security = useMemo(() => audit.filter((entry) => entry.kind === "security").slice(-15).reverse(), [audit]);
+  const hostile = useMemo(() => Object.values(runs).flatMap((run) => run.offers.filter((offer) => offer.flags.some((flag) => flag.severity === "critical")).map((offer) => ({ run, offer }))), [runs]);
+  const history = useMemo(() => audit.filter((entry) => entry.kind === "trust").slice(-40).reverse(), [audit]);
+  const shown = evaluations.filter((item) => filter === "all" || item.decision === filter);
 
   const verify = async () => {
     if (!incident || useUi.getState().busyIncident) return;
@@ -28,20 +68,23 @@ export function TrustPage() {
   return (
     <>
       <PageHeader
+        eyebrow="Trust and security center"
         title="Trust & Verification"
         subtitle="Before a partner's data or an organisation's offer is used, its identity record is checked with TrustRegistry and the signature on its attestation is verified in this browser. An unverified party is never treated as trusted."
         actions={<>
-          {registry && <a href={registry.siteUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-[#c3cbd9] bg-white px-3.5 py-2 text-[13.5px] font-semibold text-ink-2 hover:bg-slate-50"><ExternalLink size={14} aria-hidden />Open {registry.label}</a>}
+          {registry && <a href={registry.siteUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-line-strong bg-surface-3 px-3.5 py-2 text-[13.5px] font-semibold text-ink hover:bg-surface-4"><ExternalLink size={14} aria-hidden />Open {registry.label}</a>}
           <Button variant="primary" busy={!!incident && busy === incident.id} disabled={!incident || !!busy} onClick={verify}>Verify agent information</Button>
         </>}
       />
       <div className="grid gap-5">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
-          <Stat label="Verified" value={count("verified")} tone="ok" />
-          <Stat label="Caution" value={count("caution")} tone={count("caution") ? "warn" : "neutral"} hint="usable, with warnings" />
-          <Stat label="Unverified" value={count("unverified")} hint="excluded unless a person allows" />
-          <Stat label="Blocked" value={count("blocked")} tone={count("blocked") ? "critical" : "neutral"} hint="never usable" />
-          <Stat label="Signatures verified" value={signed} tone="info" hint="ECDSA P-256 in this browser" />
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-7">
+          <Stat label="Verified" number={count("verified")} tone="ok" />
+          <Stat label="Caution" number={count("caution")} tone={count("caution") ? "warn" : "neutral"} hint="usable, with warnings" />
+          <Stat label="Unverified" number={count("unverified")} hint="excluded unless a person allows" />
+          <Stat label="Blocked" number={count("blocked")} tone={count("blocked") ? "critical" : "neutral"} hint="never usable" />
+          <Stat label="Expired credentials" number={expired.length} tone={expired.length ? "warn" : "neutral"} hint="from the evidence" />
+          <Stat label="Suspicious activity" number={security.length + hostile.length} tone={security.length + hostile.length ? "critical" : "neutral"} hint="security entries and hostile offers" />
+          <Stat label="Signatures verified" number={signed} tone="info" hint="ECDSA P-256 in this browser" />
         </div>
 
         <Notice tone="info" title="What is real and what is simulated here">
@@ -61,26 +104,44 @@ export function TrustPage() {
         </Card>
 
         <Card>
-          <CardHeader title="Partner networks" subtitle="Identity record, signed attestation, integrity of the published network definition, advertised capabilities, freshness and open reports." />
-          {networks.some((peer) => peer.trust) ? (
-            <Table label="Partner network trust">
-              <thead><tr><Th>Network</Th><Th>Decision</Th><Th right>Score</Th><Th>Signature</Th><Th>Main finding</Th><Th /></tr></thead>
-              <tbody>{networks.filter((peer) => peer.trust).map((peer) => <TrustRow key={peer.id} evaluation={peer.trust!} extra={peer.overridden ? <Badge tone="warn">Allowed by a person</Badge> : undefined} />)}</tbody>
+          <CardHeader title="Trust profiles" subtitle="Partner networks and organisations, with their decision, score, signature and main finding. Open a row for the full evidence and its verification history." actions={<Segmented label="Filter by decision" size="xs" value={filter} onChange={setFilter} options={[{ id: "all", label: `All (${evaluations.length})` }, { id: "verified", label: "Verified" }, { id: "caution", label: "Caution" }, { id: "unverified", label: "Unverified" }, { id: "blocked", label: "Blocked" }]} />} />
+          {shown.length ? (
+            <Table label="Trust profiles">
+              <thead><tr><Th>Subject</Th><Th>Type</Th><Th>Decision</Th><Th right>Score</Th><Th>Signature</Th><Th>Main finding</Th><Th>Checked</Th><Th /></tr></thead>
+              <tbody>{shown.map((evaluation) => {
+                const peer = networks.find((item) => item.trust?.subjectId === evaluation.subjectId);
+                return (
+                  <tr key={evaluation.subjectId} className={cx(evaluation.decision === "blocked" && "bg-critical-soft/40")}>
+                    <Td><button type="button" className="text-left font-medium hover:text-accent-text" onClick={() => setProfile(evaluation)}>{evaluation.name}</button><div className="font-mono text-[11.5px] text-muted">{evaluation.subjectId}</div></Td>
+                    <Td>{evaluation.subjectType === "agent_network" ? "Partner network" : "Organisation"}</Td>
+                    <Td><TrustBadge decision={evaluation.decision} />{peer?.overridden && <div className="mt-1"><Badge tone="warn">Allowed by a person</Badge></div>}</Td>
+                    <Td right>{evaluation.score}</Td>
+                    <Td>{evaluation.signatureVerified ? <Badge tone="ok">Verified</Badge> : <Badge tone="neutral">None</Badge>}</Td>
+                    <Td className="text-muted">{[...evaluation.blockers, ...evaluation.warnings][0] || "No concerns."}</Td>
+                    <Td className="whitespace-nowrap text-muted">{time(evaluation.evaluatedAt)}</Td>
+                    <Td><Button size="sm" variant="ghost" onClick={() => setProfile(evaluation)}>Profile</Button></Td>
+                  </tr>
+                );
+              })}</tbody>
             </Table>
-          ) : <Empty title="No partner network verified yet">Run “Verify agent information”, or the workflow's step 4.</Empty>}
+          ) : <Empty title={evaluations.length ? "No subject matches the filter" : "Nothing verified yet"}>{evaluations.length ? "Choose another decision." : "Run “Verify agent information”, or the workflow's step 4. Results appear only after a real check."}</Empty>}
         </Card>
 
-        <Card>
-          <CardHeader title="Organisations" subtitle="Suppliers and transport operators: identity record, signed attestation, credentials, reputation history and open reports." />
-          {Object.keys(orgTrust).length ? (
-            <Table label="Organisation trust">
-              <thead><tr><Th>Organisation</Th><Th>Decision</Th><Th right>Score</Th><Th>Signature</Th><Th>Main finding</Th><Th /></tr></thead>
-              <tbody>{Object.values(orgTrust).map((evaluation) => (
-                <TrustRow key={evaluation.subjectId} evaluation={evaluation} extra={evaluation.decision === "unverified" || evaluation.decision === "blocked" ? <ReportButton subjectId={evaluation.subjectId} name={evaluation.name} reason={evaluation.decision === "unverified" ? "identity_mismatch" : "other"} details={[...evaluation.blockers, ...evaluation.warnings].join(" ") || "Flagged during a ReliefMesh trust check."} /> : undefined} />
-              ))}</tbody>
-            </Table>
-          ) : <Empty title="No organisation verified yet">Organisations are read from the supplier and logistics sites, then checked one by one.</Empty>}
-        </Card>
+        <div className="grid gap-5 xl:grid-cols-2">
+          <Card tone={security.length + hostile.length ? "critical" : undefined}>
+            <CardHeader icon={<ShieldAlert size={16} aria-hidden />} title="Suspicious activity" subtitle="Instruction-like text in partner responses, malformed responses, hostile offers and key changes, from the audit trail and the offer scan." />
+            {security.length || hostile.length ? (
+              <ul className="grid gap-1.5 text-[12.5px]">
+                {hostile.map(({ run, offer }) => <li key={`${run.incidentId}-${offer.offerId}`} className="rounded-md border border-critical/30 bg-critical-soft px-2.5 py-1.5"><span className="font-semibold">{offer.supplierName}</span> ({offer.offerId}, {run.incidentId}): {offer.flags.filter((flag) => flag.severity === "critical").map((flag) => flag.detail).join(" ")} <span className="text-muted">Excluded; not acted on.</span></li>)}
+                {security.map((entry) => <li key={entry.seq} className="rounded-md border border-line bg-surface-2 px-2.5 py-1.5"><span className="text-faint">{time(entry.at)}</span> · <span className="font-mono text-[11.5px]">{entry.actor}</span> · {entry.summary}</li>)}
+              </ul>
+            ) : <Empty title="Nothing suspicious recorded">Security findings appear here when a partner's response contains instruction-like text or fails its schema, or when the registry key changes.</Empty>}
+          </Card>
+          <Card>
+            <CardHeader title="Verification history" subtitle="Every trust check recorded in the audit trail, newest first." />
+            {history.length ? <ol className="scroll-thin grid max-h-80 gap-1 overflow-y-auto text-[12.5px]">{history.map((entry) => <li key={entry.seq} className="rounded-md border border-line bg-surface-2 px-2.5 py-1.5"><span className="text-faint">{time(entry.at)}</span> · <span className="font-mono text-[11.5px]">{entry.actor}</span> · {entry.summary}</li>)}</ol> : <Empty title="No checks yet" />}
+          </Card>
+        </div>
 
         <div className="grid gap-5 xl:grid-cols-2">
           <Card>
@@ -108,6 +169,7 @@ export function TrustPage() {
           </Card>
         </div>
       </div>
+      <Profile evaluation={profile} onClose={() => setProfile(null)} />
     </>
   );
 }
