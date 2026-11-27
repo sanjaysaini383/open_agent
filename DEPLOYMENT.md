@@ -154,7 +154,8 @@ Not enabled by default. A starting point, to test before use:
 Content-Security-Policy:
   default-src 'self';
   script-src 'self' blob:;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
   img-src 'self' data: https://*.tile.openstreetmap.org;
   connect-src 'self' https:;
   frame-src https://<shelterconnect> https://<aidsupply> https://<trustregistry> https://<routebridge>;

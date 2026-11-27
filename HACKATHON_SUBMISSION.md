@@ -117,14 +117,24 @@ from real runs, not written by hand.
 | Official `build_network.mjs --check` | 5 of 5 sites, 0 errors, 0 warnings |
 | Official `check_partner.mjs` | 12 of 12 call paths |
 | Runtime integrity | 6 of 6 copies byte-identical to the official runtime |
-| Automated tests | 263: 82 unit, 100 site, 21 inspector, 36 integration, 24 browser |
+| Automated tests | 267: 82 unit, 100 site, 21 inspector, 36 integration, 28 browser |
 | Browser tests | Five real origins in Chrome, nothing mocked |
 
 ## Built with
 
 Official agentic-web browser runtime and scripts · React 18 · TypeScript · Vite · Tailwind
-CSS · Zustand · Zod · Leaflet · Recharts · Vitest · Playwright · WebCrypto · plain ES modules
-for the partner sites.
+CSS · Framer Motion · Zustand · Zod · Leaflet · Recharts · Vitest · Playwright · WebCrypto ·
+plain ES modules for the partner sites.
+
+## The interface
+
+A dark command-centre (light theme available): collapsible sidebar, command palette
+(Ctrl+K), keyboard shortcuts, an alert centre derived from state, animated metric cards, a
+live map, and a live agent network whose nodes open each agent's identity, task, history and
+actions. Dedicated pages for a scenario simulator (five disasters; start, pause, resume,
+reset on the real workflow), an allocation editor on the deterministic engine, a supplier
+marketplace with comparison, a logistics control center, a trust and security center,
+analytics with time windows, an approval center, and a printable incident report.
 
 ## Screenshots
 
@@ -145,6 +155,13 @@ In [`docs/screenshots/`](docs/screenshots), produced by `npm run screenshots` fr
 - [x] `13-audit-trail.png` — the hash-chained audit log
 - [x] `14-command-center-after.png` — the dashboard after the response
 - [x] `15-interoperability-inspector.png` — the Inspector's report on a live site
+- [x] `16-agent-panel.png` — an agent's identity, capabilities, task, actions and history
+- [x] `17-approval-center.png` — the plan waiting for a person: what, who asked, why, consequences
+- [x] `18-allocation-editor.png` — the interactive editor on the deterministic engine
+- [x] `19-command-palette.png` — Ctrl+K: pages, incidents, agents, approvals, scenarios, actions
+- [x] `20-alert-centre.png` — alerts derived from state
+- [x] `21-scenario-simulator.png` — five predefined disasters
+- [x] `22-command-center-light.png` — the light theme
 
 ## Demo script (under two minutes)
 

@@ -176,6 +176,29 @@ definition, capabilities, credentials, reputation, open reports.
 
 The registry's **authority and credentials are simulated**. The **signatures are real**.
 
+## The dashboard interface
+
+Command's interface is a dark command-centre by default, with a light theme, built on
+semantic design tokens (`src/index.css`: CSS variables on `:root` and
+`html[data-theme="light"]`, exposed to Tailwind through `@theme inline`). Every component
+is written once against those tokens. Motion uses Framer Motion and is short, eased and
+optional: `prefers-reduced-motion` turns it off.
+
+| Piece | Where | What it reads |
+| --- | --- | --- |
+| Shell: sidebar, header (incident selector, partner and agent status, model chip, alerts, theme, profile), command palette, keyboard shortcuts | `components/AppShell.tsx`, `CommandPalette.tsx`, `lib/shortcuts.ts`, `lib/nav.ts` | the store, `lib/theme.ts` (interface preferences, kept apart from demo data) |
+| Alert centre | `lib/alerts.ts`, `components/AlertCenter.tsx` | derived from state at render time: unfulfilled demand, late or stuck shipments, unverified or blocked partners, failed requests, unknown write outcomes, pending approvals |
+| Live agent network | `components/NetworkGraph.tsx` | the activity and interaction logs; a link exists only after a real request and carries particles only while one is in flight |
+| Agent details panel | `components/AgentPanel.tsx` | the published network definitions (identity, capabilities, calls) and the activity log (task, status, history) |
+| Live activity feed | `components/ActivityFeed.tsx` | activity, interactions, consent log and inbox, merged in time order |
+| Scenario simulator | `pages/Simulator.tsx`, `workflow/scenarios.ts`, `workflow/simulation.ts` | creates a real incident and runs the real workflow; pause stops before the next step |
+| Allocation editor | `pages/Allocation.tsx`, `workflow/editing.ts` | the engine's input rebuilt from the run; an edited plan passes `validateAllocation()` or is not stored |
+| Approval Center | `pages/Approvals.tsx` | every item waiting for a person, with what, who asked, why and the consequences |
+| Report | `pages/Report.tsx`, `lib/export.ts` | a print-styled page (the browser's "Save as PDF"), Markdown, JSON, CSV |
+
+No metric, alert or feed entry is scripted. If the state holds no problem, the alert
+centre is empty; if nothing has run, the feed is empty.
+
 ## State and static hosting
 
 Every site keeps its state in its own origin's `localStorage`. A shared read runs in a frame
@@ -204,7 +227,9 @@ deployment puts each site's state on that site's own server.
 | Workflow runs tools directly | A judge can run everything without a key; numbers are reproducible. |
 | Approval binds a digest of the plan | Execution refuses if the plan changed after it was reviewed. |
 | One `openPeer()` for consent, policy and trust | A step cannot skip a gate by forgetting to call it. |
-| Zustand for state, no component library | Small, explicit. shadcn/ui and Framer Motion were not needed; CSS transitions cover the motion. |
+| Zustand for state, no component library | Small, explicit. The UI kit is `components/ui.tsx`; Framer Motion is the one animation dependency, and reduced motion is respected. |
+| Interface preferences in their own store | Theme, sidebar and display name survive Reset demo and never mix with demonstration data. |
+| PDF is the browser's print of a report view | No PDF library; the report page is print-styled and says so. |
 | `.gitattributes` forces LF | Attested digests and runtime identity depend on exact bytes. |
 
 ## Directory structure
@@ -220,8 +245,10 @@ sites/command/
     domain/                   pure logic + unit tests
     interop/                  runtime.ts, peers.ts, discovery.ts
     workflow/                 context.ts, steps.ts, execution.ts, page.ts
-    state/                    store, seed, types
-    components/, pages/       the dashboard
+    workflow/                 also scenarios.ts, simulation.ts, editing.ts
+    state/                    store, seed, types, ui (volatile)
+    lib/                      theme, nav, shortcuts, alerts, export, ownNetwork, boot
+    components/, pages/       the dashboard (design system in components/ui.tsx)
 sites/<partner>/
   index.html, styles.css, js/ the site
   <network>.hocon, agent-manifest.json, site-actions.js, site.js

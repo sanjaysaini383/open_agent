@@ -82,6 +82,19 @@ runtime's AI model settings.
 The UI marks simulated data with a badge and real cross-origin calls with another. No
 hardcoded response is ever presented as a live one.
 
+## The command-centre interface
+
+A dark operations interface (light theme available) with a collapsible sidebar, a command
+palette (**Ctrl+K**), keyboard shortcuts (**?**), an alert centre, animated metric cards,
+a live map and a live agent network whose nodes open an agent's identity, task, history and
+actions. Beyond the ten-step workflow it has a **Scenario Simulator** (flood, earthquake,
+cyclone, urban fire, industrial accident; start, pause, resume, reset), an **Allocation**
+editor on the same deterministic engine, a supplier marketplace with search, filters,
+sorting and side-by-side comparison, a logistics control center, a trust and security
+center, analytics with time windows, an **Approval Center** and a printable incident
+report (PDF via the browser, Markdown, JSON, CSV). Every number, alert and feed entry is
+read from the store; nothing is scripted. Motion respects `prefers-reduced-motion`.
+
 ## Two ways the agents run
 
 Both use the same published network, the same site actions and the same runtime engine.
@@ -104,12 +117,12 @@ npm run networks:check        # official build_network.mjs --check, all five sit
 npm run runtime:check         # every runtime/ copy is byte-identical to the official one
 npm run check:partners        # official check_partner.mjs on all 12 call paths (sites served)
 npm test                      # unit, site, inspector and integration tests
-npm run test:e2e              # 24 browser tests across five real origins
+npm run test:e2e              # 28 browser tests across five real origins
 npm run inspect -- http://localhost:8082/aidsupply
 ```
 
-Latest full run: **54 checks passed, 0 failed, 0 not run** — see [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md).
-263 automated tests: 82 unit, 100 site, 21 inspector, 36 integration, 24 browser.
+Latest full run: **58 checks passed, 0 failed, 0 not run** — see [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md).
+267 automated tests: 82 unit, 100 site, 21 inspector, 36 integration, 28 browser.
 
 ## Documentation
 

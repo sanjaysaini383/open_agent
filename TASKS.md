@@ -93,6 +93,35 @@ Verification for each area is in [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md).
 - [ ] Record a demo video (needs a person)
 - [ ] Submit on Devpost with the deployed URLs (needs the account owner)
 
+## Phase 9 — Interface redesign (command centre)
+
+- [x] Plan from an inspection of the codebase ([docs/UI_PLAN.md](docs/UI_PLAN.md))
+- [x] Design system: semantic tokens, dark (default) and light themes, Inter and JetBrains
+      Mono, UI kit with press and loading feedback, tooltips, skeletons, sortable tables,
+      pagination, breadcrumbs, drawers, segmented controls, toast stack
+- [x] Motion with Framer Motion: page transitions, staggered entrances, animated counters,
+      drawers, alerts, toasts; `prefers-reduced-motion` respected
+- [x] Shell: collapsible sidebar, header with incident selector, partner and agent status,
+      model chip, alert bell, theme toggle, profile menu; command palette (Ctrl+K);
+      keyboard shortcuts
+- [x] Command Center: metric cards with real comparisons, live map, live agent network with
+      click-to-inspect panel, live activity feed, critical alerts
+- [x] Agent network graph: internal agents and partner networks, particles while a request
+      is in flight, pulse on the active agent, outcome colours, agent details panel
+- [x] Scenario simulator with five presets, start, pause, resume, reset
+- [x] Agent Network Explorer: last successful interaction, communication errors, connectivity
+      test, manifest inspection, partner registration on the page
+- [x] Allocation page with the interactive editor and what-if weights on the existing engine
+- [x] Supplier marketplace cards with search, filters, sorting and side-by-side comparison
+- [x] Logistics control center with shipment filters, ETA, status transitions, animated routes
+- [x] Trust & security center with expired credentials, suspicious activity, profiles, history
+- [x] Analytics with response time, fulfilment, delivery time, supplier performance, shelter
+      coverage, communication success rate, time windows, latency chart
+- [x] Approval Center for plans, supplier selections, external writes, receipts, requests
+- [x] Incident report page: print to PDF, Markdown, JSON, allocation and shipment CSV
+- [x] Responsive layout and accessibility pass (labels, roles, focus, keyboard dismissal)
+- [x] All existing suites pass against the redesign
+
 ## Definition of done
 
 - [x] Main application runs

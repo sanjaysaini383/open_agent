@@ -73,6 +73,28 @@ The *Guided demonstration* card on the Command Center ticks these off as you go.
 12. **Inspect the final audit trail.** *Audit Trail*: filter by kind, open an entry for its
     data and hashes, export JSON or CSV. Export the incident report from the incident page.
 
+## The command-centre interface
+
+- **Ctrl+K / Cmd+K** opens the command palette: pages, incidents, agents, pending
+  approvals, scenarios and actions. **?** lists every keyboard shortcut; **g** then a letter
+  jumps to a page; **[** collapses the sidebar; **Shift+T** switches the theme.
+- **Bell** (top right): the alert centre. Every alert is derived from the state: an
+  unfulfilled shortage, a late shipment, an unverified partner, a failed request, a
+  pending approval. Nothing is scripted; with no problem the list is empty.
+- **Click any node** of the live agent network for that agent's identity, network,
+  capabilities, current task, status, history and the actions available on it.
+- **Scenario Simulator**: pick a flood, earthquake, cyclone, urban fire or industrial
+  accident, adjust it, start it. It creates a real incident and runs the real workflow;
+  pause, resume and reset control the run. The partners hold one simulated dataset
+  (Malda), and the page says so.
+- **Allocation** → *Edit allocation*: change quantities and watch cost, coverage,
+  remaining inventory and unfulfilled demand update. The engine's validator refuses an
+  unsound plan. The what-if sliders re-run the engine with your weighting.
+- **Approval Center**: everything waiting for a person, each with what will happen, which
+  agent asked, why, and the consequences.
+- **Report / PDF** on an incident: a print view (the browser's *Save as PDF*), plus
+  Markdown, JSON and CSV downloads.
+
 ## Things worth trying
 
 - **Decline a consent.** The step stops, says so, and nothing was sent. Check the browser's
