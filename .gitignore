@@ -38,3 +38,5 @@ video/demo/.hyperframes/
 video/demo/review/
 video/demo/node_modules/
 video/demo/.thumbnails/
+video/demo/.transcode-cache/
+submission/
