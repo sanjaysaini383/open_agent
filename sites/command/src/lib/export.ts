@@ -106,6 +106,34 @@ export async function exportIncidentReport(input: { incident: Incident; run: Wor
   }
 }
 
+const csvCell = (value: unknown): string => {
+  const text = String(value ?? "");
+  return /[",\n]/.test(text) ? `"${text.replace(/"/g, "\"\"")}"` : text;
+};
+const csv = (header: string[], rows: unknown[][]): string => [header, ...rows].map((row) => row.map(csvCell).join(",")).join("\n");
+
+/** The allocation lines as CSV, one row per shelter, resource and offer. */
+export function exportPlanCsv(incident: Incident, run: WorkflowRun): void {
+  const plan = run.plan;
+  if (!plan) return;
+  download(`reliefmesh-${incident.id}-allocation-v${plan.version}-${stamp()}.csv`, csv(
+    ["incident", "plan", "shelter_id", "shelter", "resource", "offer_id", "supplier_id", "supplier", "quantity", "unit_price_inr", "line_cost_inr", "delivery_hours", "on_time", "simulated"],
+    plan.lines.map((line) => [incident.id, plan.id, line.shelterId, line.shelterName, RESOURCES[line.resource].label, line.offerId, line.supplierId, line.supplierName, line.quantity, line.unitPrice, line.lineCost, line.deliveryHours, line.onTime ? "yes" : "no", "yes"]),
+  ), "text/csv;charset=utf-8");
+}
+
+/** The shipments as CSV: the plan's lanes, with the booking and status when they exist. */
+export function exportShipmentsCsv(incident: Incident, run: WorkflowRun): void {
+  if (!run.shipmentPlans.length) return;
+  download(`reliefmesh-${incident.id}-shipments-${stamp()}.csv`, csv(
+    ["incident", "reference", "tracking_code", "supplier", "shelter", "cargo", "weight_kg", "provider", "vehicle_type", "vehicles", "haul_km", "total_hours", "on_time", "cost_inr", "status", "delivery_receipt", "simulated"],
+    run.shipmentPlans.map((plan) => {
+      const shipment = run.shipments.find((item) => item.reference === plan.reference);
+      return [incident.id, plan.reference, shipment?.trackingCode ?? "", plan.supplierName, plan.shelterName, plan.cargo.map((line) => `${line.quantity} ${RESOURCES[line.resource].label}`).join("; "), plan.weightKg, plan.providerName ?? "", plan.vehicleType ?? "", plan.vehicles, plan.haulKm, plan.totalHours ?? "", plan.assigned ? (plan.onTime ? "yes" : "no") : "", plan.assigned ? plan.cost : "", shipment ? STATUS_LABEL[shipment.status] : plan.assigned ? "not booked" : "no transport", shipment?.deliveryReceipt ?? "", "yes"];
+    }),
+  ), "text/csv;charset=utf-8");
+}
+
 export async function exportAudit(audit: AuditEntry[], format: "json" | "csv"): Promise<void> {
   const name = `reliefmesh-audit-${stamp()}`;
   if (format === "csv") { download(`${name}.csv`, auditToCsv(audit), "text/csv;charset=utf-8"); return; }

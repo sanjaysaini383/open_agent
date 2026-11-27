@@ -12,7 +12,7 @@ import { inr, num, RESOURCE_IDS, RESOURCES } from "@/domain/resources";
 import { analyseRisks, runScenarios } from "@/domain/risk";
 import { improvedOffer, resourceRequests, routeEstimates, shelterOverview, supplierDirectory, supplierOffers, transportOptions, transportProviders } from "@/domain/schemas";
 import { isUsable } from "@/domain/trust";
-import type { AllocationPlan, GeoPoint, LaneInfo, NegotiationEvent, ScoredOffer, TransportOption, TrustEvaluation } from "@/domain/types";
+import type { AllocationPlan, GeoPoint, LaneInfo, NeedsAssessment, NegotiationEvent, ScoredOffer, TransportOption, TrustEvaluation } from "@/domain/types";
 import { askConsent, callRead, connect, ConsentDeclined, openPeer, openRegistry, verifyOrganization, verifyPeer, type Grant } from "@/interop/peers";
 import { useStore } from "@/state/store";
 import type { PeerRecord, ProviderInfo, StepId, SupplierInfo } from "@/state/types";
@@ -24,8 +24,7 @@ function trustMap() {
   return useStore.getState().orgTrust;
 }
 
-function needsOf(ctx: StepContext): AllocationNeed[] {
-  const assessment = ctx.run().assessment;
+export function needsFromAssessment(assessment: NeedsAssessment | null): AllocationNeed[] {
   if (!assessment) return [];
   return assessment.lines.map((line) => ({
     shelterId: line.shelterId, shelterName: line.shelterName, resource: line.resource,
@@ -33,7 +32,11 @@ function needsOf(ctx: StepContext): AllocationNeed[] {
   }));
 }
 
-function toAllocationOffers(offers: ScoredOffer[]): AllocationOffer[] {
+function needsOf(ctx: StepContext): AllocationNeed[] {
+  return needsFromAssessment(ctx.run().assessment);
+}
+
+export function toAllocationOffers(offers: ScoredOffer[]): AllocationOffer[] {
   return offers.map((offer) => ({
     offerId: offer.offerId, supplierId: offer.supplierId, supplierName: offer.supplierName, resource: offer.resource,
     quantityAvailable: offer.quantityAvailable, unitPrice: offer.unitPrice, listUnitPrice: offer.listUnitPrice,
