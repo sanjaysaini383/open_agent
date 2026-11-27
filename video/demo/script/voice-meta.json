@@ -1,0 +1,1433 @@
+{
+  "voice": "Kokoro am_michael (local)",
+  "narration": "assets/voice/narration.wav",
+  "total": 121.85,
+  "gap": 0.7,
+  "lines": [
+    {
+      "id": "l01",
+      "beat": "hook",
+      "text": "When a flood hits, twelve thousand people need food, water and medicine within thirty-six hours.",
+      "wav": "assets/voice/l01.wav",
+      "start": 0,
+      "duration": 6.25,
+      "words": [
+        {
+          "text": "When",
+          "start": 0,
+          "end": 0.24
+        },
+        {
+          "text": "a",
+          "start": 0.24,
+          "end": 0.32
+        },
+        {
+          "text": "flood",
+          "start": 0.32,
+          "end": 0.64
+        },
+        {
+          "text": "hits,",
+          "start": 0.64,
+          "end": 1.12
+        },
+        {
+          "text": "12,000",
+          "start": 1.12,
+          "end": 2.08
+        },
+        {
+          "text": "people",
+          "start": 2.08,
+          "end": 2.4
+        },
+        {
+          "text": "need",
+          "start": 2.4,
+          "end": 2.72
+        },
+        {
+          "text": "food,",
+          "start": 2.72,
+          "end": 3.44
+        },
+        {
+          "text": "water,",
+          "start": 3.44,
+          "end": 3.84
+        },
+        {
+          "text": "and",
+          "start": 3.84,
+          "end": 4.08
+        },
+        {
+          "text": "medicine",
+          "start": 4.08,
+          "end": 4.56
+        },
+        {
+          "text": "within",
+          "start": 4.56,
+          "end": 4.96
+        },
+        {
+          "text": "36",
+          "start": 4.96,
+          "end": 5.6
+        },
+        {
+          "text": "hours.",
+          "start": 5.84,
+          "end": 6.72
+        }
+      ]
+    },
+    {
+      "id": "l02",
+      "beat": "tension",
+      "text": "The shelters, the suppliers, the carriers and the registry that could help don't share a platform. So coordination happens by phone and spreadsheet.",
+      "wav": "assets/voice/l02.wav",
+      "start": 6.95,
+      "duration": 9.49,
+      "words": [
+        {
+          "text": "shelters,",
+          "start": 6.96,
+          "end": 7.76
+        },
+        {
+          "text": "the",
+          "start": 7.92,
+          "end": 8.08
+        },
+        {
+          "text": "suppliers,",
+          "start": 8.08,
+          "end": 9.04
+        },
+        {
+          "text": "the",
+          "start": 9.04,
+          "end": 9.28
+        },
+        {
+          "text": "carriers,",
+          "start": 9.28,
+          "end": 9.92
+        },
+        {
+          "text": "and",
+          "start": 9.92,
+          "end": 10.08
+        },
+        {
+          "text": "the",
+          "start": 10.08,
+          "end": 10.24
+        },
+        {
+          "text": "registry",
+          "start": 10.24,
+          "end": 10.8
+        },
+        {
+          "text": "that",
+          "start": 10.8,
+          "end": 11.04
+        },
+        {
+          "text": "could",
+          "start": 11.04,
+          "end": 11.2
+        },
+        {
+          "text": "help",
+          "start": 11.2,
+          "end": 11.44
+        },
+        {
+          "text": "don't",
+          "start": 11.52,
+          "end": 11.76
+        },
+        {
+          "text": "share",
+          "start": 11.76,
+          "end": 12.08
+        },
+        {
+          "text": "a",
+          "start": 12.08,
+          "end": 12.24
+        },
+        {
+          "text": "platform.",
+          "start": 12.24,
+          "end": 13.12
+        },
+        {
+          "text": "So",
+          "start": 13.12,
+          "end": 13.44
+        },
+        {
+          "text": "coordination",
+          "start": 13.44,
+          "end": 14.4
+        },
+        {
+          "text": "happens",
+          "start": 14.4,
+          "end": 14.88
+        },
+        {
+          "text": "by",
+          "start": 14.88,
+          "end": 15.12
+        },
+        {
+          "text": "phone",
+          "start": 15.12,
+          "end": 15.52
+        },
+        {
+          "text": "and",
+          "start": 15.52,
+          "end": 15.68
+        },
+        {
+          "text": "spreadsheet.",
+          "start": 15.68,
+          "end": 16.88
+        }
+      ]
+    },
+    {
+      "id": "l03",
+      "beat": "reveal",
+      "text": "ReliefMesh is five independent websites on the Open Agentic Web. Each runs its own agents, on its own origin. Nobody has to adopt anyone's platform.",
+      "wav": "assets/voice/l03.wav",
+      "start": 17.14,
+      "duration": 11.8,
+      "words": [
+        {
+          "text": "Mesh",
+          "start": 17.52,
+          "end": 18.16
+        },
+        {
+          "text": "is",
+          "start": 18.16,
+          "end": 18.4
+        },
+        {
+          "text": "five",
+          "start": 18.4,
+          "end": 18.88
+        },
+        {
+          "text": "independent",
+          "start": 18.88,
+          "end": 19.44
+        },
+        {
+          "text": "websites",
+          "start": 19.44,
+          "end": 20.08
+        },
+        {
+          "text": "on",
+          "start": 20.08,
+          "end": 20.24
+        },
+        {
+          "text": "the",
+          "start": 20.24,
+          "end": 20.4
+        },
+        {
+          "text": "open",
+          "start": 20.4,
+          "end": 20.72
+        },
+        {
+          "text": "agentic",
+          "start": 20.88,
+          "end": 21.52
+        },
+        {
+          "text": "web.",
+          "start": 21.76,
+          "end": 22.32
+        },
+        {
+          "text": "Each",
+          "start": 22.32,
+          "end": 22.8
+        },
+        {
+          "text": "runs",
+          "start": 22.8,
+          "end": 23.12
+        },
+        {
+          "text": "its",
+          "start": 23.12,
+          "end": 23.36
+        },
+        {
+          "text": "own",
+          "start": 23.36,
+          "end": 23.68
+        },
+        {
+          "text": "agents,",
+          "start": 23.68,
+          "end": 24.4
+        },
+        {
+          "text": "on",
+          "start": 24.4,
+          "end": 24.64
+        },
+        {
+          "text": "its",
+          "start": 24.64,
+          "end": 24.88
+        },
+        {
+          "text": "own",
+          "start": 24.88,
+          "end": 25.28
+        },
+        {
+          "text": "origin.",
+          "start": 25.28,
+          "end": 26.24
+        },
+        {
+          "text": "Nobody",
+          "start": 26.24,
+          "end": 26.88
+        },
+        {
+          "text": "has",
+          "start": 26.88,
+          "end": 27.04
+        },
+        {
+          "text": "to",
+          "start": 27.04,
+          "end": 27.2
+        },
+        {
+          "text": "adopt",
+          "start": 27.2,
+          "end": 27.68
+        },
+        {
+          "text": "anyone's",
+          "start": 27.68,
+          "end": 28.32
+        },
+        {
+          "text": "platform.",
+          "start": 28.32,
+          "end": 29.44
+        }
+      ]
+    },
+    {
+      "id": "l04",
+      "beat": "consent",
+      "text": "Press one button. Before any site is contacted, you are told which origin, why, and what will be sent. Nothing leaves the page until you say so.",
+      "wav": "assets/voice/l04.wav",
+      "start": 29.64,
+      "duration": 9.75,
+      "words": [
+        {
+          "text": "one",
+          "start": 29.92,
+          "end": 30.24
+        },
+        {
+          "text": "button.",
+          "start": 30.24,
+          "end": 30.96
+        },
+        {
+          "text": "Before",
+          "start": 30.96,
+          "end": 31.44
+        },
+        {
+          "text": "any",
+          "start": 31.44,
+          "end": 31.68
+        },
+        {
+          "text": "site",
+          "start": 31.68,
+          "end": 32
+        },
+        {
+          "text": "is",
+          "start": 32,
+          "end": 32.24
+        },
+        {
+          "text": "contacted,",
+          "start": 32.24,
+          "end": 33.04
+        },
+        {
+          "text": "you",
+          "start": 33.04,
+          "end": 33.2
+        },
+        {
+          "text": "are",
+          "start": 33.2,
+          "end": 33.36
+        },
+        {
+          "text": "told",
+          "start": 33.36,
+          "end": 33.76
+        },
+        {
+          "text": "which",
+          "start": 33.76,
+          "end": 34.08
+        },
+        {
+          "text": "origin,",
+          "start": 34.08,
+          "end": 34.8
+        },
+        {
+          "text": "why,",
+          "start": 34.8,
+          "end": 35.28
+        },
+        {
+          "text": "and",
+          "start": 35.28,
+          "end": 35.44
+        },
+        {
+          "text": "what",
+          "start": 35.44,
+          "end": 35.68
+        },
+        {
+          "text": "will",
+          "start": 35.68,
+          "end": 35.92
+        },
+        {
+          "text": "be",
+          "start": 35.92,
+          "end": 36.16
+        },
+        {
+          "text": "sent.",
+          "start": 36.16,
+          "end": 36.8
+        },
+        {
+          "text": "Nothing",
+          "start": 36.8,
+          "end": 37.2
+        },
+        {
+          "text": "leaves",
+          "start": 37.2,
+          "end": 37.68
+        },
+        {
+          "text": "the",
+          "start": 37.68,
+          "end": 37.84
+        },
+        {
+          "text": "page",
+          "start": 37.84,
+          "end": 38.16
+        },
+        {
+          "text": "until",
+          "start": 38.16,
+          "end": 38.56
+        },
+        {
+          "text": "you",
+          "start": 38.56,
+          "end": 38.8
+        },
+        {
+          "text": "say",
+          "start": 38.8,
+          "end": 39.12
+        },
+        {
+          "text": "so.",
+          "start": 39.12,
+          "end": 39.84
+        }
+      ]
+    },
+    {
+      "id": "l05",
+      "beat": "discovery",
+      "text": "The agents find the partners by URL and load their published networks from their own origins. Every request on this graph is real.",
+      "wav": "assets/voice/l05.wav",
+      "start": 40.09,
+      "duration": 8.9,
+      "words": [
+        {
+          "text": "agents",
+          "start": 40.16,
+          "end": 40.64
+        },
+        {
+          "text": "find",
+          "start": 40.64,
+          "end": 40.96
+        },
+        {
+          "text": "the",
+          "start": 40.96,
+          "end": 41.12
+        },
+        {
+          "text": "partners",
+          "start": 41.12,
+          "end": 41.6
+        },
+        {
+          "text": "by",
+          "start": 41.6,
+          "end": 41.92
+        },
+        {
+          "text": "URL",
+          "start": 41.92,
+          "end": 42.72
+        },
+        {
+          "text": "and",
+          "start": 42.88,
+          "end": 43.12
+        },
+        {
+          "text": "load",
+          "start": 43.12,
+          "end": 43.52
+        },
+        {
+          "text": "their",
+          "start": 43.52,
+          "end": 43.76
+        },
+        {
+          "text": "published",
+          "start": 43.76,
+          "end": 44.24
+        },
+        {
+          "text": "networks",
+          "start": 44.24,
+          "end": 44.8
+        },
+        {
+          "text": "from",
+          "start": 44.8,
+          "end": 44.96
+        },
+        {
+          "text": "their",
+          "start": 44.96,
+          "end": 45.12
+        },
+        {
+          "text": "own",
+          "start": 45.12,
+          "end": 45.52
+        },
+        {
+          "text": "origins.",
+          "start": 45.52,
+          "end": 46.56
+        },
+        {
+          "text": "Every",
+          "start": 46.56,
+          "end": 46.96
+        },
+        {
+          "text": "request",
+          "start": 46.96,
+          "end": 47.44
+        },
+        {
+          "text": "on",
+          "start": 47.44,
+          "end": 47.6
+        },
+        {
+          "text": "this",
+          "start": 47.6,
+          "end": 47.84
+        },
+        {
+          "text": "graph",
+          "start": 47.84,
+          "end": 48.32
+        },
+        {
+          "text": "is",
+          "start": 48.32,
+          "end": 48.64
+        },
+        {
+          "text": "real.",
+          "start": 48.64,
+          "end": 49.44
+        }
+      ]
+    },
+    {
+      "id": "l06",
+      "beat": "trust",
+      "text": "Each partner's attestation is verified in your browser: the signature checked, the network file hashed and compared with what the registry attested.",
+      "wav": "assets/voice/l06.wav",
+      "start": 49.69,
+      "duration": 9.45,
+      "words": [
+        {
+          "text": "partners",
+          "start": 49.84,
+          "end": 50.32
+        },
+        {
+          "text": "at",
+          "start": 50.48,
+          "end": 50.72
+        },
+        {
+          "text": "a",
+          "start": 50.72,
+          "end": 50.88
+        },
+        {
+          "text": "station",
+          "start": 50.88,
+          "end": 51.2
+        },
+        {
+          "text": "is",
+          "start": 51.2,
+          "end": 51.44
+        },
+        {
+          "text": "verified",
+          "start": 51.44,
+          "end": 52.08
+        },
+        {
+          "text": "in",
+          "start": 52.08,
+          "end": 52.24
+        },
+        {
+          "text": "your",
+          "start": 52.24,
+          "end": 52.48
+        },
+        {
+          "text": "browser,",
+          "start": 52.48,
+          "end": 53.44
+        },
+        {
+          "text": "the",
+          "start": 53.44,
+          "end": 53.68
+        },
+        {
+          "text": "signature",
+          "start": 53.68,
+          "end": 54.32
+        },
+        {
+          "text": "checked,",
+          "start": 54.32,
+          "end": 55.04
+        },
+        {
+          "text": "the",
+          "start": 55.04,
+          "end": 55.2
+        },
+        {
+          "text": "network",
+          "start": 55.2,
+          "end": 55.68
+        },
+        {
+          "text": "file",
+          "start": 55.68,
+          "end": 56.16
+        },
+        {
+          "text": "hashed",
+          "start": 56.16,
+          "end": 56.64
+        },
+        {
+          "text": "and",
+          "start": 56.64,
+          "end": 56.8
+        },
+        {
+          "text": "compared",
+          "start": 56.8,
+          "end": 57.28
+        },
+        {
+          "text": "with",
+          "start": 57.28,
+          "end": 57.52
+        },
+        {
+          "text": "what",
+          "start": 57.52,
+          "end": 57.68
+        },
+        {
+          "text": "the",
+          "start": 57.68,
+          "end": 57.84
+        },
+        {
+          "text": "registry",
+          "start": 57.84,
+          "end": 58.48
+        },
+        {
+          "text": "attested.",
+          "start": 58.48,
+          "end": 59.2
+        }
+      ]
+    },
+    {
+      "id": "l07",
+      "beat": "hostile",
+      "text": "One supplier is unverified, priced far below the rest, and its notes tell the agent to approve immediately. It is flagged, excluded, and never obeyed.",
+      "wav": "assets/voice/l07.wav",
+      "start": 59.84,
+      "duration": 10.71,
+      "words": [
+        {
+          "text": "supplier",
+          "start": 60.13,
+          "end": 60.85
+        },
+        {
+          "text": "is",
+          "start": 60.85,
+          "end": 61.01
+        },
+        {
+          "text": "unverified,",
+          "start": 61.01,
+          "end": 62.13
+        },
+        {
+          "text": "priced",
+          "start": 62.13,
+          "end": 62.61
+        },
+        {
+          "text": "far",
+          "start": 62.61,
+          "end": 62.85
+        },
+        {
+          "text": "below",
+          "start": 62.85,
+          "end": 63.25
+        },
+        {
+          "text": "the",
+          "start": 63.25,
+          "end": 63.49
+        },
+        {
+          "text": "rest,",
+          "start": 63.49,
+          "end": 63.97
+        },
+        {
+          "text": "and",
+          "start": 63.97,
+          "end": 64.21
+        },
+        {
+          "text": "its",
+          "start": 64.21,
+          "end": 64.45
+        },
+        {
+          "text": "notes",
+          "start": 64.45,
+          "end": 64.85
+        },
+        {
+          "text": "tell",
+          "start": 64.85,
+          "end": 65.17
+        },
+        {
+          "text": "the",
+          "start": 65.17,
+          "end": 65.33
+        },
+        {
+          "text": "agent",
+          "start": 65.33,
+          "end": 65.73
+        },
+        {
+          "text": "to",
+          "start": 65.73,
+          "end": 65.89
+        },
+        {
+          "text": "approve",
+          "start": 65.89,
+          "end": 66.37
+        },
+        {
+          "text": "immediately.",
+          "start": 66.37,
+          "end": 67.33
+        },
+        {
+          "text": "It",
+          "start": 67.33,
+          "end": 67.57
+        },
+        {
+          "text": "is",
+          "start": 67.57,
+          "end": 67.81
+        },
+        {
+          "text": "flagged,",
+          "start": 67.81,
+          "end": 68.61
+        },
+        {
+          "text": "excluded,",
+          "start": 68.61,
+          "end": 69.33
+        },
+        {
+          "text": "and",
+          "start": 69.33,
+          "end": 69.49
+        },
+        {
+          "text": "never",
+          "start": 69.49,
+          "end": 69.89
+        },
+        {
+          "text": "obeyed.",
+          "start": 69.89,
+          "end": 71.09
+        }
+      ]
+    },
+    {
+      "id": "l08",
+      "beat": "allocation",
+      "text": "A deterministic engine allocates every shortage within budget and explains each line. A model may explain the plan. It cannot change a number.",
+      "wav": "assets/voice/l08.wav",
+      "start": 71.25,
+      "duration": 9.81,
+      "words": [
+        {
+          "text": "deterministic",
+          "start": 71.41,
+          "end": 72.37
+        },
+        {
+          "text": "engine",
+          "start": 72.37,
+          "end": 72.85
+        },
+        {
+          "text": "allocates",
+          "start": 72.85,
+          "end": 73.57
+        },
+        {
+          "text": "every",
+          "start": 73.57,
+          "end": 73.89
+        },
+        {
+          "text": "shortage",
+          "start": 73.89,
+          "end": 74.45
+        },
+        {
+          "text": "within",
+          "start": 74.45,
+          "end": 74.85
+        },
+        {
+          "text": "budget",
+          "start": 74.85,
+          "end": 75.33
+        },
+        {
+          "text": "and",
+          "start": 75.33,
+          "end": 75.57
+        },
+        {
+          "text": "explains",
+          "start": 75.57,
+          "end": 76.13
+        },
+        {
+          "text": "each",
+          "start": 76.13,
+          "end": 76.53
+        },
+        {
+          "text": "line.",
+          "start": 76.53,
+          "end": 77.17
+        },
+        {
+          "text": "A",
+          "start": 77.17,
+          "end": 77.49
+        },
+        {
+          "text": "model",
+          "start": 77.49,
+          "end": 77.81
+        },
+        {
+          "text": "may",
+          "start": 77.89,
+          "end": 78.13
+        },
+        {
+          "text": "explain",
+          "start": 78.13,
+          "end": 78.61
+        },
+        {
+          "text": "the",
+          "start": 78.61,
+          "end": 78.85
+        },
+        {
+          "text": "plan.",
+          "start": 78.85,
+          "end": 79.49
+        },
+        {
+          "text": "It",
+          "start": 79.49,
+          "end": 79.73
+        },
+        {
+          "text": "cannot",
+          "start": 79.73,
+          "end": 80.21
+        },
+        {
+          "text": "change",
+          "start": 80.21,
+          "end": 80.53
+        },
+        {
+          "text": "a",
+          "start": 80.53,
+          "end": 80.77
+        },
+        {
+          "text": "number.",
+          "start": 80.77,
+          "end": 81.57
+        }
+      ]
+    },
+    {
+      "id": "l09",
+      "beat": "approval",
+      "text": "Nothing is written anywhere until a person approves. Then the reservation is confirmed in the supplier's own window, on the supplier's origin. Transport, the same way.",
+      "wav": "assets/voice/l09.wav",
+      "start": 81.76,
+      "duration": 11.41,
+      "words": [
+        {
+          "text": "is",
+          "start": 82.13,
+          "end": 82.29
+        },
+        {
+          "text": "writ",
+          "start": 82.29,
+          "end": 82.77
+        },
+        {
+          "text": "anywhere",
+          "start": 82.77,
+          "end": 83.25
+        },
+        {
+          "text": "until",
+          "start": 83.33,
+          "end": 83.73
+        },
+        {
+          "text": "a",
+          "start": 83.73,
+          "end": 83.89
+        },
+        {
+          "text": "person",
+          "start": 83.89,
+          "end": 84.21
+        },
+        {
+          "text": "approves.",
+          "start": 84.21,
+          "end": 85.17
+        },
+        {
+          "text": "Then",
+          "start": 85.17,
+          "end": 85.49
+        },
+        {
+          "text": "the",
+          "start": 85.49,
+          "end": 85.65
+        },
+        {
+          "text": "reservation",
+          "start": 85.65,
+          "end": 86.45
+        },
+        {
+          "text": "is",
+          "start": 86.45,
+          "end": 86.69
+        },
+        {
+          "text": "confirmed",
+          "start": 86.69,
+          "end": 87.25
+        },
+        {
+          "text": "in",
+          "start": 87.25,
+          "end": 87.41
+        },
+        {
+          "text": "the",
+          "start": 87.41,
+          "end": 87.57
+        },
+        {
+          "text": "supplier's",
+          "start": 87.57,
+          "end": 88.29
+        },
+        {
+          "text": "own",
+          "start": 88.29,
+          "end": 88.61
+        },
+        {
+          "text": "window",
+          "start": 88.61,
+          "end": 89.09
+        },
+        {
+          "text": "on",
+          "start": 89.25,
+          "end": 89.41
+        },
+        {
+          "text": "the",
+          "start": 89.41,
+          "end": 89.65
+        },
+        {
+          "text": "supplier's",
+          "start": 89.65,
+          "end": 90.45
+        },
+        {
+          "text": "origin.",
+          "start": 90.45,
+          "end": 91.41
+        },
+        {
+          "text": "Transport",
+          "start": 91.41,
+          "end": 92.21
+        },
+        {
+          "text": "the",
+          "start": 92.37,
+          "end": 92.53
+        },
+        {
+          "text": "same",
+          "start": 92.53,
+          "end": 93.01
+        },
+        {
+          "text": "way.",
+          "start": 93.01,
+          "end": 93.73
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "beat": "tracking",
+      "text": "Shipments are tracked to delivery, and every consent, decision and receipt lands in a hash-chained audit trail.",
+      "wav": "assets/voice/l10.wav",
+      "start": 93.87,
+      "duration": 7.08,
+      "words": [
+        {
+          "text": "Shipments",
+          "start": 93.73,
+          "end": 94.37
+        },
+        {
+          "text": "are",
+          "start": 94.37,
+          "end": 94.53
+        },
+        {
+          "text": "tracked",
+          "start": 94.53,
+          "end": 94.93
+        },
+        {
+          "text": "to",
+          "start": 94.93,
+          "end": 95.17
+        },
+        {
+          "text": "delivery,",
+          "start": 95.17,
+          "end": 95.97
+        },
+        {
+          "text": "and",
+          "start": 95.97,
+          "end": 96.21
+        },
+        {
+          "text": "every",
+          "start": 96.21,
+          "end": 96.61
+        },
+        {
+          "text": "consent,",
+          "start": 96.61,
+          "end": 97.49
+        },
+        {
+          "text": "decision,",
+          "start": 97.49,
+          "end": 98.05
+        },
+        {
+          "text": "and",
+          "start": 98.05,
+          "end": 98.21
+        },
+        {
+          "text": "receipt",
+          "start": 98.21,
+          "end": 98.69
+        },
+        {
+          "text": "lands",
+          "start": 98.69,
+          "end": 99.09
+        },
+        {
+          "text": "in",
+          "start": 99.09,
+          "end": 99.17
+        },
+        {
+          "text": "a",
+          "start": 99.17,
+          "end": 99.25
+        },
+        {
+          "text": "hash-chained",
+          "start": 99.25,
+          "end": 100.13
+        },
+        {
+          "text": "audit",
+          "start": 100.13,
+          "end": 100.61
+        },
+        {
+          "text": "trail.",
+          "start": 100.61,
+          "end": 101.49
+        }
+      ]
+    },
+    {
+      "id": "l11",
+      "beat": "stack",
+      "text": "The official runtime, unmodified. Twelve call paths passing the official partner check. Two hundred and sixty-seven automated tests. And an interoperability inspector anyone can use.",
+      "wav": "assets/voice/l11.wav",
+      "start": 101.66,
+      "duration": 13.35,
+      "words": [
+        {
+          "text": "official",
+          "start": 101.73,
+          "end": 102.29
+        },
+        {
+          "text": "runtime,",
+          "start": 102.29,
+          "end": 103.33
+        },
+        {
+          "text": "unmodified,",
+          "start": 103.33,
+          "end": 104.69
+        },
+        {
+          "text": "twelve",
+          "start": 104.69,
+          "end": 105.25
+        },
+        {
+          "text": "call",
+          "start": 105.25,
+          "end": 105.65
+        },
+        {
+          "text": "path",
+          "start": 105.65,
+          "end": 106.13
+        },
+        {
+          "text": "passing",
+          "start": 106.13,
+          "end": 106.53
+        },
+        {
+          "text": "the",
+          "start": 106.53,
+          "end": 106.69
+        },
+        {
+          "text": "official",
+          "start": 106.69,
+          "end": 107.17
+        },
+        {
+          "text": "partner",
+          "start": 107.17,
+          "end": 107.41
+        },
+        {
+          "text": "check,",
+          "start": 107.73,
+          "end": 108.53
+        },
+        {
+          "text": "267",
+          "start": 108.53,
+          "end": 109.81
+        },
+        {
+          "text": "automated",
+          "start": 110.05,
+          "end": 110.77
+        },
+        {
+          "text": "tests,",
+          "start": 110.77,
+          "end": 111.49
+        },
+        {
+          "text": "and",
+          "start": 111.49,
+          "end": 111.73
+        },
+        {
+          "text": "an",
+          "start": 111.73,
+          "end": 111.97
+        },
+        {
+          "text": "interoperability",
+          "start": 111.97,
+          "end": 113.01
+        },
+        {
+          "text": "inspector",
+          "start": 113.01,
+          "end": 113.65
+        },
+        {
+          "text": "anyone",
+          "start": 113.73,
+          "end": 114.21
+        },
+        {
+          "text": "can",
+          "start": 114.21,
+          "end": 114.53
+        },
+        {
+          "text": "use.",
+          "start": 114.53,
+          "end": 115.09
+        }
+      ]
+    },
+    {
+      "id": "l12",
+      "beat": "claim",
+      "text": "ReliefMesh. When disaster strikes, agents coordinate before humans have to.",
+      "wav": "assets/voice/l12.wav",
+      "start": 115.71,
+      "duration": 5.44,
+      "words": [
+        {
+          "text": "The",
+          "start": 6.72,
+          "end": 6.96
+        },
+        {
+          "text": "Relief",
+          "start": 16.88,
+          "end": 17.52
+        },
+        {
+          "text": "Press",
+          "start": 29.44,
+          "end": 29.92
+        },
+        {
+          "text": "The",
+          "start": 39.84,
+          "end": 40.16
+        },
+        {
+          "text": "Each",
+          "start": 49.44,
+          "end": 49.84
+        },
+        {
+          "text": "One",
+          "start": 59.65,
+          "end": 60.13
+        },
+        {
+          "text": "A",
+          "start": 71.09,
+          "end": 71.41
+        },
+        {
+          "text": "Nothing",
+          "start": 81.57,
+          "end": 82.13
+        },
+        {
+          "text": "The",
+          "start": 101.49,
+          "end": 101.73
+        },
+        {
+          "text": "Relief",
+          "start": 115.5,
+          "end": 116.14
+        },
+        {
+          "text": "Mesh",
+          "start": 116.14,
+          "end": 116.7
+        },
+        {
+          "text": "When",
+          "start": 116.94,
+          "end": 117.26
+        },
+        {
+          "text": "disaster",
+          "start": 117.26,
+          "end": 117.82
+        },
+        {
+          "text": "strikes,",
+          "start": 117.82,
+          "end": 118.54
+        },
+        {
+          "text": "agents",
+          "start": 118.54,
+          "end": 119.02
+        },
+        {
+          "text": "coordinate",
+          "start": 119.02,
+          "end": 119.74
+        },
+        {
+          "text": "before",
+          "start": 119.74,
+          "end": 120.06
+        },
+        {
+          "text": "humans",
+          "start": 120.06,
+          "end": 120.54
+        },
+        {
+          "text": "have",
+          "start": 120.54,
+          "end": 120.86
+        },
+        {
+          "text": "to.",
+          "start": 120.86,
+          "end": 121.82
+        }
+      ]
+    }
+  ]
+}

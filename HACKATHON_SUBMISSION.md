@@ -163,6 +163,12 @@ In [`docs/screenshots/`](docs/screenshots), produced by `npm run screenshots` fr
 - [x] `21-scenario-simulator.png` — five predefined disasters
 - [x] `22-command-center-dark.png` — the charcoal-teal theme
 
+## Demo video
+
+`video/demo/renders/reliefmesh-demo.mp4` (two minutes, 1080p, narrated, captioned),
+rendered with `npm run video:render` from a real run of the product. Upload it to YouTube
+or Devpost and paste the link here: not uploaded yet.
+
 ## Demo script (under two minutes)
 
 See [DEMO_GUIDE.md](DEMO_GUIDE.md), "The two-minute script". In one line each:

@@ -1,0 +1,50 @@
+<template>
+  <style>
+  #root { position: absolute; inset: 0; overflow: hidden; background: #0b0f0e; color: #eae7dc; font-family: Inter, sans-serif; }
+  .eyebrow { position: absolute; left: 160px; top: 110px; display: flex; align-items: center; gap: 14px; font-size: 28px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #d1e8e2; opacity: 0; }
+  .eyebrow i { width: 10px; height: 10px; border-radius: 999px; background: #e85a4f; }
+  .title { position: absolute; left: 160px; width: 1600px; font-size: 84px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+  .title .w { display: inline-block; margin-right: 0.26em; opacity: 0; filter: blur(6px); }
+  .title .accent { color: #e85a4f; }
+  .sub { position: absolute; left: 160px; width: 1500px; font-size: 34px; font-weight: 500; line-height: 1.4; color: rgba(234, 231, 220, 0.72); opacity: 0; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+
+  .cam { position: absolute; z-index: 1; inset: 0; transform-origin: 50% 50%; }
+  .frame { position: absolute; left: 190px; top: 70px; width: 1540px; border-radius: 16px; overflow: hidden; background: #1c1c1a; box-shadow: 0 30px 90px rgba(0,0,0,0.5), 0 0 0 1px rgba(234,231,220,0.14); }
+  .bar { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 18px; background: #26262b; }
+  .bar i { width: 11px; height: 11px; border-radius: 999px; background: rgba(234,231,220,0.3); }
+  .bar .pill { margin: 0 auto; min-width: 520px; padding: 5px 18px; border-radius: 999px; background: rgba(0,0,0,0.35); color: rgba(234,231,220,0.75); font-family: "JetBrains Mono", monospace; font-size: 15px; text-align: center; }
+  .screen { position: relative; width: 1540px; height: 866px; overflow: hidden; background: #f6f3eb; }
+  .screen video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+  .chapter { position: absolute; z-index: 3; left: 160px; top: 20px; display: flex; align-items: center; gap: 14px; font-size: 28px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #d1e8e2; opacity: 0; }
+  .chapter i { width: 9px; height: 9px; border-radius: 999px; background: #e85a4f; }
+</style>
+  <div id="root" data-composition-id="s-audit" data-width="1920" data-height="1080">
+
+    <div class="chapter" id="s-audit-chapter"><i></i>07 · Hash-chained audit trail</div>
+    <div class="cam" id="s-audit-cam">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span class="pill" id="s-audit-pill" data-layout-ignore>localhost:8080 · ReliefMesh Command</span></div>
+        <div class="screen">
+          <video id="s-audit-v0" class="clip" src="assets/footage/main.mp4" data-start="0" data-duration="1.99" data-media-start="246.4" data-playback-rate="1" muted playsinline></video>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const landWords = (selector, at, step = 0.07) => { const list = gsap.utils.toArray(selector); list.forEach((el, i) => tl.fromTo(el, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, at + i * step)); return at + list.length * step + 0.16; };
+      const leaveWords = (selector, at, step = 0.03) => { gsap.utils.toArray(selector).forEach((el, i) => tl.to(el, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in" }, at + i * step)); };
+      const show = (selector, at, from = {}) => tl.fromTo(selector, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.4, ease: "power3.out" }, at);
+      const pop = (selector, at) => tl.fromTo(selector, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, at);
+
+      const cam = document.getElementById("s-audit-cam");
+      tl.fromTo("#s-audit-chapter", { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.2);
+      tl.fromTo(cam, { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 0);
+tl.to(cam, { scale: 1.3, x: 0, y: 240.99, duration: 0.4, ease: "power2.inOut" }, 0.5);
+      tl.to(cam, { opacity: 0, duration: 0.2, ease: "power2.in" }, 1.79);
+      window.__timelines["s-audit"] = tl;
+    })();
+  </script>
+</template>

@@ -90,7 +90,7 @@ Verification for each area is in [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md).
 - [x] Screenshots, generated from a real run (`docs/screenshots/`)
 - [x] Demonstration script under two minutes ([DEMO_GUIDE.md](DEMO_GUIDE.md))
 - [x] Technical details and the community contribution (Interoperability Inspector)
-- [ ] Record a demo video (needs a person)
+- [x] Record a demo video: a two-minute narrated film built from a real run (`video/demo`, `npm run video:render`); uploading it is the owner's step
 - [ ] Submit on Devpost with the deployed URLs (needs the account owner)
 
 ## Phase 9 — Interface redesign (command centre)

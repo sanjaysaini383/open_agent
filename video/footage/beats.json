@@ -1,0 +1,240 @@
+{
+  "recordedAt": "2026-11-27T12:12:52.160Z",
+  "beats": [
+    {
+      "name": "command-center",
+      "at": 4.98,
+      "note": "dashboard before the workflow"
+    },
+    {
+      "name": "click",
+      "at": 25.41,
+      "note": "open incident"
+    },
+    {
+      "name": "incident",
+      "at": 27.31,
+      "note": "incident page"
+    },
+    {
+      "name": "click",
+      "at": 33.35,
+      "note": "start coordination workflow"
+    },
+    {
+      "name": "consent",
+      "at": 34.64,
+      "note": "first consent dialog"
+    },
+    {
+      "name": "click",
+      "at": 43.18,
+      "note": "consent: allow for this session"
+    },
+    {
+      "name": "click",
+      "at": 52.55,
+      "note": "consent: allow for this session"
+    },
+    {
+      "name": "assessed",
+      "at": 56.71,
+      "note": "assessment done"
+    },
+    {
+      "name": "click",
+      "at": 65.29,
+      "note": "consent: allow for this session"
+    },
+    {
+      "name": "click",
+      "at": 74.19,
+      "note": "consent: allow for this session"
+    },
+    {
+      "name": "discovered",
+      "at": 75.53,
+      "note": "partners loaded"
+    },
+    {
+      "name": "verified",
+      "at": 85.1,
+      "note": "signatures verified"
+    },
+    {
+      "name": "offers",
+      "at": 86.22,
+      "note": "offers collected"
+    },
+    {
+      "name": "negotiated",
+      "at": 95.09,
+      "note": "quotes in"
+    },
+    {
+      "name": "allocated",
+      "at": 95.3,
+      "note": "plan built"
+    },
+    {
+      "name": "logistics",
+      "at": 111.18,
+      "note": "transport planned"
+    },
+    {
+      "name": "network",
+      "at": 114.48,
+      "note": "agent network page"
+    },
+    {
+      "name": "click",
+      "at": 120.27,
+      "note": "open TrustVerificationAgent"
+    },
+    {
+      "name": "agent-panel",
+      "at": 122.94,
+      "note": "agent details panel"
+    },
+    {
+      "name": "trust",
+      "at": 124.73,
+      "note": "trust page"
+    },
+    {
+      "name": "marketplace",
+      "at": 129.27,
+      "note": "supplier cards"
+    },
+    {
+      "name": "hostile",
+      "at": 138.94,
+      "note": "hostile supplier excluded"
+    },
+    {
+      "name": "allocation",
+      "at": 140.26,
+      "note": "allocation page"
+    },
+    {
+      "name": "approvals",
+      "at": 144.92,
+      "note": "approval center"
+    },
+    {
+      "name": "click",
+      "at": 150.32,
+      "note": "review and approve"
+    },
+    {
+      "name": "approval-dialog",
+      "at": 152.59,
+      "note": "plan preview"
+    },
+    {
+      "name": "click",
+      "at": 160.75,
+      "note": "approve the plan"
+    },
+    {
+      "name": "approved",
+      "at": 162.17,
+      "note": "plan approved"
+    },
+    {
+      "name": "click",
+      "at": 168.4,
+      "note": "reserve stock"
+    },
+    {
+      "name": "window-prompt",
+      "at": 169.78,
+      "note": "partner window prompt"
+    },
+    {
+      "name": "click",
+      "at": 177.82,
+      "note": "open AidSupply"
+    },
+    {
+      "name": "popup",
+      "at": 180.13,
+      "note": "open AidSupply: partner window open"
+    },
+    {
+      "name": "popup-confirm",
+      "at": 180.87,
+      "note": "Reserve this stock"
+    },
+    {
+      "name": "reserved",
+      "at": 191.76,
+      "note": "reservation confirmed"
+    },
+    {
+      "name": "click",
+      "at": 198.1,
+      "note": "book transport"
+    },
+    {
+      "name": "click",
+      "at": 205.5,
+      "note": "open RouteBridge"
+    },
+    {
+      "name": "popup",
+      "at": 207.92,
+      "note": "open RouteBridge: partner window open"
+    },
+    {
+      "name": "popup-confirm",
+      "at": 208.7,
+      "note": "Book these shipments"
+    },
+    {
+      "name": "booked",
+      "at": 219.61,
+      "note": "booking confirmed"
+    },
+    {
+      "name": "logistics-page",
+      "at": 222.09,
+      "note": "shipment control"
+    },
+    {
+      "name": "click",
+      "at": 227.7,
+      "note": "shipment Dispatched"
+    },
+    {
+      "name": "click",
+      "at": 233.55,
+      "note": "shipment In transit"
+    },
+    {
+      "name": "click",
+      "at": 239.71,
+      "note": "shipment Delivered"
+    },
+    {
+      "name": "routes",
+      "at": 243.94,
+      "note": "routes on the map"
+    },
+    {
+      "name": "audit",
+      "at": 246.35,
+      "note": "hash chain intact"
+    },
+    {
+      "name": "command-center-after",
+      "at": 251.74,
+      "note": "dashboard after the response"
+    },
+    {
+      "name": "end",
+      "at": 255.82,
+      "note": ""
+    }
+  ]
+}

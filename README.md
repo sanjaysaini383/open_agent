@@ -124,6 +124,17 @@ npm run inspect -- http://localhost:8082/aidsupply
 Latest full run: **58 checks passed, 0 failed, 0 not run** — see [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md).
 267 automated tests: 82 unit, 100 site, 21 inspector, 36 integration, 28 browser.
 
+## Demo film
+
+A two-minute narrated demo is built from a real run of the product, not from mockups:
+`npm run video:record` drives the whole response in Chrome against the five served sites
+with a visible cursor and writes the footage and the time of every click; `npm run
+video:voice` synthesises the narration (locally, with word timings for the captions);
+`npm run video:build` generates the HyperFrames composition in [`video/demo`](video/demo)
+(title cards, the recording in a browser frame with camera pushes, per-word captions,
+sound effects); `npm run video:render` writes `video/demo/renders/reliefmesh-demo.mp4`.
+The script, storylines, spec and review notes are in that folder.
+
 ## Documentation
 
 | Document | For |

@@ -2,7 +2,7 @@
   "name": "reliefmesh",
   "version": "1.0.0",
   "private": true,
-  "description": "ReliefMesh — an open, decentralized multi-agent emergency response coordination network built on the Open Agentic Web MVP specification.",
+  "description": "ReliefMesh \u2014 an open, decentralized multi-agent emergency response coordination network built on the Open Agentic Web MVP specification.",
   "license": "Apache-2.0",
   "type": "module",
   "engines": {
@@ -27,7 +27,11 @@
     "screenshots": "node tests/e2e/support/capture-screenshots.mjs",
     "hosting:config": "node scripts/write-hosting-config.mjs",
     "test": "npm run test:unit && npm run test:sites && npm run test:integration",
-    "compliance": "node scripts/compliance-report.mjs"
+    "compliance": "node scripts/compliance-report.mjs",
+    "video:record": "node tests/e2e/support/record-demo.mjs video/footage",
+    "video:voice": "cd video/demo && node script/make-voice.mjs",
+    "video:build": "cd video/demo && node script/build.mjs && npx hyperframes check",
+    "video:render": "cd video/demo && npx hyperframes render -o renders/reliefmesh-demo.mp4 --quality delivery --video-frame-format png"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0"
