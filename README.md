@@ -135,8 +135,8 @@ generates the HyperFrames composition in [`video/demo`](video/demo) (the recordi
 browser frame with camera paths, overlapping transitions, titles and tags cued to the
 spoken words, per-word captions, effects); `npm run video:render` renders and normalises
 `video/demo/renders/reliefmesh-demo.mp4`. The production standard every film follows is
-[video/PRODUCTION.md](video/PRODUCTION.md); the script, storylines, spec and review notes
-are in `video/demo`. Needs Python 3 with `edge-tts` (`pip install edge-tts`) and ffmpeg.
+[video/PRODUCTION.md](video/PRODUCTION.md); the narration script and review notes are in
+`video/demo`. Needs Python 3 with `edge-tts` (`pip install edge-tts`) and ffmpeg.
 
 ## Documentation
 
@@ -149,7 +149,6 @@ are in `video/demo`. Needs Python 3 with `edge-tts` (`pip install edge-tts`) and
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Deploying the five sites to separate HTTPS origins |
 | [COMPLIANCE_REPORT.md](COMPLIANCE_REPORT.md) | Generated results of every official script and test |
 | [HACKATHON_SUBMISSION.md](HACKATHON_SUBMISSION.md) | Submission text, screenshots checklist |
-| [TASKS.md](TASKS.md) | Implementation checklist and status |
 | [tools/inspector/README.md](tools/inspector/README.md) | The reusable Interoperability Inspector |
 
 ## Repository layout
