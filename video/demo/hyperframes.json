@@ -10,16 +10,5 @@
     "autoProxy": true
   },
   "authoringSkill": "hyperframes",
-  "registryItems": [
-    {
-      "name": "caption-pill-karaoke",
-      "type": "hyperframes:component",
-      "target": "compositions/components/caption-pill-karaoke.html"
-    },
-    {
-      "name": "browser-device-stage",
-      "type": "hyperframes:component",
-      "target": "compositions/components/browser-device-stage.html"
-    }
-  ]
+  "registryItems": []
 }

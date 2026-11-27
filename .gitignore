@@ -39,4 +39,5 @@ video/demo/review/
 video/demo/node_modules/
 video/demo/.thumbnails/
 video/demo/.transcode-cache/
+video/demo/.waveform-cache/
 submission/
